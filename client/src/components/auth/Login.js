@@ -1,0 +1,124 @@
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { SERVER_URL } from "../../constant";
+
+const Login = () => {
+  const navigate = useNavigate();
+
+  const [loginFromDetail, setLoginFormDetail] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setLoginFormDetail({
+      ...loginFromDetail,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const url =
+      SERVER_URL +
+      `/api/shop/login?email=${loginFromDetail.email}&password=${loginFromDetail.password}`;
+    axios
+      .get(url)
+      .then((resp) => {
+        console.log("Shopkeeper Login data: ", resp);
+        localStorage.setItem("token", resp.data.token);
+        navigate("/admin/books");
+      })
+      .catch((e) => {
+        toast(e.response.data);
+        console.log("dfdfdfddffdd: ", e);
+      });
+  };
+
+  return (
+    <div className="hold-transition login-page">
+      <div className="login-box">
+        <div className="login-logo">
+          <div>
+            <b>Admin</b>LTE
+          </div>
+        </div>
+        <div className="card">
+          <div className="card-body login-card-body">
+            <p className="login-box-msg">Sign in to start your session</p>
+            <form onSubmit={handleSubmit}>
+              <div className="input-group mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                  name="email"
+                  value={loginFromDetail.email}
+                  onChange={handleInputChange}
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-envelope" />
+                  </div>
+                </div>
+              </div>
+              <div className="input-group mb-3">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  name="password"
+                  value={loginFromDetail.password}
+                  onChange={handleInputChange}
+                />
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span className="fas fa-lock" />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-8">
+                  <div className="icheck-primary">
+                    <input type="checkbox" id="remember" />
+                    <label htmlFor="remember">Remember Me</label>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <input
+                    type="submit"
+                    className="btn btn-primary btn-block"
+                  ></input>
+                </div>
+              </div>
+            </form>
+            {/* <div className="social-auth-links text-center mb-3">
+              <p>- OR -</p>
+              <a href="#" className="btn btn-block btn-primary">
+                <i className="fab fa-facebook mr-2" /> Sign in using Facebook
+              </a>
+              <a href="#" className="btn btn-block btn-danger">
+                <i className="fab fa-google-plus mr-2" /> Sign in using Google+
+              </a>
+            </div> */}
+            {/* <p className="mb-1">
+              <a href="">I forgot my password</a>
+            </p> */}
+            <p className="mb-0">
+              <Link to="/admin/register" className="text-center">
+                Register a new membership
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
