@@ -9,7 +9,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [registerFromDetail, setReagisterFormDetail] = useState({
-    fullName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -27,23 +27,24 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const registerBody = {
-      fullName: registerFromDetail.fullName,
+      username: registerFromDetail.username,
       email: registerFromDetail.email,
       password: registerFromDetail.password,
+      confirmPassword: registerFromDetail.confirmPassword,
     };
-    const url = SERVER_URL + "/api/shop/register";
-    axios
-      .post(url, registerBody)
-      .then((resp) => {
-        console.log("Shopkeeper register data: ", resp);
-        navigate("/admin/login");
-      })
-      .catch((e) => {
-        console.log("Register api error: ", e);
-        if (e.response.status == 409) {
-          toast("Account already exist.");
-        }
-      });
+    // const url = SERVER_URL + "/api/user";
+    // axios
+    //   .post(url, registerBody)
+    //   .then((resp) => {
+    //     console.log("Shopkeeper register data: ", resp);
+    //     navigate("/admin/login");
+    //   })
+    //   .catch((e) => {
+    //     console.log("Register api error: ", e);
+    //     if (e.response.status == 409) {
+    //       toast("Account already exist.");
+    //     }
+    //   });
   };
 
   return (
@@ -62,9 +63,9 @@ const Register = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Full name"
-                  name="fullName"
-                  value={registerFromDetail.fullName}
+                  placeholder="Username"
+                  name="username"
+                  value={registerFromDetail.username}
                   onChange={handleInputChange}
                 />
                 <div className="input-group-append">
