@@ -29,8 +29,8 @@ const Login = () => {
       .post(url, loginFromDetail)
       .then(resp => {
         console.log('Login api data: ', resp);
-        localStorage.setItem('token' , resp.data.token);
-        localStorage.setItem('username' , resp.data.user.username);
+        localStorage.setItem('token', resp.data.token);
+        localStorage.setItem('username', resp.data.user.username);
         navigate('/admin/dashboard');
       })
       .catch(e => {
@@ -112,9 +112,13 @@ const Login = () => {
                 <i className="fab fa-google-plus mr-2" /> Sign in using Google+
               </a>
             </div> */}
-            {/* <p className="mb-1">
-              <a href="">I forgot my password</a>
-            </p> */}
+            <p className='mb-1'>
+              <Link
+                to='/admin/forgotPassword'
+                className='text-center'>
+                I forgot my password
+              </Link>
+            </p>
             <p className='mb-0'>
               <Link
                 to='/admin/register'
