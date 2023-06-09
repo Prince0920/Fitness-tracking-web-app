@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import './Menu.css';
 
 const Menu = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const Menu = () => {
           className="brand-image img-circle elevation-3"
           style={{ opacity: ".8" }}
         />
-        <span className="brand-text font-weight-light">AdminLTE 3</span>
+        <span className="brand-text font-weight-light">FitTrack</span>
       </a>
       {/* Sidebar */}
       <div className="sidebar">
@@ -28,7 +29,7 @@ const Menu = () => {
           </div>
           <div className="info">
             <a href="#" className="d-block">
-              Alexander Pierce
+              Dotsquare
             </a>
           </div>
         </div>
@@ -104,7 +105,7 @@ const Menu = () => {
                 </p>
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 to="/admin/dashboard"
                 className={`nav-link disable ${
@@ -117,7 +118,7 @@ const Menu = () => {
                   <i className="right fas fa-angle-left" />
                 </p>
               </Link>
-              {/* <ul className="nav nav-treeview">
+              <ul className="nav nav-treeview">
                 <li className="nav-item">
                   <Link to="" className="nav-link active">
                     <i className="far fa-circle nav-icon" />
@@ -136,8 +137,8 @@ const Menu = () => {
                     <p>Most Popular books</p>
                   </Link>
                 </li>
-              </ul> */}
-            </li>
+              </ul>
+            </li> */}
           </ul>
         </nav>
         {/* /.sidebar-menu */}

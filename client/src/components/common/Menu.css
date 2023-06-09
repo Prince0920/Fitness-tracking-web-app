@@ -1,0 +1,4 @@
+.sidebar-dark-primary .nav-sidebar .nav-link.active {
+    background-color: #fd7e14 !important;
+    color: white !important;
+  }

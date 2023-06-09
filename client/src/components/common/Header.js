@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import './Header.css'
 
 export default class Header extends Component {
   render() {
     return (
-      <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+      <nav className="main-header navbar navbar-expand navbar-light navbar-orange">
         {/* Left navbar links */}
         <ul className="navbar-nav">
           <li className="nav-item">
@@ -19,12 +20,17 @@ export default class Header extends Component {
           </li>
           <li className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link">
+              AboutUs
+            </a>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <a href="#" className="nav-link">
               Contact
             </a>
           </li>
         </ul>
         {/* SEARCH FORM */}
-        <form className="form-inline ml-3">
+        {/* <form className="form-inline ml-3">
           <div className="input-group input-group-sm">
             <input
               className="form-control form-control-navbar"
@@ -38,7 +44,7 @@ export default class Header extends Component {
               </button>
             </div>
           </div>
-        </form>
+        </form> */}
         {/* Right navbar links */}
         <ul className="navbar-nav ml-auto">
           {/* Notifications Dropdown Menu */}
