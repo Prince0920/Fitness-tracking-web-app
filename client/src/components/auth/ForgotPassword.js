@@ -60,6 +60,7 @@ const ForgotPassword = () => {
                 name='email'
                 value={forgotFromDetail.email}
                 onChange={handleInputChange}
+                required
               />
               <div className='input-group-append'>
                 <div className='input-group-text'>

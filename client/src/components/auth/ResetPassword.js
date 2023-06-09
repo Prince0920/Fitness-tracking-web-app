@@ -72,6 +72,7 @@ const ResetPassword = () => {
                 name='password'
                 value={resetFromDetail.password}
                 onChange={handleInputChange}
+                required
               />
               <div className='input-group-append'>
                 <div className='input-group-text'>
@@ -87,6 +88,7 @@ const ResetPassword = () => {
                 name='confirmPassword'
                 value={resetFromDetail.confirmPassword}
                 onChange={handleInputChange}
+                required
               />
               <div className='input-group-append'>
                 <div className='input-group-text'>

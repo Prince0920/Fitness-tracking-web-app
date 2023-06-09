@@ -64,6 +64,7 @@ const Login = () => {
                   name='email'
                   value={loginFromDetail.email}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -79,6 +80,7 @@ const Login = () => {
                   name='password'
                   value={loginFromDetail.password}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -92,6 +94,7 @@ const Login = () => {
                     <input
                       type='checkbox'
                       id='remember'
+                      required
                     />
                     <label htmlFor='remember'>Remember Me</label>
                   </div>

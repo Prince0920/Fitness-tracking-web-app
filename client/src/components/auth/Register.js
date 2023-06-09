@@ -75,6 +75,7 @@ const Register = () => {
                   name='username'
                   value={registerFromDetail.username}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -90,6 +91,7 @@ const Register = () => {
                   name='email'
                   value={registerFromDetail.email}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -105,6 +107,7 @@ const Register = () => {
                   name='password'
                   value={registerFromDetail.password}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -120,6 +123,7 @@ const Register = () => {
                   name='confirmPassword'
                   value={registerFromDetail.confirmPassword}
                   onChange={handleInputChange}
+                  required
                 />
                 <div className='input-group-append'>
                   <div className='input-group-text'>
@@ -133,6 +137,7 @@ const Register = () => {
                     <input
                       type='checkbox'
                       id='agreeTerms'
+                      required
                       name='terms'
                       defaultValue='agree'
                     />
