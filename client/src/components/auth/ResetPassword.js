@@ -1,64 +1,77 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../../constant';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
+  const userId = searchParams.get('id');
 
-  const [forgotFromDetail, setForgotFormDetail] = useState({
-    email: '',
+  const [resetFromDetail, setResetFormDetail] = useState({
+    password: '',
+    confirmPassword: '',
   });
 
   const handleInputChange = e => {
     const { name, value } = e.target;
 
-    setForgotFormDetail({
-      ...forgotFromDetail,
+    setResetFormDetail({
+      ...resetFromDetail,
       [name]: value,
     });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const url = SERVER_URL + '/api/user/requestResetPassword';
-    axios
-      .post(url, forgotFromDetail)
-      .then(resp => {
-        console.log('forgot password api data: ', resp);
-        toast('Password resent link send to your mail.');
-        //   navigate('/admin/dashboard');
-      })
-      .catch(e => {
-        console.log('forgot password api error: ', e);
-        if (e.response.status == 409) {
-          toast(e.response.data.message);
-        }
-      });
+    if (resetFromDetail.password != resetFromDetail.confirmPassword) {
+      toast('Password and confirm password not match.');
+    } else {
+      const url = SERVER_URL + '/api/user/resetPassword';
+      axios
+        .post(url, {
+          token,
+          userId,
+          password: resetFromDetail.password
+        })
+        .then(resp => {
+          console.log('reset password api data: ', resp);
+          toast('Password resent Successfully.');
+          navigate('/admin/login');
+        })
+        .catch(e => {
+          console.log('reset password api error: ', e);
+          if (e.response.status == 400) {
+            toast(e.response.data.message);
+          }
+        });
+    }
   };
 
   return (
     <div className='hold-transition login-page'>
       <div className='login-logo'>
-        <a href='../../index2.html'>
-          <b>Admin</b>LTE
-        </a>
+        <div>
+          <b>DotSquares</b>
+        </div>
       </div>
       <div className='card'>
         <div className='card-body login-card-body'>
           <p className='login-box-msg'>
             You are only one step a way from your new password, recover your password now.
           </p>
-          <form
-            action='login.html'
-            method='post'>
+          <form onSubmit={handleSubmit}>
             <div className='input-group mb-3'>
               <input
                 type='password'
                 className='form-control'
                 placeholder='Password'
+                name='password'
+                value={resetFromDetail.password}
+                onChange={handleInputChange}
               />
               <div className='input-group-append'>
                 <div className='input-group-text'>
@@ -70,7 +83,10 @@ const ResetPassword = () => {
               <input
                 type='password'
                 className='form-control'
-                placeholder='Confirm Password'
+                placeholder='Retype password'
+                name='confirmPassword'
+                value={resetFromDetail.confirmPassword}
+                onChange={handleInputChange}
               />
               <div className='input-group-append'>
                 <div className='input-group-text'>
@@ -89,7 +105,11 @@ const ResetPassword = () => {
             </div>
           </form>
           <p className='mt-3 mb-1'>
-            <a href='login.html'>Login</a>
+            <Link
+              to='/admin/login'
+              className='text-center'>
+              I already have a membership
+            </Link>
           </p>
         </div>
       </div>

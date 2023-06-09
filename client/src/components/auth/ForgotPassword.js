@@ -23,20 +23,20 @@ const ForgotPassword = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-      const url = SERVER_URL + "/api/user/requestResetPassword";
-      axios
-        .post(url, forgotFromDetail)
-        .then(resp => {
-          console.log('forgot password api data: ', resp);
-          toast("Password resent link send to your mail.");
+    const url = SERVER_URL + '/api/user/requestResetPassword';
+    axios
+      .post(url, forgotFromDetail)
+      .then(resp => {
+        console.log('forgot password api data: ', resp);
+        toast('Password resent link send to your mail.');
         //   navigate('/admin/dashboard');
-        })
-        .catch(e => {
-          console.log('forgot password api error: ', e);
-          if (e.response.status == 409) {
-            toast(e.response.data.message);
-          }
-        });
+      })
+      .catch(e => {
+        console.log('forgot password api error: ', e);
+        if (e.response.status == 409) {
+          toast(e.response.data.message);
+        }
+      });
   };
 
   return (
