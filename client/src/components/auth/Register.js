@@ -32,19 +32,19 @@ const Register = () => {
       password: registerFromDetail.password,
       confirmPassword: registerFromDetail.confirmPassword,
     };
-    // const url = SERVER_URL + "/api/user";
-    // axios
-    //   .post(url, registerBody)
-    //   .then((resp) => {
-    //     console.log("Shopkeeper register data: ", resp);
-    //     navigate("/admin/login");
-    //   })
-    //   .catch((e) => {
-    //     console.log("Register api error: ", e);
-    //     if (e.response.status == 409) {
-    //       toast("Account already exist.");
-    //     }
-    //   });
+    const url = SERVER_URL + "/api/user";
+    axios
+      .post(url, registerBody)
+      .then((resp) => {
+        console.log("Register api data: ", resp);
+        navigate("/admin/login");
+      })
+      .catch((e) => {
+        console.log("Register api error: ", e);
+        if (e.response.status == 409) {
+          toast("Account already exist.");
+        }
+      });
   };
 
   return (
