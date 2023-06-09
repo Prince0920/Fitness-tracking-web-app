@@ -26,28 +26,33 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const registerBody = {
-      username: registerFromDetail.username,
-      email: registerFromDetail.email,
-      password: registerFromDetail.password,
-      confirmPassword: registerFromDetail.confirmPassword,
-    };
-    const url = SERVER_URL + '/api/user';
-    axios
-      .post(url, registerBody)
-      .then(resp => {
-        console.log('Register api data: ', resp);
-        navigate('/admin/login');
-      })
-      .catch(e => {
-        console.log('Register api error: ', e);
-        if (e.response.status == 422) {
-          toast(e.response.data.error);
-        }
-        if (e.response.status == 409) {
-          toast('Account already exist.');
-        }
-      });
+
+    if (registerFromDetail.password != registerFromDetail.confirmPassword) {
+      toast('Password and confirm password not match.');
+    } else {
+      const registerBody = {
+        username: registerFromDetail.username,
+        email: registerFromDetail.email,
+        password: registerFromDetail.password,
+        confirmPassword: registerFromDetail.confirmPassword,
+      };
+      const url = SERVER_URL + '/api/user';
+      axios
+        .post(url, registerBody)
+        .then(resp => {
+          console.log('Register api data: ', resp);
+          navigate('/admin/login');
+        })
+        .catch(e => {
+          console.log('Register api error: ', e);
+          if (e.response.status == 422) {
+            toast(e.response.data.error);
+          }
+          if (e.response.status == 409) {
+            toast('Account already exist.');
+          }
+        });
+    }
   };
 
   return (
