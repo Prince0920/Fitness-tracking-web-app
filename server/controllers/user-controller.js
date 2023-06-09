@@ -5,6 +5,9 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const sendEmail = require('../utils/sendEmail');
 
+const bcryptSalt = process.env.BCRYPT_SALT;
+const clientURL = 'localhost:3132';
+
 module.exports = {
   // get a single user by id or username
   async getSingleUser({ user = null, params }, res) {
@@ -73,8 +76,6 @@ module.exports = {
 
   async requestPasswordReset({ body }, res) {
     const { email } = body;
-    const clientURL = 'localhost:3132';
-    const bcryptSalt = 'resetPasswordLink';
     try {
       const user = await User.findOne({ email });
 
@@ -91,10 +92,40 @@ module.exports = {
       }).save();
 
       const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
-      sendEmail(user.email,"Password Reset Request",{name: user.name,link: link,},"./template/requestResetPassword.handlebars");
+      sendEmail(
+        user.email,
+        'Password Reset Request',
+        { name: user.name, link: link },
+        './template/requestResetPassword.handlebars'
+      );
       res.json({ link });
     } catch (error) {
       res.status(409).json({ message: 'Something went wrong!' });
     }
+  },
+
+  async resetPassword({ body }, res) {
+    const { userId, token, password } = body;
+    let passwordResetToken = await Token.findOne({ userId });
+    if (!passwordResetToken) {
+      return res.status(400).json({ message: 'Invalid or expired password reset token' });
+    }
+    const isValid = await bcrypt.compare(token, passwordResetToken.token);
+    if (!isValid) {
+      return res.status(400).json({ message: 'Invalid or expired password reset token' });
+    }
+    const hash = await bcrypt.hash(password, Number(bcryptSalt));
+    await User.updateOne({ _id: userId }, { $set: { password: hash } }, { new: true });
+    const user = await User.findById({ _id: userId });
+    sendEmail(
+      user.email,
+      'Password Reset Successfully',
+      {
+        name: user.name,
+      },
+      './template/resetPassword.handlebars'
+    );
+    await passwordResetToken.deleteOne();
+    res.json({ message: 'Success' });
   },
 };
