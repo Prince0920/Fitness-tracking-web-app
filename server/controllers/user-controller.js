@@ -38,7 +38,7 @@ module.exports = {
           validationErrors[key] = error.errors[key].message;
         }
         // console.log('Validation errors:', Object.values(validationErrors)[0]);
-        return res.status(422).json({ error: Object.values(validationErrors)[0] });
+        return res.status(422).json({ message: Object.values(validationErrors)[0] });
       } else {
         // Handle other types of errors
         // console.error('Error:', error);
@@ -49,19 +49,21 @@ module.exports = {
 
   // login a user, sign a token, and send it back to login page
   async login({ body }, res) {
-    const user = await User.findOne({
-      $or: [{ username: body.username }, { email: body.email }],
-    });
-    if (!user) {
-      return res.status(400).json({ message: "Can't find this user" });
-    }
+    try {
+      const user = await User.findOne({ email: body.email });
+      if (!user) {
+        return res.status(400).json({ message: "Can't find this user" });
+      }
 
-    const correctPw = await user.isCorrectPassword(body.password);
+      const correctPw = await user.isCorrectPassword(body.password);
 
-    if (!correctPw) {
-      return res.status(400).json({ message: 'Wrong password!' });
+      if (!correctPw) {
+        return res.status(400).json({ message: 'Wrong password!' });
+      }
+      const token = signToken(user);
+      res.json({ token, user });
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong!' });
     }
-    const token = signToken(user);
-    res.json({ token, user });
   },
 };
