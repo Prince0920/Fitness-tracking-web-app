@@ -21,6 +21,9 @@ module.exports = {
   // create a user, sign a token, and send it back to sign up page
   async createUser({ body }, res) {
     try {
+      if (body.password != body.confirmPassword) {
+        return res.status(422).json({ message: 'Passowrd and confirm password not match!' });
+      }
       const user = await User.create(body);
       if (!user) {
         return res.status(400).json({ message: 'Something is wrong!' });
@@ -35,11 +38,11 @@ module.exports = {
           validationErrors[key] = error.errors[key].message;
         }
         // console.log('Validation errors:', Object.values(validationErrors)[0]);
-        res.status(422).json({ error: Object.values(validationErrors)[0] });
+        return res.status(422).json({ error: Object.values(validationErrors)[0] });
       } else {
         // Handle other types of errors
         // console.error('Error:', error);
-        res.status(409).json({ error });
+        return res.status(409).json({ error });
       }
     }
   },
