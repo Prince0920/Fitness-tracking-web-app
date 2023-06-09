@@ -1,5 +1,9 @@
 const { User } = require('../models');
+const Token = require('../models/Token');
 const { signToken } = require('../utils/auth');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+const sendEmail = require('../utils/sendEmail');
 
 module.exports = {
   // get a single user by id or username
@@ -64,6 +68,33 @@ module.exports = {
       res.json({ token, user });
     } catch (error) {
       res.status(400).json({ message: 'Something went wrong!' });
+    }
+  },
+
+  async requestPasswordReset({ body }, res) {
+    const { email } = body;
+    const clientURL = 'localhost:3132';
+    const bcryptSalt = 'resetPasswordLink';
+    try {
+      const user = await User.findOne({ email });
+
+      if (!user) return res.status(409).json({ message: 'User does not exist' });
+      let token = await Token.findOne({ userId: user._id });
+      if (token) await token.deleteOne();
+      let resetToken = crypto.randomBytes(32).toString('hex');
+      const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+
+      await new Token({
+        userId: user._id,
+        token: hash,
+        createdAt: Date.now(),
+      }).save();
+
+      const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+      sendEmail(user.email,"Password Reset Request",{name: user.name,link: link,},"./template/requestResetPassword.handlebars");
+      res.json({ link });
+    } catch (error) {
+      res.status(409).json({ message: 'Something went wrong!' });
     }
   },
 };
