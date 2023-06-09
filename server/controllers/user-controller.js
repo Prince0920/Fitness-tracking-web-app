@@ -28,7 +28,19 @@ module.exports = {
       const token = signToken(user);
       res.json({ token, user });
     } catch (error) {
-      res.status(409).json({ error });
+      if (error.name === 'ValidationError') {
+        // Handle validation errors
+        const validationErrors = {};
+        for (let key in error.errors) {
+          validationErrors[key] = error.errors[key].message;
+        }
+        // console.log('Validation errors:', Object.values(validationErrors)[0]);
+        res.status(422).json({ error: Object.values(validationErrors)[0] });
+      } else {
+        // Handle other types of errors
+        // console.error('Error:', error);
+        res.status(409).json({ error });
+      }
     }
   },
 
