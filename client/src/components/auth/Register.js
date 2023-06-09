@@ -46,7 +46,7 @@ const Register = () => {
         .catch(e => {
           console.log('Register api error: ', e);
           if (e.response.status == 422) {
-            toast(e.response.data.error);
+            toast(e.response.data.message);
           }
           if (e.response.status == 409) {
             toast('Account already exist.');
@@ -60,7 +60,7 @@ const Register = () => {
       <div className='register-box'>
         <div className='register-logo'>
           <div>
-            <b>Admin</b>LTE
+            <b>DotSquares</b>
           </div>
         </div>
         <div className='card'>
