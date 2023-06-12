@@ -5,19 +5,31 @@ const UserSchema = new Schema({
   username: {
     type: String,
     trim: true,
-    unique: true,
+    unique: false,
     required: "Username is Required",
   },
   password: {
     type: String,
     trim: true,
     required: "Password is Required",
-    minlength: 6,
+    validate: {
+      validator: function (value) {
+        return value.length >= 6;
+      },
+      message: "Password should have a minimum length of 6 characters.",
+    },
   },
   email: {
     type: String,
     unique: true,
-    match: [/.+@.+\..+/],
+    // match: [/.+@.+\..+/],
+    validate: {
+      validator: function (value) {
+        // Regular expression for email validation
+        return /.+@.+\..+/.test(value);
+      },
+      message: "Email address is not valid.",
+    },
   },
   cardio: [{
     type: Schema.Types.ObjectId,
