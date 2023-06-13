@@ -3,10 +3,12 @@ import Layout from '../../common/Layout';
 
 const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
-  const [username, setUsername] = useState('Nina Mcintire');
-  const [height, setHeight] = useState('5.7');
-  const [weight, setWeight] = useState('61');
-  const [age, setAge] = useState('25');
+  const [profileDetail, setProfileDetail] = useState({
+    username: 'Nina Mcintire',
+    height: '5.7',
+    weight: '61',
+    age: '25',
+  });
 
   const handleEditClick = () => {
     setEditMode(true);
@@ -15,6 +17,14 @@ const ProfilePage = () => {
   const handleSaveClick = () => {
     setEditMode(false);
     // Perform save/update logic here
+  };
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setProfileDetail(prevProfileDetail => ({
+      ...prevProfileDetail,
+      [name]: value,
+    }));
   };
 
   return (
@@ -41,13 +51,14 @@ const ProfilePage = () => {
                       <b>Username:</b>
                       <input
                         type='text'
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        name='username'
+                        value={profileDetail.username}
+                        onChange={handleInputChange}
                         className='form-control'
                       />
                     </>
                   ) : (
-                    <h3 className='profile-username text-center'>{username}</h3>
+                    <h3 className='profile-username text-center'>{profileDetail.username}</h3>
                   )}
 
                   {editMode ? (
@@ -71,8 +82,9 @@ const ProfilePage = () => {
                         <div className='input-group'>
                           <input
                             type='text'
-                            value={height}
-                            onChange={e => setHeight(e.target.value)}
+                            name='height'
+                            value={profileDetail.height}
+                            onChange={handleInputChange}
                             className='form-control'
                           />
                           <div className='input-group-append'>
@@ -80,7 +92,7 @@ const ProfilePage = () => {
                           </div>
                         </div>
                       ) : (
-                        <span className='float-right'>{height} feet</span>
+                        <span className='float-right'>{profileDetail.height} feet</span>
                       )}
                     </li>
                     <li className='list-group-item'>
@@ -89,8 +101,9 @@ const ProfilePage = () => {
                         <div className='input-group'>
                           <input
                             type='text'
-                            value={weight}
-                            onChange={e => setWeight(e.target.value)}
+                            name='weight'
+                            value={profileDetail.weight}
+                            onChange={handleInputChange}
                             className='form-control'
                           />
                           <div className='input-group-append'>
@@ -98,7 +111,7 @@ const ProfilePage = () => {
                           </div>
                         </div>
                       ) : (
-                        <span className='float-right'>{weight} kg</span>
+                        <span className='float-right'>{profileDetail.weight} kg</span>
                       )}
                     </li>
                     <li className='list-group-item'>
@@ -107,8 +120,9 @@ const ProfilePage = () => {
                         <div className='input-group'>
                           <input
                             type='text'
-                            value={age}
-                            onChange={e => setAge(e.target.value)}
+                            name='age'
+                            value={profileDetail.age}
+                            onChange={handleInputChange}
                             className='form-control'
                           />
                           <div className='input-group-append'>
@@ -116,7 +130,7 @@ const ProfilePage = () => {
                           </div>
                         </div>
                       ) : (
-                        <span className='float-right'>{age} year</span>
+                        <span className='float-right'>{profileDetail.age} year</span>
                       )}
                     </li>
                   </ul>
