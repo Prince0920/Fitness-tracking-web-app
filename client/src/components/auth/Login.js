@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <div className='hold-transition login-page'>
-      <div className='login-box'>
+      <div className='login-box card card-primary card-outline'>
         <div className='login-logo'>
           <div>
             <b>DotSquares</b>

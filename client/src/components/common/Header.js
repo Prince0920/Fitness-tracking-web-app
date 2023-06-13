@@ -65,10 +65,10 @@ export default class Header extends Component {
                 <span className="float-right text-muted text-sm">Logout</span>
               </Link>
               <div className="dropdown-divider" />
-              <a href="#" className="dropdown-item">
+              <Link to="/admin/profile" className="dropdown-item">
                 <i class="fas fa-users" />
                 <span className="float-right text-muted text-sm">Profile</span>
-              </a>
+              </Link>
             </div>
           </li>
         </ul>

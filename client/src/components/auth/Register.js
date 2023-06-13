@@ -57,7 +57,7 @@ const Register = () => {
 
   return (
     <div className='hold-transition register-page'>
-      <div className='register-box'>
+      <div className='register-box card card-primary card-outline'>
         <div className='register-logo'>
           <div>
             <b>DotSquares</b>

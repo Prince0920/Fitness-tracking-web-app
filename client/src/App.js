@@ -11,6 +11,7 @@ import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import { UserList } from './components/users/UserList';
 import LandingPage from './components/LandingPage/LandingPage';
+import ProfilePage from './components/admin/profile/Profile';
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
             path='dashboard'
             element={<Dashboard />}
           />
-
+          <Route
+            path='profile'
+            element={<ProfilePage />}
+          />
           <Route
             path='apple/dashboard'
             element={<Apple />}
