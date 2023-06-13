@@ -81,7 +81,7 @@ const ProfilePage = () => {
                       {editMode ? (
                         <div className='input-group'>
                           <input
-                            type='text'
+                            type='number'
                             name='height'
                             value={profileDetail.height}
                             onChange={handleInputChange}
@@ -100,7 +100,7 @@ const ProfilePage = () => {
                       {editMode ? (
                         <div className='input-group'>
                           <input
-                            type='text'
+                            type='number'
                             name='weight'
                             value={profileDetail.weight}
                             onChange={handleInputChange}
@@ -119,7 +119,7 @@ const ProfilePage = () => {
                       {editMode ? (
                         <div className='input-group'>
                           <input
-                            type='text'
+                            type='number'
                             name='age'
                             value={profileDetail.age}
                             onChange={handleInputChange}
