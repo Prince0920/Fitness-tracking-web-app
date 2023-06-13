@@ -59,7 +59,6 @@ const Menu = () => {
                 </p>
               </Link>
             </li>
-            
 
             <li className='nav-item'>
               <Link
@@ -67,7 +66,7 @@ const Menu = () => {
                 className={`nav-link ${
                   location.pathname.startsWith('/admin/users') ? 'active' : ''
                 }`}>
-                <i className='nav-icon fas fa-tachometer-alt' />
+                <i class='nav-icon fas fa-users'></i>
                 <p>
                   Users
                   <i className='right fas fa-angle-left' />
@@ -86,7 +85,6 @@ const Menu = () => {
                 </li>
               </ul>
             </li>
-
 
             <li className='nav-item'>
               <Link
