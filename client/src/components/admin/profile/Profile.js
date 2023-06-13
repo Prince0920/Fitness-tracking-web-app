@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../common/Layout';
+import { getProfile, updateProfile } from '../../../utils/API';
 
 const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
   const [profileDetail, setProfileDetail] = useState({
-    username: 'Nina Mcintire',
-    height: '5.7',
-    weight: '61',
-    age: '25',
+    email: '',
+    username: '',
+    height: '',
+    weight: '',
+    age: '',
   });
-
+  const token = localStorage.getItem('token');
   const handleEditClick = () => {
     setEditMode(true);
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
+    const profileBody = profileDetail;
+    delete profileBody.email;
+    const { data } = await updateProfile(profileBody, token);
+    setProfileDetail({
+      email: data.email,
+      username: data.username,
+      height: data.height,
+      weight: data.weight,
+      age: data.age,
+    });
     setEditMode(false);
     // Perform save/update logic here
   };
@@ -27,6 +39,16 @@ const ProfilePage = () => {
     }));
   };
 
+  useEffect(async () => {
+    const { data } = await getProfile(token);
+    setProfileDetail({
+      email: data.email,
+      username: data.username,
+      height: data.height,
+      weight: data.weight,
+      age: data.age,
+    });
+  }, []);
   return (
     <div className='content-wrapper'>
       <Layout
@@ -72,7 +94,7 @@ const ProfilePage = () => {
                       />
                     </>
                   ) : (
-                    <p className='text-muted text-center'>prince@yopmail.com</p>
+                    <p className='text-muted text-center'>{profileDetail.email}</p>
                   )}
 
                   <ul className='list-group list-group-unbordered mb-3'>
