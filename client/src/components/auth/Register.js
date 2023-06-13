@@ -165,7 +165,7 @@ const Register = () => {
               </a>
             </div> */}
             <Link
-              to='/admin/login'
+              to='/login'
               className='text-center'>
               I already have a membership
             </Link>

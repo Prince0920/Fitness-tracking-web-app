@@ -117,14 +117,14 @@ const Login = () => {
             </div> */}
             <p className='mb-1'>
               <Link
-                to='/admin/forgotPassword'
+                to='/forgotPassword'
                 className='text-center'>
                 I forgot my password
               </Link>
             </p>
             <p className='mb-0'>
               <Link
-                to='/admin/register'
+                to='/register'
                 className='text-center'>
                 Register a new membership
               </Link>

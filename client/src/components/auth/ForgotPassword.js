@@ -80,14 +80,14 @@ const ForgotPassword = () => {
           </form>
           <p className='mt-3 mb-1'>
             <Link
-              to='/admin/login'
+              to='/login'
               className='text-center'>
               Login
             </Link>
           </p>
           <p className='mb-0'>
             <Link
-              to='/admin/register'
+              to='/register'
               className='text-center'>
               Register a new membership
             </Link>

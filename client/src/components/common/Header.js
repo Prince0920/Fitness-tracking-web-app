@@ -55,7 +55,7 @@ export default class Header extends Component {
             <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <div className="dropdown-divider" />
               <Link
-                to="/admin/login"
+                to="/login"
                 onClick={() => {
                   localStorage.removeItem("token");
                 }}

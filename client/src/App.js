@@ -10,6 +10,7 @@ import { Fitbit } from './components/fitbit/Fitbit';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import { UserList } from './components/users/UserList';
+import LandingPage from './components/LandingPage/LandingPage';
 
 function App() {
   return (
@@ -44,20 +45,24 @@ function App() {
         </Route>
 
         <Route
-          path='/admin/login'
+          path='/login'
           element={<Login />}
         />
         <Route
-          path='/admin/register'
+          path='/register'
           element={<Register />}
         />
         <Route
-          path='/admin/forgotPassword'
+          path='/forgotPassword'
           element={<ForgotPassword />}
         />
         <Route
           path='/passwordReset'
           element={<ResetPassword />}
+        />
+        <Route
+          path='/'
+          element={<LandingPage />}
         />
 
         <Route

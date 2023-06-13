@@ -108,7 +108,7 @@ const ResetPassword = () => {
           </form>
           <p className='mt-3 mb-1'>
             <Link
-              to='/admin/login'
+              to='/login'
               className='text-center'>
               I already have a membership
             </Link>
