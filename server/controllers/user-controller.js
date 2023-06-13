@@ -74,6 +74,7 @@ module.exports = {
     }
   },
 
+  // reset password link
   async requestPasswordReset({ body }, res) {
     const { email } = body;
     try {
@@ -104,28 +105,64 @@ module.exports = {
     }
   },
 
+  // reset password
   async resetPassword({ body }, res) {
-    const { userId, token, password } = body;
-    let passwordResetToken = await Token.findOne({ userId });
-    if (!passwordResetToken) {
-      return res.status(400).json({ message: 'Invalid or expired password reset token' });
+    try {
+      const { userId, token, password } = body;
+      let passwordResetToken = await Token.findOne({ userId });
+      if (!passwordResetToken) {
+        return res.status(400).json({ message: 'Invalid or expired password reset token' });
+      }
+      const isValid = await bcrypt.compare(token, passwordResetToken.token);
+      if (!isValid) {
+        return res.status(400).json({ message: 'Invalid or expired password reset token' });
+      }
+      const hash = await bcrypt.hash(password, Number(bcryptSalt));
+      await User.updateOne({ _id: userId }, { $set: { password: hash } }, { new: true });
+      const user = await User.findById({ _id: userId });
+      sendEmail(
+        user.email,
+        'Password Reset Successfully',
+        {
+          name: user.name,
+        },
+        './template/resetPassword.handlebars'
+      );
+      await passwordResetToken.deleteOne();
+      res.json({ message: 'Success' });
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong!' });
     }
-    const isValid = await bcrypt.compare(token, passwordResetToken.token);
-    if (!isValid) {
-      return res.status(400).json({ message: 'Invalid or expired password reset token' });
+  },
+
+  // get user profile data
+  async getProfile(req, res) {
+    try {
+      const { user } = req;
+      const foundUser = await User.findOne({ _id: user._id });
+
+      if (!foundUser) {
+        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+      }
+
+      res.json(foundUser);
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong!' });
     }
-    const hash = await bcrypt.hash(password, Number(bcryptSalt));
-    await User.updateOne({ _id: userId }, { $set: { password: hash } }, { new: true });
-    const user = await User.findById({ _id: userId });
-    sendEmail(
-      user.email,
-      'Password Reset Successfully',
-      {
-        name: user.name,
-      },
-      './template/resetPassword.handlebars'
-    );
-    await passwordResetToken.deleteOne();
-    res.json({ message: 'Success' });
+  },
+
+  // update user profile data
+  async updateProfile(req, res) {
+    try {
+      const { user, body } = req;
+      const updatedUser = await User.findOneAndUpdate({ _id: user._id }, body, { new: true });
+      if (!updatedUser) {
+        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+      }
+
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong!' });
+    }
   },
 };
