@@ -16,6 +16,7 @@
     "react-select": "^5.7.0",
     "react-toast": "^1.0.3",
     "react-toastify": "^8.0.0",
+    "recharts": "^2.6.2",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
@@ -44,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

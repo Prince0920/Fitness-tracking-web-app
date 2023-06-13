@@ -3,6 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../common/Layout';
+import CalorieBurnGraph from './graphs/CalorieBurnGraph';
+import StepCountProgressGraph from './graphs/StepCountProgressGraph';
+import { getTodayDate } from '../../utils/getCurrentDate';
+import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
+import StepCountCard from './cards/StepCountCard';
 
 export const Fitbit = () => {
   useEffect(() => {
@@ -12,7 +17,14 @@ export const Fitbit = () => {
       window.$(knobs).knob();
     }
   }, []);
+  const calorieData = [
+    { time: '9 AM', calories: 500 },
+    { time: '10 AM', calories: 700 },
+    { time: '11 AM', calories: 400 },
+    // Add more data points as per your requirement
+  ];
 
+  
   return (
     <div className='content-wrapper'>
       <Layout
@@ -22,67 +34,13 @@ export const Fitbit = () => {
       <section className='content'>
         <div className='container-fluid'>
           <div className='row'>
-            <div className='col-4'>
-              <div className='card card-success'>
-                <div className='card-header'>
-                  <h3 className='card-title'>Step Count</h3>
-                  <div className='card-tools'>
-                    <button
-                      type='button'
-                      className='btn btn-tool'
-                      data-card-widget='collapse'>
-                      <i className='fas fa-minus' />
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-tool'
-                      data-card-widget='remove'>
-                      <i className='fas fa-times' />
-                    </button>
-                  </div>
-                </div>
-                <div className='card-body'>
-                  <div className='row'>
-                    <div className='col-12 text-center'>
-                      <div style={{ display: 'inline', width: 90, height: 90 }}>
-                        <canvas
-                          width={90}
-                          height={90}
-                        />
-                        <input
-                          type='text'
-                          className='knob'
-                          defaultValue={10}
-                          value={3200}
-                          data-min={0}
-                          data-max={4000}
-                          data-width={90}
-                          data-height={90}
-                          data-fgcolor='#3c8dbc'
-                          data-readonly='true'
-                          readOnly='readonly'
-                          style={{
-                            width: 49,
-                            height: 30,
-                            position: 'absolute',
-                            verticalAlign: 'middle',
-                            marginTop: 30,
-                            marginLeft: '-69px',
-                            border: 0,
-                            background: 'none',
-                            font: 'bold 18px Arial',
-                            textAlign: 'center',
-                            color: 'rgb(60, 141, 188)',
-                            padding: 0,
-                            appearance: 'none',
-                          }}
-                        />
-                      </div>
-                      <div className='knob-label'>Total 4000</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className='col-12'>
+              <FitbitGreetingHeader />
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-md-6'>
+              <StepCountCard />
             </div>
           </div>
         </div>
