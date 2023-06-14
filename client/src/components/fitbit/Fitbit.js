@@ -8,8 +8,12 @@ import StepCountProgressGraph from './graphs/StepCountProgressGraph';
 import { getTodayDate } from '../../utils/getCurrentDate';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
+import { fitbitAuth, fitbitSuccess } from '../../utils/API';
+import { SERVER_URL } from '../../constant';
 
 export const Fitbit = () => {
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     // Canvas rendering fix
     const knobs = document.getElementsByClassName('knob');
@@ -17,14 +21,12 @@ export const Fitbit = () => {
       window.$(knobs).knob();
     }
   }, []);
-  const calorieData = [
-    { time: '9 AM', calories: 500 },
-    { time: '10 AM', calories: 700 },
-    { time: '11 AM', calories: 400 },
-    // Add more data points as per your requirement
-  ];
 
-  
+  async function handleConnect() {
+    await fitbitAuth(token);
+  }
+
+  const isLogin = true;
   return (
     <div className='content-wrapper'>
       <Layout
@@ -33,16 +35,27 @@ export const Fitbit = () => {
       />
       <section className='content'>
         <div className='container-fluid'>
-          <div className='row'>
-            <div className='col-12'>
-              <FitbitGreetingHeader />
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-md-6'>
-              <StepCountCard />
-            </div>
-          </div>
+          {isLogin ? (
+            <>
+              <div className='row'>
+                <div className='col-12'>
+                  <FitbitGreetingHeader />
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col-md-6'>
+                  <StepCountCard />
+                </div>
+              </div>
+            </>
+          ) : (
+            <button
+              type='button'
+              class='btn btn-block btn-primary'
+              onClick={handleConnect}>
+              Connect to Fitbit
+            </button>
+          )}
         </div>
       </section>
     </div>

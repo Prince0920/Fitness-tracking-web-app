@@ -126,7 +126,7 @@ const Menu = () => {
               <ul className='nav nav-treeview'>
                 <li className='nav-item'>
                   <Link
-                    to='/admin/apple/dashboard'
+                    to='/admin/fitbit/dashboard'
                     className={`nav-link ${
                       location.pathname == '/admin/fitbit/dashboard' ? 'active' : ''
                     }`}>

@@ -22,3 +22,24 @@ export const updateProfile = async (profileData, token) => {
     console.log(error);
   }
 };
+
+export const fitbitAuth = async token => {
+  try {
+    window.open(
+      `${SERVER_URL}/api/fitbit/auth/fitbit?token=${localStorage.getItem('token')}`,
+      '_self'
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fitbitSuccess = async token => {
+  try {
+    const url = SERVER_URL + '/api/fitbit/auth/fitbit/success';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
