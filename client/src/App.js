@@ -12,6 +12,7 @@ import ResetPassword from './components/auth/ResetPassword';
 import { UserList } from './components/users/UserList';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/admin/profile/Profile';
+import EditUser from './components/users/EditUser';
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
           <Route
             path='users/userList'
             element={<UserList />}
+          />
+          <Route
+            path='users/edit/:id'
+            element={<EditUser />}
           />
 
           <Route
