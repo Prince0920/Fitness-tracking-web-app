@@ -33,8 +33,8 @@ module.exports = {
   // update a single user by id
   async updateUser(req, res) {
     try {
-      const { user, body } = req;
-      const updatedUser = await User.findOneAndUpdate({ _id: user._id }, body, { new: true });
+      const { user, params } = req;
+      const updatedUser = await User.findOneAndUpdate({ _id: params }, body, { new: true });
       if (!updatedUser) {
         return res.status(400).json({ message: 'Cannot find a user with this id!' });
       }
@@ -48,8 +48,8 @@ module.exports = {
   // update a single user by id
   async deleteUser(req, res) {
     try {
-      const { user } = req;
-      const deleteUser = await User.findOneAndDelete({ _id: user._id });
+      const { user, params } = req;
+      const deleteUser = await User.findOneAndDelete({ _id: params.id });
       if (!deleteUser) {
         return res.status(400).json({ message: 'Cannot find a user with this id!' });
       }

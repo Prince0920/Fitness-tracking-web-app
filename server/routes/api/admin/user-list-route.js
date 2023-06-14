@@ -13,6 +13,7 @@ const { authMiddleware } = require('../../../utils/auth');
 router.route('/users').get(authMiddleware, getUsers);
 
 // /api/admin/user
-router.route('/user').get(authMiddleware, getUser).put(authMiddleware, updateUser).delete(authMiddleware, deleteUser);
+router.route('/user').get(authMiddleware, getUser);
+router.route('/user/:id').put(authMiddleware, updateUser).delete(authMiddleware, deleteUser);
 
 module.exports = router;
