@@ -10,14 +10,22 @@ module.exports = {
   },
 
   fitbitAuthenticate: passport.authenticate('fitbit', {
-    successRedirect: '/api/fitbit/auth/fitbit/success',
+    successRedirect: "http://localhost:3132/admin/fitbit/dashboard",
     failureRedirect: '/api/fitbit/auth/fitbit/failure',
   }),
 
   // Fitbit authentication success
   authSuccess(req, res) {
-    // console.log(JSON.stringify(req.user))
-    res.json({ message: 'Authentication success with fitbit!' });
+    console.log("authSuccess", req.user)
+    if (req.user) {
+      res.status(200).json({
+        error: false,
+        message: "Successfully Loged In",
+        user: req.user,
+      });
+    } else {
+      res.status(403).json({ error: true, message: "Not Authorized" });
+    }
   },
 
   // Fitbit authentication failed
