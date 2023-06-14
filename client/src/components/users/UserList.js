@@ -3,8 +3,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../common/Layout';
+import { deleteUser, getUsers } from '../../utils/API';
 
 export const UserList = () => {
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+
+  useEffect(async () => {
+    const userList = await getUsers(token);
+    setUsers(userList.data);
+  }, []);
+
+  async function handleDelete(id) {
+    alert('Confirm you want to delete...');
+    const data = await deleteUser(token, id);
+
+    // const arr = users;
+    // const objWithIdIndex = arr.findIndex(obj => obj._id === id);
+    // if (objWithIdIndex > -1) {
+    //   arr.splice(objWithIdIndex, 1);
+    // }
+    // setUsers(arr);
+  }
+
   return (
     <div className='content-wrapper'>
       <Layout
@@ -31,52 +53,39 @@ export const UserList = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1.</td>
-                        <td>Prince Agrawal</td>
-                        <td>prince@youpmail.com</td>
-                        <td>********</td>
-                        <td>
-                          <span className='badge bg-warning'>
-                            <i class='fas fa-edit'></i>
-                          </span>
-                          {'  '}
-                          <span className='badge bg-danger'>
-                            <i class='fas fa-trash'></i>
-                          </span>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>2.</td>
-                        <td>Prince Agrawal</td>
-                        <td>prince@youpmail.com</td>
-                        <td>********</td>
-                        <td>
-                          <span className='badge bg-warning'>
-                            <i class='fas fa-edit'></i>
-                          </span>
-                          {'  '}
-                          <span className='badge bg-danger'>
-                            <i class='fas fa-trash'></i>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3.</td>
-                        <td>Prince Agrawal</td>
-                        <td>prince@youpmail.com</td>
-                        <td>********</td>
-                        <td>
-                          <span className='badge bg-warning'>
-                            <i class='fas fa-edit'></i>
-                          </span>
-                          {'  '}
-                          <span className='badge bg-danger'>
-                            <i class='fas fa-trash'></i>
-                          </span>
-                        </td>
-                      </tr>
+                      {users.length ? (
+                        users.map((user, index) => {
+                          return (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{user.username}</td>
+                              <td>{user.email}</td>
+                              <td>********</td>
+                              <td>
+                                <span
+                                  className='badge bg-warning'
+                                  onClick={() => {
+                                    navigate(`/admin/users/edit/${user._id}`);
+                                  }}
+                                  style={{ cursor: 'pointer' }}>
+                                  <i class='fas fa-edit'></i>
+                                </span>
+                                {'  '}
+                                <span
+                                  className='badge bg-danger'
+                                  style={{ cursor: 'pointer' }}
+                                  onClick={() => {
+                                    handleDelete(user._id);
+                                  }}>
+                                  <i class='fas fa-trash'></i>
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <>No user found</>
+                      )}
                     </tbody>
                   </table>
                 </div>

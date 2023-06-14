@@ -23,6 +23,7 @@ export const updateProfile = async (profileData, token) => {
   }
 };
 
+// Fitbit API  Starts--------------------------------------------------------------------
 export const fitbitAuth = async token => {
   try {
     window.open(
@@ -43,3 +44,47 @@ export const fitbitSuccess = async token => {
     console.log(error);
   }
 };
+
+// Fitbit API  Ends--------------------------------------------------------------------
+
+// User api starts --------------------------------------------------------------------
+
+export const getUsers = async token => {
+  try {
+    const url = SERVER_URL + '/api/admin/users';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUser = async token => {
+  try {
+    const url = SERVER_URL + '/api/admin/user';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const updateUser = async (token, id, body) => {
+  try {
+    const url = SERVER_URL + `/api/admin/user/${id}`;
+    const data = await axios.put(url, body, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deleteUser = async (token, id) => {
+  try {
+    const url = SERVER_URL + `/api/admin/user/${id}`;
+    const data = await axios.delete(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// User api ends ----------------------------------------------------------------------
