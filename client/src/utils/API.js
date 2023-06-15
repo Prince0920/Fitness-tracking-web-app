@@ -59,9 +59,9 @@ export const getUsers = async token => {
   }
 };
 
-export const getUser = async token => {
+export const getUser = async (token, id) => {
   try {
-    const url = SERVER_URL + '/api/admin/user';
+    const url = SERVER_URL + `/api/admin/user/${id}`;
     const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
     return data;
   } catch (error) {
