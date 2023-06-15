@@ -14,14 +14,6 @@ import { SERVER_URL } from '../../constant';
 export const Fitbit = () => {
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    // Canvas rendering fix
-    const knobs = document.getElementsByClassName('knob');
-    if (knobs.length > 0) {
-      window.$(knobs).knob();
-    }
-  }, []);
-
   async function handleConnect() {
     await fitbitAuth(token);
   }
