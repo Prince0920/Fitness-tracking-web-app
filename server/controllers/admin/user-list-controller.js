@@ -1,4 +1,5 @@
 const { User } = require('../../models');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   // get a user list
@@ -17,8 +18,8 @@ module.exports = {
   // get a single user by id
   async getUser(req, res) {
     try {
-      const { user } = req;
-      const foundUser = await User.findOne({ _id: user._id });
+      const { id } = req.params;
+      const foundUser = await User.findOne({ _id: id });
 
       if (!foundUser) {
         return res.status(400).json({ message: 'Cannot find a user with this id!' });
@@ -33,8 +34,22 @@ module.exports = {
   // update a single user by id
   async updateUser(req, res) {
     try {
-      const { user, params } = req;
-      const updatedUser = await User.findOneAndUpdate({ _id: params }, body, { new: true });
+      const { params, body } = req;
+      const newPassword = body.password;
+
+      const data = body;
+      delete data.password;
+
+      let hashPassword = '';
+      if (newPassword) {
+        const saltRounds = 10;
+        hashPassword = await bcrypt.hash(newPassword, saltRounds);
+      }
+      if (hashPassword) {
+        data.password = hashPassword;
+      }
+
+      const updatedUser = await User.findOneAndUpdate({ _id: params.id }, body, { new: true });
       if (!updatedUser) {
         return res.status(400).json({ message: 'Cannot find a user with this id!' });
       }
