@@ -1,30 +1,39 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import './Header.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Header.css';
 
 export default class Header extends Component {
   render() {
     return (
-      <nav className="main-header navbar navbar-expand navbar-light navbar-orange">
+      <nav className='main-header navbar navbar-expand navbar-light navbar-orange'>
         {/* Left navbar links */}
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <a className="nav-link" data-widget="pushmenu" href="#">
-              <i className="fas fa-bars" />
+        <ul className='navbar-nav'>
+          <li className='nav-item'>
+            <a
+              className='nav-link'
+              data-widget='pushmenu'
+              href='/'>
+              <i className='fas fa-bars' />
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" className="nav-link">
+          <li className='nav-item d-none d-sm-inline-block'>
+            <a
+              href='/'
+              className='nav-link'>
               Home
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
-            <a href="#" className="nav-link">
+          <li className='nav-item d-none d-sm-inline-block'>
+            <a
+              href='/admin/dashboard'
+              className='nav-link'>
               AboutUs
             </a>
           </li>
-          <li className="nav-item d-none d-sm-inline-block">
-            <a href="#" className="nav-link">
+          <li className='nav-item d-none d-sm-inline-block'>
+            <a
+              href='/admin/dashboard'
+              className='nav-link'>
               Contact
             </a>
           </li>
@@ -46,28 +55,33 @@ export default class Header extends Component {
           </div>
         </form> */}
         {/* Right navbar links */}
-        <ul className="navbar-nav ml-auto">
+        <ul className='navbar-nav ml-auto'>
           {/* Notifications Dropdown Menu */}
-          <li className="nav-item dropdown">
-            <a className="nav-link" data-toggle="dropdown" href="#">
-              <i className="fas fa-user-circle" />
+          <li className='nav-item dropdown'>
+            <a
+              className='nav-link'
+              data-toggle='dropdown'
+              href='/'>
+              <i className='fas fa-user-circle' />
             </a>
-            <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <div className="dropdown-divider" />
+            <div className='dropdown-menu dropdown-menu-lg dropdown-menu-right'>
+              <div className='dropdown-divider' />
               <Link
-                to="/login"
-                onClick={() => {
-                  localStorage.removeItem("token");
-                }}
-                className="dropdown-item"
-              >
-                <i className="fas fa-sign-out-alt" />
-                <span className="float-right text-muted text-sm">Logout</span>
+                to='/admin/profile'
+                className='dropdown-item'>
+                <i class='fas fa-users' />
+                <span className='float-right text-muted text-sm'>Profile</span>
               </Link>
-              <div className="dropdown-divider" />
-              <Link to="/admin/profile" className="dropdown-item">
-                <i class="fas fa-users" />
-                <span className="float-right text-muted text-sm">Profile</span>
+
+              <div className='dropdown-divider' />
+              <Link
+                to='/login'
+                onClick={() => {
+                  localStorage.removeItem('token');
+                }}
+                className='dropdown-item'>
+                <i className='fas fa-sign-out-alt' />
+                <span className='float-right text-muted text-sm'>Logout</span>
               </Link>
             </div>
           </li>

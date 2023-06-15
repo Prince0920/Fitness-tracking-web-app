@@ -39,16 +39,20 @@ const ProfilePage = () => {
     }));
   };
 
-  useEffect(async () => {
-    const { data } = await getProfile(token);
-    setProfileDetail({
-      email: data.email,
-      username: data.username,
-      height: data.height,
-      weight: data.weight,
-      age: data.age,
-    });
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await getProfile(token);
+      setProfileDetail({
+        email: data.email,
+        username: data.username,
+        height: data.height,
+        weight: data.weight,
+        age: data.age,
+      });
+    };
+
+    fetchData();
+  }, [token]);
   return (
     <div className='content-wrapper'>
       <Layout
@@ -65,7 +69,7 @@ const ProfilePage = () => {
                     <img
                       className='profile-user-img img-fluid img-circle'
                       src='https://adminlte.io/themes/v3/dist/img/user1-128x128.jpg'
-                      alt='User profile picture'
+                      alt='User profile'
                     />
                   </div>
                   {editMode ? (

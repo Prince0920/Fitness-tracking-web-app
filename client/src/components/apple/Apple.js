@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../common/Layout';
 import AppleGreetingHeader from './cards/AppleGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
 
 export const Apple = () => {
-  const [stepCount, setStepCount] = useState(40);
   async function handleConnect() {
     alert('Handle Connect functionality');
   }

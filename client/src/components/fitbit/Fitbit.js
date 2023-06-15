@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import { fitbitAuth } from '../../utils/API';
 import Layout from '../common/Layout';
-import CalorieBurnGraph from './graphs/CalorieBurnGraph';
-import StepCountProgressGraph from './graphs/StepCountProgressGraph';
-import { getTodayDate } from '../../utils/getCurrentDate';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
-import { fitbitAuth, fitbitSuccess } from '../../utils/API';
-import { SERVER_URL } from '../../constant';
 
 export const Fitbit = () => {
   const token = localStorage.getItem('token');

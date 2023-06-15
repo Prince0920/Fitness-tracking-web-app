@@ -28,15 +28,15 @@ const Menu = () => {
             <img
               src='https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg'
               className='img-circle elevation-2'
-              alt='User Image'
+              alt='user'
             />
           </div>
           <div className='info'>
-            <a
-              href='#'
+            <Link
+              to='/admin/dashboard'
               className='d-block'>
               Dotsquare
-            </a>
+            </Link>
           </div>
         </div>
         {/* Sidebar Menu */}
@@ -51,7 +51,7 @@ const Menu = () => {
             <li className='nav-item'>
               <Link
                 to='/admin/dashboard'
-                className={`nav-link ${location.pathname == '/admin/dashboard' ? 'active' : ''}`}>
+                className={`nav-link ${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
                 <i className='nav-icon fas fa-tachometer-alt' />
                 <p>
                   Dashboard
@@ -77,7 +77,7 @@ const Menu = () => {
                   <Link
                     to='/admin/users/userList'
                     className={`nav-link ${
-                      location.pathname == '/admin/users/userList' ? 'active' : ''
+                      location.pathname === '/admin/users/userList' ? 'active' : ''
                     }`}>
                     <i className='far fa-circle nav-icon' />
                     <p>User List</p>
@@ -103,7 +103,7 @@ const Menu = () => {
                   <Link
                     to='/admin/apple/dashboard'
                     className={`nav-link ${
-                      location.pathname == '/admin/apple/dashboard' ? 'active' : ''
+                      location.pathname === '/admin/apple/dashboard' ? 'active' : ''
                     }`}>
                     <i className='far fa-circle nav-icon' />
                     <p>Dashboard</p>
@@ -128,7 +128,7 @@ const Menu = () => {
                   <Link
                     to='/admin/fitbit/dashboard'
                     className={`nav-link ${
-                      location.pathname == '/admin/fitbit/dashboard' ? 'active' : ''
+                      location.pathname === '/admin/fitbit/dashboard' ? 'active' : ''
                     }`}>
                     <i className='far fa-circle nav-icon' />
                     <p>Dashboard</p>

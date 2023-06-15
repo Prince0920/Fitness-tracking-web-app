@@ -35,10 +35,10 @@ const Login = () => {
       })
       .catch(e => {
         console.log('Login api error: ', e);
-        if (e.response.status == 422) {
+        if (e.response.status === 422) {
           toast(e.response.data.error);
         }
-        if (e.response.status == 400) {
+        if (e.response.status === 400) {
           toast(e.response.data.message);
         }
       });

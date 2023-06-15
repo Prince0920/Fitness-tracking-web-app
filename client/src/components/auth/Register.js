@@ -27,7 +27,7 @@ const Register = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (registerFromDetail.password != registerFromDetail.confirmPassword) {
+    if (registerFromDetail.password !== registerFromDetail.confirmPassword) {
       toast('Password and confirm password not match.');
     } else {
       const registerBody = {
@@ -45,10 +45,10 @@ const Register = () => {
         })
         .catch(e => {
           console.log('Register api error: ', e);
-          if (e.response.status == 422) {
+          if (e.response.status === 422) {
             toast(e.response.data.message);
           }
-          if (e.response.status == 409) {
+          if (e.response.status === 409) {
             toast('Account already exist.');
           }
         });
@@ -142,7 +142,7 @@ const Register = () => {
                       defaultValue='agree'
                     />
                     <label htmlFor='agreeTerms'>
-                      I agree to the <a href='#'>terms</a>
+                      I agree to the terms
                     </label>
                   </div>
                 </div>

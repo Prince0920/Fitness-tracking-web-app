@@ -11,15 +11,17 @@ const EditUser = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
-  useEffect(async () => {
-    const userData = await getUser(token, id);
-    setUser(userData.data);
-    setEditedUser(userData.data);
-    setEditedUser({
-      ...user,
-      password: '',
-    });
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await getUser(token, id);
+      setUser(userData.data);
+      setEditedUser({
+        ...userData.data,
+        password: '',
+      });
+    };
+    fetchData();
+  }, [token, id]);
 
   const handleCancel = () => {
     setEditedUser({
@@ -43,7 +45,7 @@ const EditUser = () => {
       email: editedUser.email,
       password: editedUser.password,
     });
-    if (updateUser) {
+    if (updatedUser) {
       toast('User updated successfully!');
       navigate('/admin/users/userList');
     } else {

@@ -27,7 +27,7 @@ const ResetPassword = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (resetFromDetail.password != resetFromDetail.confirmPassword) {
+    if (resetFromDetail.password !== resetFromDetail.confirmPassword) {
       toast('Password and confirm password not match.');
     } else {
       const url = SERVER_URL + '/api/user/resetPassword';
@@ -44,7 +44,7 @@ const ResetPassword = () => {
         })
         .catch(e => {
           console.log('reset password api error: ', e);
-          if (e.response.status == 400) {
+          if (e.response.status === 400) {
             toast(e.response.data.message);
           }
         });

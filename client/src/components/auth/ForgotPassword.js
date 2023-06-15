@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SERVER_URL } from '../../constant';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
 
   const [forgotFromDetail, setForgotFormDetail] = useState({
     email: '',
@@ -33,7 +32,7 @@ const ForgotPassword = () => {
       })
       .catch(e => {
         console.log('forgot password api error: ', e);
-        if (e.response.status == 409) {
+        if (e.response.status === 409) {
           toast(e.response.data.message);
         }
       });

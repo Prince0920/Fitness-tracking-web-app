@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from '../common/Layout';
 import { deleteUser, getUsers } from '../../utils/API';
+import Layout from '../common/Layout';
 
 export const UserList = () => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
-  useEffect(async () => {
-    const userList = await getUsers(token);
-    setUsers(userList.data);
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const userList = await getUsers(token);
+      setUsers(userList.data);
+    };
+    fetchData();
+  }, [token]);
 
   async function handleDelete(id) {
     const confirmDelete = window.confirm('Are you sure you want to delete this user?');
@@ -57,7 +60,7 @@ export const UserList = () => {
                       {users.length ? (
                         users.map((user, index) => {
                           return (
-                            <tr>
+                            <tr key={index}>
                               <td>{index + 1}</td>
                               <td>{user.username}</td>
                               <td>{user.email}</td>
