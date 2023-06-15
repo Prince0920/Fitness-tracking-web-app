@@ -16,17 +16,18 @@ export const UserList = () => {
   }, []);
 
   async function handleDelete(id) {
-    alert('Confirm you want to delete...');
-    const data = await deleteUser(token, id);
-
-    // const arr = users;
-    // const objWithIdIndex = arr.findIndex(obj => obj._id === id);
-    // if (objWithIdIndex > -1) {
-    //   arr.splice(objWithIdIndex, 1);
-    // }
-    // setUsers(arr);
+    const confirmDelete = window.confirm('Are you sure you want to delete this user?');
+    if (confirmDelete) {
+      const data = await deleteUser(token, id);
+      if (data) {
+        toast('User deleted successfully!');
+        // Remove the deleted user from the list
+        setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
+      } else {
+        toast('Something went wrong!');
+      }
+    }
   }
-
   return (
     <div className='content-wrapper'>
       <Layout

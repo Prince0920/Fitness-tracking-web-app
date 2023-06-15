@@ -1,7 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getUser, updateUser } from '../../utils/API';
+import { toast } from 'react-toastify';
 
 const EditUser = () => {
+  let { id } = useParams();
+  const [user, setUser] = useState({});
+  const [editedUser, setEditedUser] = useState({});
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    const userData = await getUser(token, id);
+    setUser(userData.data);
+    setEditedUser(userData.data);
+    setEditedUser({
+      ...user,
+      password: '',
+    });
+  }, []);
+
+  const handleCancel = () => {
+    setEditedUser({
+      ...user,
+      password: '',
+    });
+    navigate('/admin/users/userList');
+  };
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setEditedUser(prevEditedUser => ({
+      ...prevEditedUser,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async () => {
+    const updatedUser = await updateUser(token, id, {
+      username: editedUser.username,
+      email: editedUser.email,
+      password: editedUser.password,
+    });
+    if (updateUser) {
+      toast('User updated successfully!');
+      navigate('/admin/users/userList');
+    } else {
+      toast('Something went wrong!');
+    }
+  };
+
   return (
     <div className='content-wrapper'>
       <Layout
@@ -14,14 +63,17 @@ const EditUser = () => {
             <div className='col-12'>
               <div className='card card-default'>
                 <div className='card-body'>
-                  <div className='row'>
+                  <div className='row align-items-end'>
                     <div className='form-group col-md-6'>
                       <label htmlFor='exampleInputEmail1'>Username</label>
                       <input
                         type='text'
                         className='form-control'
-                        id='exampleInputEmail1'
+                        name='username'
                         placeholder='Enter username'
+                        onChange={handleInputChange}
+                        defaultValue={user.username}
+                        value={editedUser.username}
                       />
                     </div>
 
@@ -30,29 +82,41 @@ const EditUser = () => {
                       <input
                         type='email'
                         className='form-control'
-                        id='exampleInputEmail1'
                         placeholder='Enter email'
+                        name='email'
+                        onChange={handleInputChange}
+                        defaultValue={user.email}
+                        value={editedUser.email}
                       />
                     </div>
 
                     <div className='form-group col-md-6'>
-                      <label htmlFor='exampleInputEmail1'>Username</label>
+                      <label htmlFor='exampleInputPassword1'>Password</label>
                       <input
-                        type='text'
+                        type='password'
                         className='form-control'
-                        id='exampleInputEmail1'
-                        placeholder='Enter username'
+                        placeholder='********'
+                        name='password'
+                        onChange={handleInputChange}
+                        value={editedUser.password}
                       />
                     </div>
 
                     <div className='form-group col-md-6'>
-                      <label htmlFor='exampleInputEmail1'>Email address</label>
-                      <input
-                        type='email'
-                        className='form-control'
-                        id='exampleInputEmail1'
-                        placeholder='Enter email'
-                      />
+                      <div className='d-flex justify-content-end'>
+                        <button
+                          type='button'
+                          className='btn btn-primary'
+                          onClick={handleSave}>
+                          Save
+                        </button>
+                        <button
+                          type='button'
+                          className='btn btn-danger ml-2'
+                          onClick={handleCancel}>
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
