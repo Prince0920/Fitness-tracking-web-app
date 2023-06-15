@@ -31,6 +31,10 @@ const UserSchema = new Schema({
       message: 'Email address is not valid.',
     },
   },
+  role: {
+    type: String,
+    default: 'user'
+  },
   height: {
     type: Number,
     trim: true,
