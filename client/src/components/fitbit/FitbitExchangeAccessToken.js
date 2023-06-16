@@ -12,8 +12,7 @@ const FitbitExchangeAccessToken = () => {
   useEffect(() => {
     const create = async () => {
       const data = await createFitbit(token, {
-        accessToken: searchParams.get('accessToken'),
-        refreshToken: searchParams.get('refreshToken'),
+        fitbitMongoId: searchParams.get('fitbitMongoId')
       });
       if (data.status === 200) {
         navigate('/admin/fitbit/dashboard');
