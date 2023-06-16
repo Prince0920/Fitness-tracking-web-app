@@ -16,12 +16,26 @@ module.exports = {
 
   // Fitbit authentication success
   authSuccess(req, res) {
-    console.log("authSuccess", req.user);
-    res.redirect('http://localhost:3132/admin/fitbit/dashboard');
+    res.redirect(
+      `http://localhost:3132/admin/fitbit/exchange?accessToken=${req.user.accessToken}&refreshToken=${req.user.refreshToken}`
+    );
   },
 
   // Fitbit authentication failed
   authFailed({ body }, res) {
     res.json({ message: 'Authentication failed with fitbit!' });
+  },
+
+  // Fitbit authentication failed
+  createFitbit(req, res) {
+    // console.log('Access                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                : ', req.body.accessToken);
+    // console.log('____________________________________');
+    // console.log('Refresh Token: ', req.body.refreshToken);
+    // console.log('____________________________________');
+    // console.log('req user: ', req.user);
+    // console.log('____________________________________');
+    // res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
+
+    res.json({ message: 'Authentication success!' });
   },
 };
