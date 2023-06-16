@@ -12,7 +12,7 @@ export const Fitbit = () => {
     await fitbitAuth(token);
   }
 
-  const isLogin = true;
+  const isLogin = false;
   return (
     <div className='content-wrapper'>
       <Layout

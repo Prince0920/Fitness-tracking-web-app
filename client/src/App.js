@@ -13,6 +13,7 @@ import { UserList } from './components/users/UserList';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/admin/profile/Profile';
 import EditUser from './components/users/EditUser';
+import FitbitExchangeAccessToken from './components/fitbit/FitbitExchangeAccessToken';
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
           <Route
             path='fitbit/dashboard'
             element={<Fitbit />}
+          />
+          <Route
+            path='fitbit/exchange'
+            element={<FitbitExchangeAccessToken />}
           />
           <Route
             path='users/userList'

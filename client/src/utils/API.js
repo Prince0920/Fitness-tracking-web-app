@@ -45,6 +45,16 @@ export const fitbitSuccess = async token => {
   }
 };
 
+export const createFitbit = async (token, body) => {
+  try {
+    const url = SERVER_URL + '/api/fitbit/createFitbit';
+    const data = await axios.post(url, body, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Fitbit API  Ends--------------------------------------------------------------------
 
 // User api starts --------------------------------------------------------------------
