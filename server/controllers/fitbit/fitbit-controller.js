@@ -10,22 +10,14 @@ module.exports = {
   },
 
   fitbitAuthenticate: passport.authenticate('fitbit', {
-    successRedirect: "http://localhost:3132/admin/fitbit/dashboard",
+    successRedirect: '/api/fitbit/auth/fitbit/success',
     failureRedirect: '/api/fitbit/auth/fitbit/failure',
   }),
 
   // Fitbit authentication success
   authSuccess(req, res) {
-    console.log("authSuccess", req.user)
-    if (req.user) {
-      res.status(200).json({
-        error: false,
-        message: "Successfully Loged In",
-        user: req.user,
-      });
-    } else {
-      res.status(403).json({ error: true, message: "Not Authorized" });
-    }
+    console.log("authSuccess", req.user);
+    res.redirect('http://localhost:3132/admin/fitbit/dashboard');
   },
 
   // Fitbit authentication failed
