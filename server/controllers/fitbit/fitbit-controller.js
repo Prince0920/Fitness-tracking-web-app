@@ -1,5 +1,6 @@
 // const { Cardio, User } = require("../models");
 const passport = require('passport');
+const Fitbit = require('../../models/Fitbit');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 
 module.exports = {
@@ -15,10 +16,20 @@ module.exports = {
   }),
 
   // Fitbit authentication success
-  authSuccess(req, res) {
-    res.redirect(
-      `http://localhost:3132/admin/fitbit/exchange?accessToken=${req.user.accessToken}&refreshToken=${req.user.refreshToken}`
-    );
+  async authSuccess(req, res) {
+    try {
+      const fitbit_data = await Fitbit.create({
+        access_token: req.user.accessToken,
+        refresh_token: req.user.refreshToken,
+        profile: req.user.profile,
+      });
+      console.log(fitbit_data);
+      res.redirect(
+        `http://localhost:3132/admin/fitbit/exchange?fitbitMongoId=${fitbit_data._id}`
+      );
+    } catch (error) {
+      console.log(error)
+    }
   },
 
   // Fitbit authentication failed
@@ -27,7 +38,7 @@ module.exports = {
   },
 
   // Fitbit authentication failed
-  createFitbit(req, res) {
+  async createFitbit(req, res) {
     // console.log('Access                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                : ', req.body.accessToken);
     // console.log('____________________________________');
     // console.log('Refresh Token: ', req.body.refreshToken);
@@ -35,7 +46,12 @@ module.exports = {
     // console.log('req user: ', req.user);
     // console.log('____________________________________');
     // res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
+    console.log("fitbitMongoId", req.body.fitbitMongoId);
+    console.log("req.user", req.user._id);
 
+    await Fitbit.findOneAndUpdate({ _id: req.body.fitbitMongoId }, {
+      userId: req.user._id
+    }, { new: true });
     res.json({ message: 'Authentication success!' });
   },
 };
