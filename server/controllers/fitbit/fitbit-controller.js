@@ -23,7 +23,6 @@ module.exports = {
         refresh_token: req.user.refreshToken,
         profile: req.user.profile,
       });
-      console.log(fitbit_data);
       res.redirect(
         `http://localhost:3132/admin/fitbit/exchange?fitbitMongoId=${fitbit_data._id}`
       );
@@ -39,16 +38,6 @@ module.exports = {
 
   // Fitbit authentication failed
   async createFitbit(req, res) {
-    // console.log('Access                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                : ', req.body.accessToken);
-    // console.log('____________________________________');
-    // console.log('Refresh Token: ', req.body.refreshToken);
-    // console.log('____________________________________');
-    // console.log('req user: ', req.user);
-    // console.log('____________________________________');
-    // res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
-    console.log("fitbitMongoId", req.body.fitbitMongoId);
-    console.log("req.user", req.user._id);
-
     await Fitbit.findOneAndUpdate({ _id: req.body.fitbitMongoId }, {
       userId: req.user._id
     }, { new: true });
