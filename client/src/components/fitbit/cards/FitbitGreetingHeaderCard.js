@@ -1,8 +1,7 @@
 import React from 'react';
 import { getTodayDate } from '../../../utils/getCurrentDate';
 
-const FitbitGreetingHeader = () => {
-  const username = 'Prince Agrawal';
+const FitbitGreetingHeader = ({ username }) => {
   const currentDate = getTodayDate();
 
   return (
@@ -29,11 +28,14 @@ const FitbitGreetingHeader = () => {
             <div
               className='col-md-4'
               style={{ textAlign: 'right' }}>
-              <p
-                className='card-text greeting-text'
-                style={{ fontSize: '4rem', fontWeight: 'bold', color: '#000000' }}>
+              <button
+                className='btn btn-danger'
+                style={{ marginRight: '10px' }}>
+                Disconnect
+              </button>
+              {/* <p className='card-text greeting-text' style={{ fontSize: '2rem', fontWeight: 'bold', color: '#000000', textAlign: 'center' }}>
                 <span style={{ color: '#000000' }}>Fitbit</span>
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ export const getProfile = async token => {
     return userProfile;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -20,6 +21,7 @@ export const updateProfile = async (profileData, token) => {
     return updatedProfile;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -32,6 +34,7 @@ export const fitbitAuth = async token => {
     );
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -42,6 +45,7 @@ export const fitbitSuccess = async token => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -53,6 +57,7 @@ export const updateFitbit = async (token, body) => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -63,6 +68,7 @@ export const isFitbitLogin = async token => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -77,6 +83,7 @@ export const getUsers = async token => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 
@@ -87,6 +94,7 @@ export const getUser = async (token, id) => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 export const updateUser = async (token, id, body) => {
@@ -96,6 +104,7 @@ export const updateUser = async (token, id, body) => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 export const deleteUser = async (token, id) => {
@@ -105,6 +114,7 @@ export const deleteUser = async (token, id) => {
     return data;
   } catch (error) {
     console.log(error);
+    return error.response
   }
 };
 

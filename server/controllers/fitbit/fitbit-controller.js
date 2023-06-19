@@ -25,7 +25,7 @@ module.exports = {
     res.json({ message: 'Authentication failed with fitbit!' });
   },
 
-  // Fitbit authentication failed
+  // Insert corresponding user id in fitbit model
   async updateFitbit(req, res) {
     await Fitbit.findOneAndUpdate(
       { profileId: req.body.profileId },
@@ -37,18 +37,22 @@ module.exports = {
     res.json({ message: 'Authentication success!' });
   },
 
-  // Fitbit authentication failed
+  // Checking if user already login
   async isLogin(req, res) {
     try {
-      const { user, params } = req;
-      const fitbitData = await Fitbit.findOne({ userId: req.user._id });
+      const { user } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
       if (!fitbitData) {
-        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
       }
 
-      res.json({ profileId: fitbitData.profileId, provider: 'fitbit' });
+      return res.json({
+        profileId: fitbitData.profileId,
+        provider: 'fitbit',
+        displayName: fitbitData.profile.displayName,
+      });
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      return res.status(400).json({ message: 'Something went wrong!' });
     }
   },
 };
