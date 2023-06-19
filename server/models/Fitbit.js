@@ -5,6 +5,11 @@ const FitbitSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  profileId: {
+    type: String,
+    required: true,
+    unique: true
+  },
   access_token: {
     type: String,
   },
