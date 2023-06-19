@@ -15,11 +15,10 @@ router.route('/testing').get(sampleFitbit);
 
 // /api/fitbit/auth/fitbit
 router.route('/auth/fitbit').get(authMiddleware, (req, res, next) => {
-  passport.authenticate('fitbit', { scope: ['activity', 'heartrate', 'location', 'profile'], state: req.user._id })(
-    req,
-    res,
-    next
-  );
+  passport.authenticate('fitbit', {
+    scope: ['activity', 'heartrate', 'location', 'profile'],
+    state: req.user._id,
+  })(req, res, next);
 });
 
 // /api/fitbit/auth/fitbit/callback

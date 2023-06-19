@@ -1,8 +1,8 @@
 const Fitbit = require('../models/Fitbit');
 
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
-const CLIENT_ID = '23QXZ7';
-const CLIENT_SECRET = '77738a0baac5343826e2020497132cc1';
+const CLIENT_ID = process.env.FITBIT_CLIENT_ID;
+const CLIENT_SECRET = process.env.FITBIT_CLIENT_SECRET;
 
 function initializeFitbit(passport) {
   passport.use(
