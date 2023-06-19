@@ -25,7 +25,7 @@ export const Fitbit = () => {
         profileId: searchParams.get('profileId'),
       });
       if (data.status === 200) {
-        setIsLogin(prev => !prev);
+        setIsLogin(true);
         navigate('/admin/fitbit/dashboard');
       } else {
         toast('Something went wrong please try again!');
@@ -38,7 +38,7 @@ export const Fitbit = () => {
     const checkLoginStatus = async () => {
       const fitbitData = await isFitbitLogin(token);
       if (fitbitData.status === 200) {
-        setIsLogin(prev => !prev);
+        setIsLogin(true);
         setUsername(fitbitData.data.displayName);
       } else if (fitbitData.status === 400) {
         toast('something went wrong!');
@@ -51,7 +51,7 @@ export const Fitbit = () => {
   const handleDisconnect = async () => {
     const data = await disconnectFitbit(token);
     if (data.status === 200) {
-      setIsLogin(prev => !prev);
+      setIsLogin(false);
     } else {
       toast('Something went wrong!');
     }
