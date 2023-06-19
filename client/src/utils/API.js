@@ -45,10 +45,21 @@ export const fitbitSuccess = async token => {
   }
 };
 
-export const createFitbit = async (token, body) => {
+export const updateFitbit = async (token, body) => {
   try {
-    const url = SERVER_URL + '/api/fitbit/createFitbit';
+    const url = SERVER_URL + '/api/fitbit/updateFitbit';
     const data = await axios.post(url, body, { headers: { Authorization: `Bearer ${token}` } });
+    console.log("data")
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const isFitbitLogin = async token => {
+  try {
+    const url = SERVER_URL + '/api/fitbit/isLogin';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
     return data;
   } catch (error) {
     console.log(error);
