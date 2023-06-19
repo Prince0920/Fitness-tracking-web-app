@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateFitbit, fitbitAuth, isFitbitLogin, disconnectFitbit } from '../../utils/API';
+import { fitbitAuth, isFitbitLogin, disconnectFitbit } from '../../utils/API';
 import Layout from '../common/Layout';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
 
 export const Fitbit = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
@@ -18,21 +17,6 @@ export const Fitbit = () => {
   async function handleConnect() {
     await fitbitAuth(token);
   }
-
-  useEffect(() => {
-    const create = async () => {
-      const data = await updateFitbit(token, {
-        profileId: searchParams.get('profileId'),
-      });
-      if (data.status === 200) {
-        setIsLogin(true);
-        navigate('/admin/fitbit/dashboard');
-      } else {
-        toast('Something went wrong please try again!');
-      }
-    };
-    if (searchParams.get('profileId')) create();
-  }, [token, searchParams, navigate]);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -52,6 +36,7 @@ export const Fitbit = () => {
     const data = await disconnectFitbit(token);
     if (data.status === 200) {
       setIsLogin(false);
+      navigate('/admin/fitbit/dashboard');
     } else {
       toast('Something went wrong!');
     }

@@ -12,12 +12,14 @@ function initializeFitbit(passport) {
         clientSecret: CLIENT_SECRET,
         scope: ['activity', 'heartrate', 'location', 'profile'],
         callbackURL: 'http://localhost:3001/api/fitbit/auth/fitbit/callback',
+        passReqToCallback: true,
       },
-      async (accessToken, refreshToken, profile, done) => {
+      async (req, accessToken, refreshToken, profile, done) => {
         // TODO: save accessToken here for later use
 
         const bodyData = {
           profileId: profile.id,
+          userId: req.query.state,
           access_token: accessToken,
           refresh_token: refreshToken,
           profile: profile,

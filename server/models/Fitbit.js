@@ -3,12 +3,13 @@ const { Schema, model } = require('mongoose');
 const FitbitSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true,
   },
   profileId: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   access_token: {
     type: String,

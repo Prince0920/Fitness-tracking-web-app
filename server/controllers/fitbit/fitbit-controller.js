@@ -13,7 +13,7 @@ module.exports = {
   // Fitbit authentication success
   async authSuccess(req, res) {
     try {
-      res.redirect(`http://localhost:3132/admin/fitbit/dashboard?profileId=${req.user.profileId}`);
+      res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
     } catch (error) {
       console.error('Error:', error);
       return res.status(409).json({ error });
@@ -23,18 +23,6 @@ module.exports = {
   // Fitbit authentication failed
   authFailed({ body }, res) {
     res.json({ message: 'Authentication failed with fitbit!' });
-  },
-
-  // Insert corresponding user id in fitbit model
-  async updateFitbit(req, res) {
-    await Fitbit.findOneAndUpdate(
-      { profileId: req.body.profileId },
-      {
-        userId: req.user._id,
-      },
-      { new: true }
-    );
-    res.json({ message: 'Authentication success!' });
   },
 
   // Checking if user already login

@@ -49,18 +49,6 @@ export const fitbitSuccess = async token => {
   }
 };
 
-export const updateFitbit = async (token, body) => {
-  try {
-    const url = SERVER_URL + '/api/fitbit/updateFitbit';
-    const data = await axios.post(url, body, { headers: { Authorization: `Bearer ${token}` } });
-    console.log("data")
-    return data;
-  } catch (error) {
-    console.log(error);
-    return error.response
-  }
-};
-
 export const isFitbitLogin = async token => {
   try {
     const url = SERVER_URL + '/api/fitbit/isLogin';
