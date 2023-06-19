@@ -7,6 +7,7 @@ const {
   authFailed,
   updateFitbit,
   isLogin,
+  disconnect
 } = require('../../../controllers/fitbit/fitbit-controller');
 const { authMiddleware } = require('../../../utils/auth');
 
@@ -41,5 +42,8 @@ router.route('/updateFitbit').post(authMiddleware, updateFitbit);
 
 // /api/fitbit/isLogin
 router.route('/isLogin').get(authMiddleware, isLogin);
+
+// /api/fitbit/disconnect
+router.route('/disconnect').delete(authMiddleware, disconnect);
 
 module.exports = router;

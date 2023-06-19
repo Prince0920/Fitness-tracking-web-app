@@ -55,4 +55,18 @@ module.exports = {
       return res.status(400).json({ message: 'Something went wrong!' });
     }
   },
+
+  async disconnect(req, res) {
+    try {
+      const { user } = req;
+      const fitbitData = await Fitbit.deleteOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+
+      return res.json(fitbitData);
+    } catch (error) {
+      return res.status(400).json({ message: 'Something went wrong!' });
+    }
+  },
 };

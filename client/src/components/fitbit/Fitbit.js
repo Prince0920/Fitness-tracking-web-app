@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateFitbit, fitbitAuth, isFitbitLogin } from '../../utils/API';
+import { updateFitbit, fitbitAuth, isFitbitLogin, disconnectFitbit } from '../../utils/API';
 import Layout from '../common/Layout';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
@@ -37,11 +37,10 @@ export const Fitbit = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       const fitbitData = await isFitbitLogin(token);
-      console.log("fitbitData", fitbitData)
       if (fitbitData.status === 200) {
         setIsLogin(prev => !prev);
         setUsername(fitbitData.data.displayName);
-      }else if(fitbitData.status === 400){
+      } else if (fitbitData.status === 400) {
         toast('something went wrong!');
       }
     };
@@ -49,6 +48,14 @@ export const Fitbit = () => {
     checkLoginStatus();
   }, [token]);
 
+  const handleDisconnect = async () => {
+    const data = await disconnectFitbit(token);
+    if (data.status === 200) {
+      setIsLogin(prev => !prev);
+    } else {
+      toast('Something went wrong!');
+    }
+  };
   return (
     <div className='content-wrapper'>
       <Layout
@@ -61,7 +68,10 @@ export const Fitbit = () => {
             <>
               <div className='row'>
                 <div className='col-12'>
-                  <FitbitGreetingHeader username={username} />
+                  <FitbitGreetingHeader
+                    username={username}
+                    handleDisconnect={handleDisconnect}
+                  />
                 </div>
               </div>
               <div className='row'>

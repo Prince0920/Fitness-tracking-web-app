@@ -1,7 +1,7 @@
 import React from 'react';
 import { getTodayDate } from '../../../utils/getCurrentDate';
 
-const FitbitGreetingHeader = ({ username }) => {
+const FitbitGreetingHeader = ({ username , handleDisconnect }) => {
   const currentDate = getTodayDate();
 
   return (
@@ -30,7 +30,8 @@ const FitbitGreetingHeader = ({ username }) => {
               style={{ textAlign: 'right' }}>
               <button
                 className='btn btn-danger'
-                style={{ marginRight: '10px' }}>
+                style={{ marginRight: '10px' }}
+                onClick={handleDisconnect}>
                 Disconnect
               </button>
               {/* <p className='card-text greeting-text' style={{ fontSize: '2rem', fontWeight: 'bold', color: '#000000', textAlign: 'center' }}>

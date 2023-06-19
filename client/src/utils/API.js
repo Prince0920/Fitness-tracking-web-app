@@ -72,6 +72,17 @@ export const isFitbitLogin = async token => {
   }
 };
 
+export const disconnectFitbit = async token => {
+  try {
+    const url = SERVER_URL + '/api/fitbit/disconnect';
+    const data = await axios.delete(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response
+  }
+};
+
 // Fitbit API  Ends--------------------------------------------------------------------
 
 // User api starts --------------------------------------------------------------------
