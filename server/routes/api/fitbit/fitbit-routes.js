@@ -5,7 +5,7 @@ const {
   sampleFitbit,
   authSuccess,
   authFailed,
-  createFitbit,
+  updateFitbit,
   isLogin,
 } = require('../../../controllers/fitbit/fitbit-controller');
 const { authMiddleware } = require('../../../utils/auth');
@@ -36,8 +36,8 @@ router.route('/auth/fitbit/success').get(authSuccess);
 // /api/fitbit/auth/fitbit/failure
 router.route('/auth/fitbit/failure').get(authFailed);
 
-// /api/fitbit/createFitbit
-router.route('/createFitbit').post(authMiddleware, createFitbit);
+// /api/fitbit/updateFitbit
+router.route('/updateFitbit').post(authMiddleware, updateFitbit);
 
 // /api/fitbit/isLogin
 router.route('/isLogin').get(authMiddleware, isLogin);
