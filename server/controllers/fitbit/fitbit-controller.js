@@ -10,11 +10,6 @@ module.exports = {
     res.json({ message: 'Fitbit Api setup successfully!' + JSON.stringify(req.user) });
   },
 
-  fitbitAuthenticate: passport.authenticate('fitbit', {
-    successRedirect: '/api/fitbit/auth/fitbit/success',
-    failureRedirect: '/api/fitbit/auth/fitbit/failure',
-  }),
-
   // Fitbit authentication success
   async authSuccess(req, res) {
     try {
@@ -55,5 +50,20 @@ module.exports = {
       { new: true }
     );
     res.json({ message: 'Authentication success!' });
+  },
+
+  // Fitbit authentication failed
+  async isLogin(req, res) {
+    try {
+      const { user, params } = req;
+      const fitbitData = await Fitbit.findOne({ userId: req.user._id });
+      if (!fitbitData) {
+        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+      }
+
+      res.json({ profileId: fitbitData.profileId, provider: 'fitbit' });
+    } catch (error) {
+      res.status(400).json({ message: 'Something went wrong!' });
+    }
   },
 };
