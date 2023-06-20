@@ -87,19 +87,19 @@ module.exports = {
               next();
             })
             .catch(error => {
-              console.error('Error:', error.response.data);
-              res.sendStatus(500);
+              console.error('Error in ensureFitibitAuthenticated:', error);
+              return res.status(500).json({ message: 'Something went wrong!' });
             });
         } else {
           console.log('fitbit access token valid');
           next();
         }
       } else {
-        return res.status(400).json({ message: 'Something went wrong!' });
+        return res.status(500).json({ message: 'Something went wrong!' });
       }
     } catch (error) {
       console.log(error);
-      return res.status(400).json({ message: 'Something went wrong!' });
+      return res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 };

@@ -29,11 +29,11 @@ module.exports = {
   async createUser({ body }, res) {
     try {
       if (body.password != body.confirmPassword) {
-        return res.status(422).json({ message: 'Passowrd and confirm password not match!' });
+        return res.status(400).json({ message: 'Passowrd and confirm password not match!' });
       }
       const user = await User.create(body);
       if (!user) {
-        return res.status(400).json({ message: 'Something is wrong!' });
+        return res.status(500).json({ message: 'Something is wrong!' });
       }
       const token = signToken(user);
       res.json({ token, user });
@@ -45,11 +45,11 @@ module.exports = {
           validationErrors[key] = error.errors[key].message;
         }
         // console.log('Validation errors:', Object.values(validationErrors)[0]);
-        return res.status(422).json({ message: Object.values(validationErrors)[0] });
+        return res.status(400).json({ message: Object.values(validationErrors)[0] });
       } else {
         // Handle other types of errors
         // console.error('Error:', error);
-        return res.status(409).json({ error });
+        return res.status(500).json({ error });
       }
     }
   },
@@ -70,7 +70,7 @@ module.exports = {
       const token = signToken(user);
       res.json({ token, user });
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -80,7 +80,7 @@ module.exports = {
     try {
       const user = await User.findOne({ email });
 
-      if (!user) return res.status(409).json({ message: 'User does not exist' });
+      if (!user) return res.status(400).json({ message: 'User does not exist' });
       let token = await Token.findOne({ userId: user._id });
       if (token) await token.deleteOne();
       let resetToken = crypto.randomBytes(32).toString('hex');
@@ -101,7 +101,7 @@ module.exports = {
       );
       res.json({ link });
     } catch (error) {
-      res.status(409).json({ message: 'Something went wrong!' });
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -131,7 +131,7 @@ module.exports = {
       await passwordResetToken.deleteOne();
       res.json({ message: 'Success' });
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -147,7 +147,7 @@ module.exports = {
 
       res.json(foundUser);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -162,7 +162,7 @@ module.exports = {
 
       res.json(updatedUser);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 };

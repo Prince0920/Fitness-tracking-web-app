@@ -6,8 +6,12 @@ const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 module.exports = {
   // Testing fitbit routing
   sampleFitbit(req, res) {
-    // console.log(req.user.accessToken);
-    res.json({ message: 'Fitbit Api setup successfully!' + JSON.stringify(req.user) });
+    try {
+      res.json({ message: 'Fitbit Api setup successfully!' + JSON.stringify(req.user) });
+    } catch (error) {
+      console.log('error in sampleFitbit', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
   },
 
   // Fitbit authentication success
@@ -15,14 +19,19 @@ module.exports = {
     try {
       res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(409).json({ error });
+      console.error('Error in authSuccess:', error);
+      return res.status(500).json("Something went wrong!");
     }
   },
 
   // Fitbit authentication failed
   authFailed({ body }, res) {
-    res.json({ message: 'Authentication failed with fitbit!' });
+    try {
+      res.json({ message: 'Authentication failed with fitbit!' });
+    } catch (error) {
+      console.error('Error in authFailed:', error);
+      return res.status(500).json("Something went wrong!");
+    }
   },
 
   // Checking if user already login
@@ -40,7 +49,8 @@ module.exports = {
         displayName: fitbitData.profile.displayName,
       });
     } catch (error) {
-      return res.status(400).json({ message: 'Something went wrong!' });
+      console.error('Error in isLogin:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -54,7 +64,8 @@ module.exports = {
 
       return res.json(fitbitData);
     } catch (error) {
-      return res.status(400).json({ message: 'Something went wrong!' });
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 };

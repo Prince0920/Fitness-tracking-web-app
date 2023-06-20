@@ -11,7 +11,8 @@ module.exports = {
       }
       res.json(userList);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      console.log('Error in getUsers', error);
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -22,12 +23,13 @@ module.exports = {
       const foundUser = await User.findOne({ _id: id });
 
       if (!foundUser) {
-        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
       }
 
       res.json(foundUser);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      console.log('Error in getUser', error);
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
@@ -51,27 +53,29 @@ module.exports = {
 
       const updatedUser = await User.findOneAndUpdate({ _id: params.id }, body, { new: true });
       if (!updatedUser) {
-        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
       }
 
       res.json(updatedUser);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      console.log('Error in updateUser', error);
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 
   // update a single user by id
   async deleteUser(req, res) {
     try {
-      const { user, params } = req;
+      const { params } = req;
       const deleteUser = await User.findOneAndDelete({ _id: params.id });
       if (!deleteUser) {
-        return res.status(400).json({ message: 'Cannot find a user with this id!' });
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
       }
 
       res.json(deleteUser);
     } catch (error) {
-      res.status(400).json({ message: 'Something went wrong!' });
+      console.log('Error in deleteUser', error);
+      res.status(500).json({ message: 'Something went wrong!' });
     }
   },
 };
