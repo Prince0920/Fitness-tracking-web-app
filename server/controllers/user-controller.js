@@ -39,6 +39,7 @@ module.exports = {
       res.json({ token, user });
     } catch (error) {
       if (error.name === 'ValidationError') {
+        console.log('I am in validation');
         // Handle validation errors
         const validationErrors = {};
         for (let key in error.errors) {
@@ -46,9 +47,12 @@ module.exports = {
         }
         // console.log('Validation errors:', Object.values(validationErrors)[0]);
         return res.status(400).json({ message: Object.values(validationErrors)[0] });
+      } else if (error.name === 'MongoServerError' && error.code === 11000) {
+        // Handle duplicate email error
+        return res.status(400).json({ message: 'Email address already exists!' });
       } else {
         // Handle other types of errors
-        // console.error('Error:', error);
+        console.error('Error:', error.name);
         return res.status(500).json({ error });
       }
     }
