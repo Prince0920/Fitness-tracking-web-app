@@ -1,4 +1,6 @@
 // const { Cardio, User } = require("../models");
+const mongoose = require('mongoose');
+const axios = require('axios');
 const passport = require('passport');
 const Fitbit = require('../../models/Fitbit');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
@@ -20,7 +22,7 @@ module.exports = {
       res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
     } catch (error) {
       console.error('Error in authSuccess:', error);
-      return res.status(500).json("Something went wrong!");
+      return res.status(500).json('Something went wrong!');
     }
   },
 
@@ -30,7 +32,7 @@ module.exports = {
       res.json({ message: 'Authentication failed with fitbit!' });
     } catch (error) {
       console.error('Error in authFailed:', error);
-      return res.status(500).json("Something went wrong!");
+      return res.status(500).json('Something went wrong!');
     }
   },
 
@@ -63,6 +65,27 @@ module.exports = {
       }
 
       return res.json(fitbitData);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
+
+  async getActivityGoals(req, res) {
+    try {
+      const { user } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+      const profileId = fitbitData.profileId;
+      const accessToken = fitbitData.access_token;
+
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/goals/weekly.json`;
+      const { data } = await axios.get(url, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      res.json(data);
     } catch (error) {
       console.error('Error in disconnect:', error);
       return res.status(500).json({ message: 'Something went wrong!' });
