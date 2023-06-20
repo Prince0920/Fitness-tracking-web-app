@@ -8,7 +8,7 @@ export const Apple = () => {
   async function handleConnect() {
     alert('Handle Connect functionality');
   }
-  const isLogin = true;
+  const isLogin = false;
 
   return (
     <div className='content-wrapper'>
