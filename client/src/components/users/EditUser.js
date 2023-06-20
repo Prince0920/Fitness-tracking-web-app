@@ -13,12 +13,16 @@ const EditUser = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await getUser(token, id);
-      setUser(userData.data);
-      setEditedUser({
-        ...userData.data,
-        password: '',
-      });
+      const resp = await getUser(token, id);
+      if (resp.status === 200) {
+        setUser(resp.data);
+        setEditedUser({
+          ...resp.data,
+          password: '',
+        });
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
     };
     fetchData();
   }, [token, id]);
@@ -40,16 +44,17 @@ const EditUser = () => {
   };
 
   const handleSave = async () => {
-    const updatedUser = await updateUser(token, id, {
+    const resp = await updateUser(token, id, {
       username: editedUser.username,
       email: editedUser.email,
       password: editedUser.password,
     });
-    if (updatedUser) {
+
+    if (resp.status === 200) {
       toast('User updated successfully!');
       navigate('/admin/users/userList');
     } else {
-      toast('Something went wrong!');
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
     }
   };
 

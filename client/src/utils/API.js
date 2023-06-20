@@ -1,6 +1,49 @@
 import { SERVER_URL } from '../constant';
 import axios from 'axios';
 
+// Auth API Starts ---------------------------------------------
+
+export const login = async loginFromDetail => {
+  try {
+    const url = SERVER_URL + '/api/user/login';
+
+    const resp = await axios.post(url, loginFromDetail);
+    return resp;
+  } catch (error) {
+    console.log('Login Api error', error);
+    return error.response;
+  }
+};
+
+export const signUp = async registerBody => {
+  try {
+    const url = SERVER_URL + '/api/user';
+    const resp = await axios.post(url, registerBody);
+    return resp;
+    // .then(resp => {
+    //   // console.log('Register api data: ', resp);
+    //   // navigate('/admin/login');
+    //   return resp;
+    // })
+    // .catch(e => {
+    //   // console.log('Register api error: ', e);
+    // if (e.response.status === 400) {
+    //   toast(e.response.data.message);
+    // } else {
+    //   toast('Server error!');
+    //   // }
+    //   return error.response;
+    // });
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
+// Auth API Ends ---------------------------------------------
+
+// Profile API Starts -------------------------------------------
+
 export const getProfile = async token => {
   try {
     const url = SERVER_URL + '/api/user/profile';
@@ -8,7 +51,7 @@ export const getProfile = async token => {
     return userProfile;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 
@@ -20,10 +63,12 @@ export const updateProfile = async (profileData, token) => {
     });
     return updatedProfile;
   } catch (error) {
-    console.log(error);
-    return error.response
+    console.log("error updateProfile", error);
+    return error.response;
   }
 };
+
+// Profile API Ends -------------------------------------------
 
 // Fitbit API  Starts--------------------------------------------------------------------
 export const fitbitAuth = async token => {
@@ -32,9 +77,10 @@ export const fitbitAuth = async token => {
       `${SERVER_URL}/api/fitbit/auth/fitbit?token=${localStorage.getItem('token')}`,
       '_self'
     );
+    return true;
   } catch (error) {
     console.log(error);
-    return error.response
+    return false;
   }
 };
 
@@ -45,7 +91,7 @@ export const fitbitSuccess = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 
@@ -56,7 +102,7 @@ export const isFitbitLogin = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 
@@ -67,7 +113,7 @@ export const disconnectFitbit = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 
@@ -82,7 +128,7 @@ export const getUsers = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 
@@ -93,7 +139,7 @@ export const getUser = async (token, id) => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 export const updateUser = async (token, id, body) => {
@@ -103,7 +149,7 @@ export const updateUser = async (token, id, body) => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 export const deleteUser = async (token, id) => {
@@ -113,7 +159,7 @@ export const deleteUser = async (token, id) => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response
+    return error.response;
   }
 };
 

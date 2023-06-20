@@ -35,7 +35,7 @@ const ResetPassword = () => {
         .post(url, {
           token,
           userId,
-          password: resetFromDetail.password
+          password: resetFromDetail.password,
         })
         .then(resp => {
           console.log('reset password api data: ', resp);
@@ -46,6 +46,8 @@ const ResetPassword = () => {
           console.log('reset password api error: ', e);
           if (e.response.status === 400) {
             toast(e.response.data.message);
+          } else {
+            toast('Server error!');
           }
         });
     }

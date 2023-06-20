@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from '../../constant';
+import { login } from '../../utils/API';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,26 +21,16 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const url = SERVER_URL + '/api/user/login';
-    axios
-      .post(url, loginFromDetail)
-      .then(resp => {
-        console.log('Login api data: ', resp);
-        localStorage.setItem('token', resp.data.token);
-        localStorage.setItem('username', resp.data.user.username);
-        navigate('/admin/dashboard');
-      })
-      .catch(e => {
-        console.log('Login api error: ', e);
-        if (e.response.status === 422) {
-          toast(e.response.data.error);
-        }
-        if (e.response.status === 400) {
-          toast(e.response.data.message);
-        }
-      });
+    const resp = await login(loginFromDetail);
+    if (resp.status === 200) {
+      localStorage.setItem('token', resp.data.token);
+      localStorage.setItem('username', resp.data.user.username);
+      navigate('/admin/dashboard');
+    } else {
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+    }
   };
 
   return (

@@ -12,8 +12,12 @@ export const UserList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userList = await getUsers(token);
-      setUsers(userList.data);
+      const resp = await getUsers(token);
+      if (resp.status === 200) {
+        setUsers(resp.data);
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
     };
     fetchData();
   }, [token]);
@@ -21,13 +25,13 @@ export const UserList = () => {
   async function handleDelete(id) {
     const confirmDelete = window.confirm('Are you sure you want to delete this user?');
     if (confirmDelete) {
-      const data = await deleteUser(token, id);
-      if (data) {
-        toast('User deleted successfully!');
+      const resp = await deleteUser(token, id);
+      if (resp.status === 200) {
         // Remove the deleted user from the list
         setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
+        toast('User deleted successfully!');
       } else {
-        toast('Something went wrong!');
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
       }
     }
   }

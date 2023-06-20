@@ -45,11 +45,10 @@ const Register = () => {
         })
         .catch(e => {
           console.log('Register api error: ', e);
-          if (e.response.status === 422) {
+          if (e.response.status === 400) {
             toast(e.response.data.message);
-          }
-          if (e.response.status === 409) {
-            toast('Account already exist.');
+          } else {
+            toast('Server error!');
           }
         });
     }

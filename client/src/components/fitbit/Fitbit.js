@@ -20,12 +20,12 @@ export const Fitbit = () => {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const fitbitData = await isFitbitLogin(token);
-      if (fitbitData.status === 200) {
+      const resp = await isFitbitLogin(token);
+      if (resp.status === 200) {
         setIsLogin(true);
-        setUsername(fitbitData.data.displayName);
-      } else if (fitbitData.status === 400) {
-        toast('something went wrong!');
+        setUsername(resp.data.displayName);
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
       }
     };
 
@@ -33,12 +33,12 @@ export const Fitbit = () => {
   }, [token]);
 
   const handleDisconnect = async () => {
-    const data = await disconnectFitbit(token);
-    if (data.status === 200) {
+    const resp = await disconnectFitbit(token);
+    if (resp.status === 200) {
       setIsLogin(false);
       navigate('/admin/fitbit/dashboard');
     } else {
-      toast('Something went wrong!');
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
     }
   };
   return (

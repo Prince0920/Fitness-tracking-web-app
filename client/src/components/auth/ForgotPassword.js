@@ -28,12 +28,13 @@ const ForgotPassword = () => {
       .then(resp => {
         console.log('forgot password api data: ', resp);
         toast('Password resent link send to your mail.');
-        //   navigate('/admin/dashboard');
       })
       .catch(e => {
         console.log('forgot password api error: ', e);
-        if (e.response.status === 409) {
+        if (e.response.status === 400) {
           toast(e.response.data.message);
+        } else {
+          toast('Server error!');
         }
       });
   };

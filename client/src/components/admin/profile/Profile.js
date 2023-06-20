@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../common/Layout';
 import { getProfile, updateProfile } from '../../../utils/API';
+import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
@@ -19,15 +20,22 @@ const ProfilePage = () => {
   const handleSaveClick = async () => {
     const profileBody = profileDetail;
     delete profileBody.email;
-    const { data } = await updateProfile(profileBody, token);
-    setProfileDetail({
-      email: data.email,
-      username: data.username,
-      height: data.height,
-      weight: data.weight,
-      age: data.age,
-    });
-    setEditMode(false);
+    const resp = await updateProfile(profileBody, token);
+
+    if (resp.status === 200) {
+      setProfileDetail({
+        email: resp?.data?.email,
+        username: resp?.data?.username,
+        height: resp?.data?.height,
+        weight: resp?.data?.weight,
+        age: resp?.data?.age,
+      });
+      setEditMode(false);
+      toast('Profile Updated!');
+    } else {
+      return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+    }
+
     // Perform save/update logic here
   };
 
@@ -41,14 +49,19 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getProfile(token);
-      setProfileDetail({
-        email: data.email,
-        username: data.username,
-        height: data.height,
-        weight: data.weight,
-        age: data.age,
-      });
+      const resp = await getProfile(token);
+      if (resp.status === 200) {
+        const { data } = resp;
+        setProfileDetail({
+          email: data.email,
+          username: data.username,
+          height: data.height,
+          weight: data.weight,
+          age: data.age,
+        });
+      } else {
+        return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
     };
 
     fetchData();
