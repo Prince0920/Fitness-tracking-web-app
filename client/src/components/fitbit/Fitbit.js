@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fitbitAuth, isFitbitLogin, disconnectFitbit } from '../../utils/API';
+import { fitbitAuth, isFitbitLogin, disconnectFitbit, getActivityGoals } from '../../utils/API';
 import Layout from '../common/Layout';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
@@ -24,13 +24,29 @@ export const Fitbit = () => {
       if (resp.status === 200) {
         setIsLogin(true);
         setUsername(resp.data.displayName);
-      } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      } else if (resp.status === 400) {
+        toast(resp.data.message);
       }
     };
 
     checkLoginStatus();
   }, [token]);
+
+  // Fetching activity goals.
+  useEffect(() => {
+    const fetch = async () => {
+      const resp = await getActivityGoals(token);
+      if (resp.status === 200) {
+        console.log('getActivityGoals', resp.data.goals);
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
+    };
+
+    if (isLogin) {
+      fetch();
+    }
+  }, [token, isLogin]);
 
   const handleDisconnect = async () => {
     const resp = await disconnectFitbit(token);
@@ -41,6 +57,7 @@ export const Fitbit = () => {
       resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
     }
   };
+
   return (
     <div className='content-wrapper'>
       <Layout

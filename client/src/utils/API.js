@@ -129,6 +129,17 @@ export const disconnectFitbit = async token => {
   }
 };
 
+export const getActivityGoals = async token => {
+  try {
+    const url = SERVER_URL + '/api/fitbit/getActivityGoals';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
 // Fitbit API  Ends--------------------------------------------------------------------
 
 // User api starts --------------------------------------------------------------------
