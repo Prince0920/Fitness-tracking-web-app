@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from '../../constant';
+import { signUp } from '../../utils/API';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,9 +23,8 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-
     if (registerFromDetail.password !== registerFromDetail.confirmPassword) {
       toast('Password and confirm password not match.');
     } else {
@@ -36,21 +34,12 @@ const Register = () => {
         password: registerFromDetail.password,
         confirmPassword: registerFromDetail.confirmPassword,
       };
-      const url = SERVER_URL + '/api/user';
-      axios
-        .post(url, registerBody)
-        .then(resp => {
-          console.log('Register api data: ', resp);
-          navigate('/admin/login');
-        })
-        .catch(e => {
-          console.log('Register api error: ', e);
-          if (e.response.status === 400) {
-            toast(e.response.data.message);
-          } else {
-            toast('Server error!');
-          }
-        });
+      const resp = await signUp(registerBody);
+      if (resp.status === 200) {
+        navigate('/admin/login');
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
     }
   };
 
@@ -140,9 +129,7 @@ const Register = () => {
                       name='terms'
                       defaultValue='agree'
                     />
-                    <label htmlFor='agreeTerms'>
-                      I agree to the terms
-                    </label>
+                    <label htmlFor='agreeTerms'>I agree to the terms</label>
                   </div>
                 </div>
                 <div className='col-4'>

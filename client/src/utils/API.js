@@ -20,20 +20,32 @@ export const signUp = async registerBody => {
     const url = SERVER_URL + '/api/user';
     const resp = await axios.post(url, registerBody);
     return resp;
-    // .then(resp => {
-    //   // console.log('Register api data: ', resp);
-    //   // navigate('/admin/login');
-    //   return resp;
-    // })
-    // .catch(e => {
-    //   // console.log('Register api error: ', e);
-    // if (e.response.status === 400) {
-    //   toast(e.response.data.message);
-    // } else {
-    //   toast('Server error!');
-    //   // }
-    //   return error.response;
-    // });
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
+export const forgotPassword = async forgotFromDetail => {
+  try {
+    const url = SERVER_URL + '/api/user/requestResetPassword';
+    const resp = await axios.post(url, forgotFromDetail);
+    return resp;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
+export const resetPassword = async (token, userId, newPassword) => {
+  try {
+    const url = SERVER_URL + '/api/user/resetPassword';
+    const resp = await axios.post(url, {
+      token,
+      userId,
+      password: newPassword,
+    });
+    return resp;
   } catch (error) {
     console.log(error);
     return error.response;
@@ -63,7 +75,7 @@ export const updateProfile = async (profileData, token) => {
     });
     return updatedProfile;
   } catch (error) {
-    console.log("error updateProfile", error);
+    console.log('error updateProfile', error);
     return error.response;
   }
 };
