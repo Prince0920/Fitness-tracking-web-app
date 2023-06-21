@@ -1,4 +1,4 @@
-import './DietSuggestionsCard.css'
+import './DietSuggestionsCard.css';
 
 export const DietSuggestionsCard = ({ category }) => {
   const getDietSuggestions = category => {
