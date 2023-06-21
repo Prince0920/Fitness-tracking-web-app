@@ -1,84 +1,84 @@
-import React, { Component } from "react";
-import Layout from "./common/Layout";
+import React, { Component } from 'react';
+import './Dashboard.css';
+import Layout from './common/Layout';
 
 export default class Dashboard extends Component {
   render() {
+    const weight = 70; // Example weight value in kilograms
+    const height = 175; // Example height value in centimeters
+    const age = 25; // Example age value
+
+    // Calculate BMI
+    const bmi = (weight / (height / 100) ** 2).toFixed(2);
+
+    // Determine BMI category
+    let category;
+    if (bmi < 18.5) {
+      category = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 25) {
+      category = 'Normal weight';
+    } else if (bmi >= 25 && bmi < 30) {
+      category = 'Overweight';
+    } else {
+      category = 'Obese';
+    }
+
+    // Estimate expected age based on BMI
+    let expectedAge;
+    if (bmi < 18.5) {
+      expectedAge = age + 5;
+    } else if (bmi >= 18.5 && bmi < 25) {
+      expectedAge = age + 10;
+    } else if (bmi >= 25 && bmi < 30) {
+      expectedAge = age + 2;
+    } else {
+      expectedAge = age - 5;
+    }
+
     return (
-      <div className="content-wrapper">
-        <Layout heading="Dashboard" item="dashboard" />
-        <section className="content">
-          <div className="container-fluid">
-            {/* Small boxes (Stat box) */}
-            <div className="row">
-              <div className="col-lg-3 col-6">
-                {/* small box */}
-                <div className="small-box bg-info">
-                  <div className="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+      <div className='content-wrapper'>
+        <Layout
+          heading='Dashboard'
+          item='dashboard'
+        />
+        <section className='content'>
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-12'>
+                <div className='small-box bg-warning'>
+                  <div className='inner'>
+                    <div className='dashboard-info-container'>
+                      <div className='dashboard-info'>
+                        <h3>{weight}</h3>
+                        <p>Weight</p>
+                      </div>
+                      <div className='dashboard-info'>
+                        <h3>{height}</h3>
+                        <p>Height</p>
+                      </div>
+                      <div className='dashboard-info'>
+                        <h3>{age}</h3>
+                        <p>Actual Age</p>
+                      </div>
+                      <div className='dashboard-info'>
+                        <h3>{expectedAge}</h3>
+                        <p>Expected Age</p>
+                      </div>
+                      <div className='dashboard-info'>
+                        <h3>{bmi}</h3>
+                        <p>BMI</p>
+                      </div>
+                      <div className='dashboard-info'>
+                        <h3>{category}</h3>
+                        <p>BMI Category</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="icon">
-                    <i className="ion ion-bag" />
-                  </div>
-                  <a href="/" className="small-box-footer">
-                    More info <i className="fas fa-arrow-circle-right" />
-                  </a>
+                  <div className='small-box-footer'>Body Mass Index Analysis</div>
                 </div>
               </div>
-              {/* ./col */}
-              <div className="col-lg-3 col-6">
-                {/* small box */}
-                <div className="small-box bg-success">
-                  <div className="inner">
-                    <h3>
-                      53<sup style={{ fontSize: 20 }}>%</sup>
-                    </h3>
-                    <p>Bounce Rate</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-stats-bars" />
-                  </div>
-                  <a href="/" className="small-box-footer">
-                    More info <i className="fas fa-arrow-circle-right" />
-                  </a>
-                </div>
-              </div>
-              {/* ./col */}
-              <div className="col-lg-3 col-6">
-                {/* small box */}
-                <div className="small-box bg-warning">
-                  <div className="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-person-add" />
-                  </div>
-                  <a href="/" className="small-box-footer">
-                    More info <i className="fas fa-arrow-circle-right" />
-                  </a>
-                </div>
-              </div>
-              {/* ./col */}
-              <div className="col-lg-3 col-6">
-                {/* small box */}
-                <div className="small-box bg-danger">
-                  <div className="inner">
-                    <h3>65</h3>
-                    <p>Unique Visitors</p>
-                  </div>
-                  <div className="icon">
-                    <i className="ion ion-pie-graph" />
-                  </div>
-                  <a href="/" className="small-box-footer">
-                    More info <i className="fas fa-arrow-circle-right" />
-                  </a>
-                </div>
-              </div>
-              {/* ./col */}
             </div>
           </div>
-          {/* /.container-fluid */}
         </section>
       </div>
     );
