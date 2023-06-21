@@ -1,0 +1,82 @@
+/* landing-page.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('./run.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.home-header {
+  padding: 30px;
+  text-align: center;
+  color: #ffcaca;
+  background: transparent; /* Clear background color for the header */
+}
+
+.home-header h1 {
+  font-weight: bold;
+}
+
+.home-content {
+  padding: 50px;
+  text-align: center;
+  color: #fff; /* Text color set to white */
+}
+
+.home-cta-button {
+  background-color: #f7931e;
+  border-color: #f7931e;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.home-cta-button:hover {
+  background-color: #e67e00;
+  border-color: #e67e00;
+}
+
+/* landing-page.css */
+
+/* ... */
+
+.home-button-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-login-button,
+.home-signup-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.home-login-button {
+  background-color: #f7931e;
+  border-color: #f7931e;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.home-signup-button {
+  background-color: #fff;
+  border: 2px solid #f7931e;
+  color: #f7931e;
+}
+
+.home-login-button:hover,
+.home-signup-button:hover {
+  background-color: #e67e00;
+  border-color: #e67e00;
+  color: #fff;
+}

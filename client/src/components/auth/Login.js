@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from '../../constant';
+import { login } from '../../utils/API';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,31 +21,21 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const url = SERVER_URL + '/api/user/login';
-    axios
-      .post(url, loginFromDetail)
-      .then(resp => {
-        console.log('Login api data: ', resp);
-        localStorage.setItem('token', resp.data.token);
-        localStorage.setItem('username', resp.data.user.username);
-        navigate('/admin/dashboard');
-      })
-      .catch(e => {
-        console.log('Login api error: ', e);
-        if (e.response.status == 422) {
-          toast(e.response.data.error);
-        }
-        if (e.response.status == 400) {
-          toast(e.response.data.message);
-        }
-      });
+    const resp = await login(loginFromDetail);
+    if (resp.status === 200) {
+      localStorage.setItem('token', resp.data.token);
+      localStorage.setItem('username', resp.data.user.username);
+      navigate('/admin/dashboard');
+    } else {
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+    }
   };
 
   return (
     <div className='hold-transition login-page'>
-      <div className='login-box'>
+      <div className='login-box card card-primary card-outline'>
         <div className='login-logo'>
           <div>
             <b>DotSquares</b>
@@ -117,14 +106,14 @@ const Login = () => {
             </div> */}
             <p className='mb-1'>
               <Link
-                to='/admin/forgotPassword'
+                to='/forgotPassword'
                 className='text-center'>
                 I forgot my password
               </Link>
             </p>
             <p className='mb-0'>
               <Link
-                to='/admin/register'
+                to='/register'
                 className='text-center'>
                 Register a new membership
               </Link>

@@ -2,3 +2,10 @@
     background-color: #fd7e14 !important;
     color: white !important;
   }
+
+  .sidebar-dark-primary .nav-sidebar .nav-treeview .nav-link.active {
+    background-color: transparent !important;
+    color: orange !important;
+  }
+
+  

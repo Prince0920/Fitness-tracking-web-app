@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from '../../constant';
+import { resetPassword } from '../../utils/API';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -25,29 +24,19 @@ const ResetPassword = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (resetFromDetail.password != resetFromDetail.confirmPassword) {
+
+    if (resetFromDetail.password !== resetFromDetail.confirmPassword) {
       toast('Password and confirm password not match.');
     } else {
-      const url = SERVER_URL + '/api/user/resetPassword';
-      axios
-        .post(url, {
-          token,
-          userId,
-          password: resetFromDetail.password
-        })
-        .then(resp => {
-          console.log('reset password api data: ', resp);
-          toast('Password resent Successfully.');
-          navigate('/admin/login');
-        })
-        .catch(e => {
-          console.log('reset password api error: ', e);
-          if (e.response.status == 400) {
-            toast(e.response.data.message);
-          }
-        });
+      const resp = await resetPassword(token, userId, resetFromDetail.password);
+      if (resp.status === 200) {
+        toast('Password resent Successfully.');
+        navigate('/admin/login');
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
     }
   };
 
@@ -108,7 +97,7 @@ const ResetPassword = () => {
           </form>
           <p className='mt-3 mb-1'>
             <Link
-              to='/admin/login'
+              to='/login'
               className='text-center'>
               I already have a membership
             </Link>

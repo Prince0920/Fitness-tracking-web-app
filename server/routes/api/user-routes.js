@@ -5,6 +5,8 @@ const {
   getSingleUser,
   requestPasswordReset,
   resetPassword,
+  getProfile,
+  updateProfile,
 } = require('../../controllers/user-controller');
 
 // import middleware
@@ -22,6 +24,9 @@ router.route('/requestResetPassword').post(requestPasswordReset);
 
 // /api/user/resetPassword
 router.route('/resetPassword').post(resetPassword);
+
+// /api/user/profile
+router.route('/profile').get(authMiddleware, getProfile).put(authMiddleware, updateProfile);
 
 // /api/user/me to get single user data
 router.route('/me').get(authMiddleware, getSingleUser);

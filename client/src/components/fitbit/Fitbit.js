@@ -1,17 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { fitbitAuth, isFitbitLogin, disconnectFitbit, getActivityGoals } from '../../utils/API';
 import Layout from '../common/Layout';
+import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
+import StepCountCard from './cards/StepCountCard';
 
 export const Fitbit = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+
+  const [isLogin, setIsLogin] = useState(false);
+  const [username, setUsername] = useState('');
+
+  async function handleConnect() {
+    await fitbitAuth(token);
+  }
+
   useEffect(() => {
-    // Canvas rendering fix
-    const knobs = document.getElementsByClassName('knob');
-    if (knobs.length > 0) {
-      window.$(knobs).knob();
+    const checkLoginStatus = async () => {
+      const resp = await isFitbitLogin(token);
+      if (resp.status === 200) {
+        setIsLogin(true);
+        setUsername(resp.data.displayName);
+      } else if (resp.status === 400) {
+        toast(resp.data.message);
+      }
+    };
+
+    checkLoginStatus();
+  }, [token]);
+
+  // Fetching activity goals.
+  useEffect(() => {
+    const fetch = async () => {
+      const resp = await getActivityGoals(token);
+      if (resp.status === 200) {
+        console.log('getActivityGoals', resp.data.goals);
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
+    };
+
+    if (isLogin) {
+      fetch();
     }
-  }, []);
+  }, [token, isLogin]);
+
+  const handleDisconnect = async () => {
+    const resp = await disconnectFitbit(token);
+    if (resp.status === 200) {
+      setIsLogin(false);
+      navigate('/admin/fitbit/dashboard');
+    } else {
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+    }
+  };
 
   return (
     <div className='content-wrapper'>
@@ -21,70 +66,30 @@ export const Fitbit = () => {
       />
       <section className='content'>
         <div className='container-fluid'>
-          <div className='row'>
-            <div className='col-4'>
-              <div className='card card-success'>
-                <div className='card-header'>
-                  <h3 className='card-title'>Step Count</h3>
-                  <div className='card-tools'>
-                    <button
-                      type='button'
-                      className='btn btn-tool'
-                      data-card-widget='collapse'>
-                      <i className='fas fa-minus' />
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-tool'
-                      data-card-widget='remove'>
-                      <i className='fas fa-times' />
-                    </button>
-                  </div>
-                </div>
-                <div className='card-body'>
-                  <div className='row'>
-                    <div className='col-12 text-center'>
-                      <div style={{ display: 'inline', width: 90, height: 90 }}>
-                        <canvas
-                          width={90}
-                          height={90}
-                        />
-                        <input
-                          type='text'
-                          className='knob'
-                          defaultValue={10}
-                          value={3200}
-                          data-min={0}
-                          data-max={4000}
-                          data-width={90}
-                          data-height={90}
-                          data-fgcolor='#3c8dbc'
-                          data-readonly='true'
-                          readOnly='readonly'
-                          style={{
-                            width: 49,
-                            height: 30,
-                            position: 'absolute',
-                            verticalAlign: 'middle',
-                            marginTop: 30,
-                            marginLeft: '-69px',
-                            border: 0,
-                            background: 'none',
-                            font: 'bold 18px Arial',
-                            textAlign: 'center',
-                            color: 'rgb(60, 141, 188)',
-                            padding: 0,
-                            appearance: 'none',
-                          }}
-                        />
-                      </div>
-                      <div className='knob-label'>Total 4000</div>
-                    </div>
-                  </div>
+          {isLogin ? (
+            <>
+              <div className='row'>
+                <div className='col-12'>
+                  <FitbitGreetingHeader
+                    username={username}
+                    handleDisconnect={handleDisconnect}
+                  />
                 </div>
               </div>
-            </div>
-          </div>
+              <div className='row'>
+                <div className='col-md-6'>
+                  <StepCountCard />
+                </div>
+              </div>
+            </>
+          ) : (
+            <button
+              type='button'
+              class='btn btn-block btn-primary'
+              onClick={handleConnect}>
+              Connect to Fitbit
+            </button>
+          )}
         </div>
       </section>
     </div>

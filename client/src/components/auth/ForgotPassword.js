@@ -1,13 +1,10 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from '../../constant';
+import { forgotPassword } from '../../utils/API';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
-
   const [forgotFromDetail, setForgotFormDetail] = useState({
     email: '',
   });
@@ -21,22 +18,28 @@ const ForgotPassword = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const url = SERVER_URL + '/api/user/requestResetPassword';
-    axios
-      .post(url, forgotFromDetail)
-      .then(resp => {
-        console.log('forgot password api data: ', resp);
-        toast('Password resent link send to your mail.');
-        //   navigate('/admin/dashboard');
-      })
-      .catch(e => {
-        console.log('forgot password api error: ', e);
-        if (e.response.status == 409) {
-          toast(e.response.data.message);
-        }
-      });
+    const resp = await forgotPassword(forgotFromDetail);
+    if (resp.status === 200) {
+      toast('Password resent link send to your mail.');
+    } else {
+      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+    }
+    // axios
+    //   .post(url, forgotFromDetail)
+    //   .then(resp => {
+    //     console.log('forgot password api data: ', resp);
+    //     toast('Password resent link send to your mail.');
+    //   })
+    //   .catch(e => {
+    //     console.log('forgot password api error: ', e);
+    //     if (e.response.status === 400) {
+    //       toast(e.response.data.message);
+    //     } else {
+    //       toast('Server error!');
+    //     }
+    //   });
   };
 
   return (
@@ -80,14 +83,14 @@ const ForgotPassword = () => {
           </form>
           <p className='mt-3 mb-1'>
             <Link
-              to='/admin/login'
+              to='/login'
               className='text-center'>
               Login
             </Link>
           </p>
           <p className='mb-0'>
             <Link
-              to='/admin/register'
+              to='/register'
               className='text-center'>
               Register a new membership
             </Link>
