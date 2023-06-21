@@ -35,6 +35,7 @@ export const UserList = () => {
       }
     }
   }
+
   return (
     <div className='content-wrapper'>
       <Layout
@@ -46,56 +47,56 @@ export const UserList = () => {
           <div className='row'>
             <div className='col-12'>
               <div className='card'>
-                {/* <div className='card-header'>
-                  <h3 className='card-title'>Bordered Table</h3>
-                </div> */}
                 <div className='card-body'>
-                  <table className='table table-bordered'>
-                    <thead>
-                      <tr>
-                        <th style={{ width: 10 }}>#</th>
-                        <th style={{ width: 250 }}>Username</th>
-                        <th style={{ width: 400 }}>Email</th>
-                        <th>Password</th>
-                        <th style={{ width: 80 }}>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.length ? (
-                        users.map((user, index) => {
-                          return (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{user.username}</td>
-                              <td>{user.email}</td>
-                              <td>********</td>
-                              <td>
-                                <span
-                                  className='badge bg-warning'
-                                  onClick={() => {
-                                    navigate(`/admin/users/edit/${user._id}`);
-                                  }}
-                                  style={{ cursor: 'pointer' }}>
-                                  <i class='fas fa-edit'></i>
-                                </span>
-                                {'  '}
-                                <span
-                                  className='badge bg-danger'
-                                  style={{ cursor: 'pointer' }}
-                                  onClick={() => {
-                                    handleDelete(user._id);
-                                  }}>
-                                  <i class='fas fa-trash'></i>
-                                </span>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <>No user found</>
-                      )}
-                    </tbody>
-                  </table>
+                  <div className='table-responsive'>
+                    <table className='table table-bordered'>
+                      <thead>
+                        <tr>
+                          <th style={{ width: '10%' }}>#</th>
+                          <th style={{ width: '25%' }}>Username</th>
+                          <th style={{ width: '30%' }}>Email</th>
+                          <th style={{ width: '25%' }}>Password</th>
+                          <th style={{ width: '10%' }}>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {users.length ? (
+                          users.map((user, index) => {
+                            return (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{user.username}</td>
+                                <td>{user.email}</td>
+                                <td>********</td>
+                                <td>
+                                  <span
+                                    className='badge bg-warning'
+                                    onClick={() => {
+                                      navigate(`/admin/users/edit/${user._id}`);
+                                    }}
+                                    style={{ cursor: 'pointer' }}>
+                                    <i className='fas fa-edit'></i>
+                                  </span>{' '}
+                                  <span
+                                    className='badge bg-danger'
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => {
+                                      handleDelete(user._id);
+                                    }}>
+                                    <i className='fas fa-trash'></i>
+                                  </span>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <tr>
+                            <td colSpan='5'>No user found</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
