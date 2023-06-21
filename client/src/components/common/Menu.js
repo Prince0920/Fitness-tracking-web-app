@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Menu.css';
 
 const Menu = () => {
-  const location = useLocation();
   return (
     <aside
       className='main-sidebar sidebar-dark-primary elevation-4'
@@ -32,11 +31,12 @@ const Menu = () => {
             />
           </div>
           <div className='info'>
-            <Link
+            <NavLink
               to='/admin/dashboard'
-              className='d-block'>
+              className='d-block'
+              activeClassName='active'>
               Dotsquare
-            </Link>
+            </NavLink>
           </div>
         </div>
         {/* Sidebar Menu */}
@@ -46,101 +46,90 @@ const Menu = () => {
             data-widget='treeview'
             role='menu'
             data-accordion='false'>
-            {/* Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library */}
             <li className='nav-item'>
-              <Link
+              <NavLink
                 to='/admin/dashboard'
-                className={`nav-link ${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
+                className='nav-link'
+                activeClassName='active'
+                exact={true}>
                 <i className='nav-icon fas fa-tachometer-alt' />
-                <p>
-                  Dashboard
-                  {/* <i className="right fas fa-angle-left" /> */}
-                </p>
-              </Link>
+                <p>Dashboard</p>
+              </NavLink>
             </li>
 
             <li className='nav-item'>
-              <Link
+              <NavLink
                 to='/admin/users/userList'
-                className={`nav-link ${
-                  location.pathname.startsWith('/admin/users') ? 'active' : ''
-                }`}>
-                <i class='nav-icon fas fa-users'></i>
+                className='nav-link'
+                activeClassName='active'>
+                <i className='nav-icon fas fa-users' />
                 <p>
                   Users
                   <i className='right fas fa-angle-left' />
                 </p>
-              </Link>
+              </NavLink>
               <ul className='nav nav-treeview'>
                 <li className='nav-item'>
-                  <Link
+                  <NavLink
                     to='/admin/users/userList'
-                    className={`nav-link ${
-                      location.pathname === '/admin/users/userList' ? 'active' : ''
-                    }`}>
+                    className='nav-link'
+                    activeClassName='active'>
                     <i className='far fa-circle nav-icon' />
                     <p>User List</p>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </li>
 
             <li className='nav-item'>
-              <Link
+              <NavLink
                 to='/admin/apple/dashboard'
-                className={`nav-link ${
-                  location.pathname.startsWith('/admin/apple') ? 'active' : ''
-                }`}>
+                className='nav-link'
+                activeClassName='active'>
                 <i className='nav-icon fas fa-tachometer-alt' />
                 <p>
                   Apple Watch
                   <i className='right fas fa-angle-left' />
                 </p>
-              </Link>
+              </NavLink>
               <ul className='nav nav-treeview'>
                 <li className='nav-item'>
-                  <Link
+                  <NavLink
                     to='/admin/apple/dashboard'
-                    className={`nav-link ${
-                      location.pathname === '/admin/apple/dashboard' ? 'active' : ''
-                    }`}>
+                    className='nav-link'
+                    activeClassName='active'>
                     <i className='far fa-circle nav-icon' />
                     <p>Dashboard</p>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li className='nav-item'>
-              <Link
+              <NavLink
                 to='/admin/fitbit/dashboard'
-                className={`nav-link ${
-                  location.pathname.startsWith('/admin/fitbit') ? 'active' : ''
-                }`}>
+                className='nav-link'
+                activeClassName='active'>
                 <i className='nav-icon fas fa-tachometer-alt' />
                 <p>
                   FitBit Watch
                   <i className='right fas fa-angle-left' />
                 </p>
-              </Link>
+              </NavLink>
               <ul className='nav nav-treeview'>
                 <li className='nav-item'>
-                  <Link
+                  <NavLink
                     to='/admin/fitbit/dashboard'
-                    className={`nav-link ${
-                      location.pathname === '/admin/fitbit/dashboard' ? 'active' : ''
-                    }`}>
+                    className='nav-link'
+                    activeClassName='active'>
                     <i className='far fa-circle nav-icon' />
                     <p>Dashboard</p>
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </li>
           </ul>
         </nav>
-        {/* /.sidebar-menu */}
       </div>
-      {/* /.sidebar */}
     </aside>
   );
 };
