@@ -9,7 +9,7 @@ const {
   disconnect,
   getActivityGoals,
 } = require('../../../controllers/fitbit/fitbit-controller');
-const { authMiddleware } = require('../../../utils/auth');
+const { authMiddleware, ensureFitibitAuthenticated } = require('../../../utils/auth');
 
 // /api/fitbit/testing
 router.route('/testing').get(sampleFitbit);
@@ -46,6 +46,6 @@ router.route('/isLogin').get(authMiddleware, isLogin);
 router.route('/disconnect').delete(authMiddleware, disconnect);
 
 // /api/fitbit/getActivityGoals
-router.route('/getActivityGoals').get(authMiddleware, getActivityGoals);
+router.route('/getActivityGoals').get(authMiddleware, ensureFitibitAuthenticated, getActivityGoals);
 
 module.exports = router;
