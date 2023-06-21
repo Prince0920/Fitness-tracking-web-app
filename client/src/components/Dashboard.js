@@ -4,12 +4,12 @@ import Layout from './common/Layout';
 
 export default class Dashboard extends Component {
   render() {
-    const weight = 70; // Example weight value in kilograms
-    const height = 175; // Example height value in centimeters
-    const age = 25; // Example age value
+    const weight = 61; // Example weight value in kilograms
+    const height = 5.9; // Example height value in feet
+    const age = 23; // Example age value
 
     // Calculate BMI
-    const bmi = (weight / (height / 100) ** 2).toFixed(2);
+    const bmi = (weight / (height * 0.3048) ** 2).toFixed(2); // Convert height from feet to meters
 
     // Determine BMI category
     let category;
@@ -49,11 +49,11 @@ export default class Dashboard extends Component {
                   <div className='inner'>
                     <div className='dashboard-info-container'>
                       <div className='dashboard-info'>
-                        <h3>{weight}</h3>
+                        <h3>{weight} kg</h3>
                         <p>Weight</p>
                       </div>
                       <div className='dashboard-info'>
-                        <h3>{height}</h3>
+                        <h3>{height} ft</h3>
                         <p>Height</p>
                       </div>
                       <div className='dashboard-info'>
