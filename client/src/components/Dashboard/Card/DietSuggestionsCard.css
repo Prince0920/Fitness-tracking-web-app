@@ -1,0 +1,17 @@
+.diet-suggestions-card {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .diet-card-header {
+    background-color: #e0e0e0;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  .diet-card-body {
+    padding: 10px;
+  }

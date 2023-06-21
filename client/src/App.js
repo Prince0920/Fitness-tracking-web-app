@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Admin from './components/Admin';
-import Dashboard from './components/Dashboard';
 import { Apple } from './components/apple/Apple';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -13,6 +12,7 @@ import { UserList } from './components/users/UserList';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/admin/profile/Profile';
 import EditUser from './components/users/EditUser';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
