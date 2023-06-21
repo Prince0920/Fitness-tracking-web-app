@@ -17,25 +17,25 @@ export default class Header extends Component {
             </a>
           </li>
           <li className='nav-item d-none d-sm-inline-block'>
-            <a
-              href='/'
+            <Link
+              to='/'
               className='nav-link'>
               Home
-            </a>
+            </Link>
           </li>
           <li className='nav-item d-none d-sm-inline-block'>
-            <a
-              href='/admin/dashboard'
+            <Link
+              to='/admin/dashboard'
               className='nav-link'>
               AboutUs
-            </a>
+            </Link>
           </li>
           <li className='nav-item d-none d-sm-inline-block'>
-            <a
-              href='/admin/dashboard'
+            <Link
+              to='/admin/dashboard'
               className='nav-link'>
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
         {/* SEARCH FORM */}
