@@ -1,16 +1,41 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
-const CalorieBurnGraph = ({ calorieData }) => {
+const CalorieBurnGraph = ({ data }) => {
   return (
-    <BarChart width={500} height={300} data={calorieData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="time" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="calories" fill="#8884d8" />
-    </BarChart>
+    <ResponsiveContainer
+      width='100%'
+      height={400}>
+      <LineChart
+        data={data}
+        margin={{ top: 20, right: 40, left: 20, bottom: 20 }}>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis
+          dataKey='date'
+          interval={0}
+          angle={-45}
+          dy={15}
+        />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line
+          type='monotone'
+          dataKey='calories'
+          stroke='#8884d8'
+          activeDot={{ r: 8 }}
+        />
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 

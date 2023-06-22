@@ -6,6 +6,7 @@ import { fitbitAuth, isFitbitLogin, disconnectFitbit, getActivityGoals } from '.
 import Layout from '../common/Layout';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
+import CalorieBurnCard from './cards/CalorieBurnCard';
 
 export const Fitbit = () => {
   const navigate = useNavigate();
@@ -79,6 +80,11 @@ export const Fitbit = () => {
               <div className='row'>
                 <div className='col-md-6'>
                   <StepCountCard />
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col-12'>
+                  <CalorieBurnCard />
                 </div>
               </div>
             </>
