@@ -1,47 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import Layout from '../common/Layout';
 import { HealthFitnessAnalyticsCard } from './Card/HealthFitnessAnalyticsCard';
 import { DietSuggestionsCard } from './Card/DietSuggestionsCard';
+import { getProfile } from '../../utils/API';
+import { toast } from 'react-toastify';
+import { calculateBMI, calculateBMICategory, calculateExpectedAge } from './helperFunction';
 
 const Dashboard = () => {
-  const calculateBMI = (weight, height) => {
-    const bmi = (weight / (height * 0.3048) ** 2).toFixed(2); // Convert height from feet to meters
-    return bmi;
-  };
+  const token = localStorage.getItem('token');
+  const [profileDetail, setProfileDetail] = useState({
+    height: 0,
+    weight: 0,
+    age: 0,
+  });
 
-  const calculateExpectedAge = (bmi, age) => {
-    let expectedAge;
-    if (bmi < 18.5) {
-      expectedAge = age + 5;
-    } else if (bmi >= 18.5 && bmi < 25) {
-      expectedAge = age + 10;
-    } else if (bmi >= 25 && bmi < 30) {
-      expectedAge = age + 2;
-    } else {
-      expectedAge = age - 5;
-    }
-    return expectedAge;
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await getProfile(token);
+      if (resp.status === 200) {
+        const { data } = resp;
+        setProfileDetail({
+          height: data.height,
+          weight: data.weight,
+          age: data.age,
+        });
+      } else {
+        return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
+    };
 
-  const calculateBMICategory = bmi => {
-    let category;
-    if (bmi < 18.5) {
-      category = 'Underweight';
-    } else if (bmi < 25) {
-      category = 'Normal weight';
-    } else if (bmi < 30) {
-      category = 'Overweight';
-    } else {
-      category = 'Obese';
-    }
-    return category;
-  };
+    fetchData();
+  }, [token]);
 
-  const weight = 611; // Example weight value in kilograms
-  const height = 5.8399; // Example height value in feet
-  const age = 23; // Example age value
-
+  const { weight, height, age } = profileDetail;
   const bmi = calculateBMI(weight, height);
   const expectedAge = calculateExpectedAge(bmi, age);
   const category = calculateBMICategory(bmi);
