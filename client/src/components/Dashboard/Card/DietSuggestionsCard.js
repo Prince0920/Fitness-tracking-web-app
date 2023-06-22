@@ -20,9 +20,7 @@ export const DietSuggestionsCard = ({ category }) => {
 
   return (
     <div className='card diet-suggestions-card'>
-      <div className='diet-card-header'>
-        <h3 className='card-title'>Diet Suggestions</h3>
-      </div>
+      <h2 className='diet-card-header'>Diet Suggestions</h2>
       <div className='diet-card-body'>
         <p>{dietSuggestions}</p>
       </div>
