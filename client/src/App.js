@@ -13,6 +13,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/admin/profile/Profile';
 import EditUser from './components/users/EditUser';
 import Dashboard from './components/Dashboard/Dashboard';
+import Sample from './Sample';
 
 function App() {
   return (
@@ -53,6 +54,10 @@ function App() {
           />
         </Route>
 
+        <Route
+          path='/sample'
+          element={<Sample />}
+        />
         <Route
           path='/login'
           element={<Login />}
