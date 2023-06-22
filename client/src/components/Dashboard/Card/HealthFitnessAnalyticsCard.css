@@ -1,3 +1,14 @@
+.small-box.health-fitness-card {
+  background-color: #e0e0e0;
+}
+
+.health-data-heading {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .dashboard-info-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -35,4 +46,9 @@
   text-align: right;
   color: #000;
   text-decoration: none;
+}
+
+.bmi-text {
+  font-size: 12px;
+  font-style: italic;
 }
