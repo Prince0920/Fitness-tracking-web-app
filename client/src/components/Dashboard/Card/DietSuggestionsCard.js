@@ -38,9 +38,30 @@ export const DietSuggestionsCard = ({ category }) => {
           </div>
         );
       case 'Normal weight':
-        return 'Maintain a balanced diet with a mix of all essential nutrients. Regular exercise and portion control are recommended.';
+        return (
+          <div class='tips-container'>
+            <h2>A healthy eating plan:</h2>
+            <div>
+              <ul>
+                <li>
+                  Emphasizes vegetables, fruits, whole grains, and fat-free or low-fat dairy
+                  products
+                </li>
+                <li>Includes lean meats, poultry, fish, beans, eggs, and nuts</li>
+                <li>Limits saturated and trans fats, sodium, and added sugars</li>
+                <li>Controls portion sizes</li>
+              </ul>
+            </div>
+          </div>
+        );
       case 'Overweight':
-        return 'Focus on a calorie-controlled diet with reduced intake of high-fat and sugary foods. Incorporate regular physical activity for weight management.';
+        return (
+          <div class='tips-container'>
+            <h2>A Overweight eating plan:</h2>
+            Focus on a calorie-controlled diet with reduced intake of high-fat and sugary foods.
+            Incorporate regular physical activity for weight management.
+          </div>
+        );
       case 'Obese':
         return (
           <div class='tips-container'>
