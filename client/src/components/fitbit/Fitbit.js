@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { disconnectFitbit, fitbitAuth, getActivityGoals, isFitbitLogin } from '../../utils/API';
 import Layout from '../common/Layout';
-import CalorieBurnCard from './cards/CalorieBurnCard';
+import ExerciseTrackingCard from './cards/ExerciseTrackingCard';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard';
 import TodayStatisticsCard from './cards/TodayStatisticsCard';
@@ -85,7 +85,7 @@ export const Fitbit = () => {
               </div>
               <div className='row'>
                 <div className='col-12'>
-                  <CalorieBurnCard />
+                  <ExerciseTrackingCard />
                 </div>
               </div>
 
