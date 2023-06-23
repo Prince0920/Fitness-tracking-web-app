@@ -1,12 +1,19 @@
 import React from 'react';
 import './landing-page.css';
 import { Link } from 'react-router-dom';
+import backgroundImage from './run.jpg'; // Import the background image
 
 const LandingPage = () => {
   const token = localStorage.getItem('token');
 
   return (
-    <div className='home-container'>
+    <div
+      className='home-container'
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
       <header className='home-header'>
         <h1>Health Tracking App</h1>
         {token ? (
