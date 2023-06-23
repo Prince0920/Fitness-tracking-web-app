@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fitbitAuth, isFitbitLogin, disconnectFitbit, getActivityGoals } from '../../utils/API';
+import { disconnectFitbit, fitbitAuth, getActivityGoals, isFitbitLogin } from '../../utils/API';
 import Layout from '../common/Layout';
-import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
-import StepCountCard from './cards/StepCountCard';
 import CalorieBurnCard from './cards/CalorieBurnCard';
+import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
+import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard';
+import TodayStatisticsCard from './cards/TodayStatisticsCard';
 
 export const Fitbit = () => {
   const navigate = useNavigate();
@@ -78,13 +79,24 @@ export const Fitbit = () => {
                 </div>
               </div>
               <div className='row'>
-                <div className='col-md-6'>
-                  <StepCountCard />
+                <div className='col-md-12'>
+                  <TodayStatisticsCard />
                 </div>
               </div>
               <div className='row'>
                 <div className='col-12'>
                   <CalorieBurnCard />
+                </div>
+              </div>
+
+              <div className='row'>
+                <div className='col-12'>
+                  <LifetimeStatisticsCard
+                    caloriesBurned={170000}
+                    totalSteps={95000}
+                    distanceTraveled={5000}
+                    activeScore={13000}
+                  />
                 </div>
               </div>
             </>
