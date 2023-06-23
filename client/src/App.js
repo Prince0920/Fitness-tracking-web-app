@@ -47,6 +47,10 @@ function App() {
             path='users/edit/:id'
             element={<EditUser />}
           />
+          <Route
+            path='sample'
+            element={<Sample />}
+          />
 
           <Route
             path='*'
@@ -54,10 +58,6 @@ function App() {
           />
         </Route>
 
-        <Route
-          path='/sample'
-          element={<Sample />}
-        />
         <Route
           path='/login'
           element={<Login />}
