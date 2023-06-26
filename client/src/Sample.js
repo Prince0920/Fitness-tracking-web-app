@@ -102,6 +102,7 @@ const Sample = () => {
       setDropDownState(prev => ({
         ...prev,
         voiceTypes: voiceTypeResp.voiceTypes,
+        voiceNames: [],
       }));
     };
 
