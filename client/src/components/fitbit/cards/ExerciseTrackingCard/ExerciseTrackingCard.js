@@ -1,6 +1,6 @@
 import { Button, DatePicker } from 'antd';
 import React, { useState } from 'react';
-import ExerciseTrackingGraph from '../graphs/ExerciseTrackingGraph';
+import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
 
 const { RangePicker } = DatePicker;

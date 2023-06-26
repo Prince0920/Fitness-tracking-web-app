@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-
+  
 const ExerciseTrackingGraph = ({
   data = [
     { date: '2023-06-01', caloriesBurned: 250, stepCount: 190 },
