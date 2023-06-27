@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Progress, Card, Typography, Row, Col, Divider, Dropdown, Menu } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { getActivityGoals } from '../../../../utils/API';
+import { Card, Col, Divider, Progress, Row, Typography } from 'antd';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { getActivityGoals } from '../../../../utils/API';
 
 const { Title } = Typography;
 
-const ActivityGoalsCard = () => {
+const DailyGoalsCard = () => {
   const totalSteps = 10000;
   const currentSteps = 6000;
   const stepProgressPercent = (currentSteps / totalSteps) * 100;
@@ -46,27 +45,10 @@ const ActivityGoalsCard = () => {
     </div>
   );
 
-  const [selectedPeriod, setSelectedPeriod] = useState('daily');
-
-  const handleMenuClick = ({ key }) => {
-    setSelectedPeriod(key);
-    // Handle menu click here
-    console.log('Selected:', key);
-  };
-
-  const menu = (
-    <Menu
-      onClick={handleMenuClick}
-      selectedKeys={[selectedPeriod]}>
-      <Menu.Item key='daily'>Daily</Menu.Item>
-      <Menu.Item key='weekly'>Weekly</Menu.Item>
-    </Menu>
-  );
-
   // Fetching activity goals.
   useEffect(() => {
     const fetch = async () => {
-      const resp = await getActivityGoals(localStorage.getItem('token'), selectedPeriod);
+      const resp = await getActivityGoals(localStorage.getItem('token'), "daily");
       if (resp.status === 200) {
         console.log('getActivityGoals', resp.data.goals);
       } else {
@@ -75,7 +57,7 @@ const ActivityGoalsCard = () => {
     };
 
     fetch();
-  }, [selectedPeriod]);
+  }, []);
 
   return (
     <Card className='card card-primary card-outline'>
@@ -87,20 +69,8 @@ const ActivityGoalsCard = () => {
             <Title
               level={4}
               style={{ color: '#CC5500' }}>
-              Activity Goals
+              Activity Status
             </Title>
-          </Col>
-          <Col>
-            <Dropdown
-              overlay={menu}
-              placement='bottomRight'>
-              <a
-                href='#!'
-                className='ant-dropdown-link'
-                onClick={e => e.preventDefault()}>
-                {selectedPeriod} <DownOutlined />
-              </a>
-            </Dropdown>
           </Col>
         </Row>
         <Divider />
@@ -165,4 +135,4 @@ const ActivityGoalsCard = () => {
   );
 };
 
-export default ActivityGoalsCard;
+export default DailyGoalsCard;

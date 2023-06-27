@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { disconnectFitbit, fitbitAuth, getActivityGoals, isFitbitLogin } from '../../utils/API';
+import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../utils/API';
 import Layout from '../common/Layout';
+import Loader from '../utils/Loader ';
 import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingCard';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
-import ActivityGoalsCard from './cards/TodayStatisticsCard/ActivityGoalsCard';
-import Loader from '../utils/Loader ';
+import DailyGoalsCard from './cards/DailyGoalsCard/DailyGoalsCard';
 
 export const Fitbit = () => {
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ export const Fitbit = () => {
                 </div>
                 <div className='row'>
                   <div className='col-md-12'>
-                    <ActivityGoalsCard />
+                    <DailyGoalsCard />
                   </div>
                 </div>
                 <div className='row'>
