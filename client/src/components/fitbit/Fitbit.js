@@ -8,11 +8,13 @@ import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingC
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
 import ActivityGoalsCard from './cards/TodayStatisticsCard/ActivityGoalsCard';
+import Loader from '../utils/Loader ';
 
 export const Fitbit = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
+  const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState('');
 
@@ -24,10 +26,14 @@ export const Fitbit = () => {
     const checkLoginStatus = async () => {
       const resp = await isFitbitLogin(token);
       if (resp.status === 200) {
+        setIsLoading(false);
         setIsLogin(true);
         setUsername(resp.data.displayName);
       } else if (resp.status === 400) {
         toast(resp.data.message);
+      } else {
+        setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -50,50 +56,54 @@ export const Fitbit = () => {
         heading='Fitbit Dashboard'
         item='fitbit'
       />
-      <section className='content'>
-        <div className='container-fluid'>
-          {isLogin ? (
-            <>
-              <div className='row'>
-                <div className='col-12'>
-                  <FitbitGreetingHeader
-                    username={username}
-                    handleDisconnect={handleDisconnect}
-                  />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <section className='content'>
+          <div className='container-fluid'>
+            {isLogin ? (
+              <>
+                <div className='row'>
+                  <div className='col-12'>
+                    <FitbitGreetingHeader
+                      username={username}
+                      handleDisconnect={handleDisconnect}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className='row'>
-                <div className='col-md-12'>
-                  <ActivityGoalsCard />
+                <div className='row'>
+                  <div className='col-md-12'>
+                    <ActivityGoalsCard />
+                  </div>
                 </div>
-              </div>
-              <div className='row'>
-                <div className='col-12'>
-                  <ExerciseTrackingCard />
+                <div className='row'>
+                  <div className='col-12'>
+                    <ExerciseTrackingCard />
+                  </div>
                 </div>
-              </div>
 
-              <div className='row'>
-                <div className='col-12'>
-                  <LifetimeStatisticsCard
-                    caloriesBurned={170000}
-                    totalSteps={95000}
-                    distanceTraveled={5000}
-                    activeScore={13000}
-                  />
+                <div className='row'>
+                  <div className='col-12'>
+                    <LifetimeStatisticsCard
+                      caloriesBurned={170000}
+                      totalSteps={95000}
+                      distanceTraveled={5000}
+                      activeScore={13000}
+                    />
+                  </div>
                 </div>
-              </div>
-            </>
-          ) : (
-            <button
-              type='button'
-              class='btn btn-block btn-primary'
-              onClick={handleConnect}>
-              Connect to Fitbit
-            </button>
-          )}
-        </div>
-      </section>
+              </>
+            ) : (
+              <button
+                type='button'
+                class='btn btn-block btn-primary'
+                onClick={handleConnect}>
+                Connect to Fitbit
+              </button>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 };
