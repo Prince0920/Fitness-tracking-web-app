@@ -6,11 +6,11 @@ import { getDailyActivitySummary } from '../../../../utils/API';
 const { Title } = Typography;
 
 const DailyGoalsCard = () => {
-  const [activites, setActivites] = useState(null);
+  const [summary, setSummary] = useState(null);
   const [goals, setGoals] = useState(null);
 
-  const totalSteps = goals?.steps;
-  const currentSteps = activites?.steps || 6000;
+  const totalSteps = goals?.steps || 10000;
+  const currentSteps = summary?.steps || 6000;
   const stepProgressPercent = (currentSteps / totalSteps) * 100;
 
   const formatSteps = () => (
@@ -22,8 +22,8 @@ const DailyGoalsCard = () => {
     </div>
   );
 
-  const totalCalories = goals?.caloriesOut;
-  const burnedCalories = activites?.caloriesOut || 1500;
+  const totalCalories = goals?.caloriesOut || 2000;
+  const burnedCalories = summary?.caloriesOut || 1500;
   const calorieProgressPercent = (burnedCalories / totalCalories) * 100;
 
   const formatCalories = () => (
@@ -35,8 +35,8 @@ const DailyGoalsCard = () => {
     </div>
   );
 
-  const totalDistance = goals?.distance;
-  const traveledDistance = activites?.distance || 6;
+  const totalDistance = goals?.distance || 10;
+  const traveledDistance = summary?.distances[0]?.distance || 6;
   const distanceProgressPercent = (traveledDistance / totalDistance) * 100;
 
   const formatDistance = () => (
@@ -54,7 +54,7 @@ const DailyGoalsCard = () => {
       const resp = await getDailyActivitySummary(localStorage.getItem('token'));
       if (resp.status === 200) {
         console.log('getDailyActivitySummary', resp.data);
-        setActivites(resp.data.activites);
+        setSummary(resp.data.summary);
         setGoals(resp.data.goals);
       } else {
         resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
