@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Sample.css';
 import Layout from './components/common/Layout';
+import { SERVER_URL } from './constant';
+import axios from 'axios';
 
 const Sample = () => {
   const [state, setState] = useState({
@@ -30,8 +32,10 @@ const Sample = () => {
   };
 
   console.log('state', state);
-  const getAvaliableLanguage = () => {
-    const url = '/api/get-available-languages';
+  const getAvaliableLanguage = async() => {
+    // const url = SERVER_URL + '/api/get-available-languages';
+    // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+    // return data;
     return {
       languages: [
         {
@@ -81,14 +85,11 @@ const Sample = () => {
   useEffect(() => {
     const fetch = async () => {
       const languagesResp = await getAvaliableLanguage();
+      const audioDeviceResp = await getActivityAudioDevice();
+
       setDropDownState(prev => ({
         ...prev,
         languages: languagesResp.languages,
-      }));
-
-      const audioDeviceResp = await getActivityAudioDevice();
-      setDropDownState(prev => ({
-        ...prev,
         audioDevices: audioDeviceResp.audioDevices,
       }));
     };
@@ -164,7 +165,11 @@ const Sample = () => {
                 <option value=''>Select Language</option>
                 {dropDownState.languages.length > 0 &&
                   dropDownState.languages.map(language => (
-                    <option value={language.code}>{language.name}</option>
+                    <option
+                      key={language.code}
+                      value={language.code}>
+                      {language.name}
+                    </option>
                   ))}
               </select>
             </div>
@@ -179,7 +184,11 @@ const Sample = () => {
                 <option value=''>Select Voice Type</option>
                 {dropDownState.voiceTypes.length > 0 &&
                   dropDownState.voiceTypes.map(voiceType => (
-                    <option value={voiceType.code}>{voiceType.name}</option>
+                    <option
+                      key={voiceType.code}
+                      value={voiceType.code}>
+                      {voiceType.name}
+                    </option>
                   ))}
               </select>
             </div>
@@ -194,7 +203,11 @@ const Sample = () => {
                 <option value=''>Select Voice Name</option>
                 {dropDownState.voiceNames.length > 0 &&
                   dropDownState.voiceNames.map(voiceName => (
-                    <option value={voiceName.code}>{voiceName.name}</option>
+                    <option
+                      key={voiceName.code}
+                      value={voiceName.code}>
+                      {voiceName.name}
+                    </option>
                   ))}
               </select>
             </div>
@@ -211,7 +224,11 @@ const Sample = () => {
                 <option value=''>Select Audio Device Profile</option>
                 {dropDownState.audioDevices.length > 0 &&
                   dropDownState.audioDevices.map(audioDevice => (
-                    <option value={audioDevice.code}>{audioDevice.name}</option>
+                    <option
+                      key={audioDevice.code}
+                      value={audioDevice.code}>
+                      {audioDevice.name}
+                    </option>
                   ))}
               </select>
             </div>
@@ -223,7 +240,7 @@ const Sample = () => {
                 name='speed'
                 min='0.5'
                 max='2'
-                step='0.1'
+                step='0.01'
                 value={state.speed}
                 onChange={handleChange}
                 className='ttl-range-input'
@@ -238,7 +255,7 @@ const Sample = () => {
                 name='pitch'
                 min='0.5'
                 max='2'
-                step='0.1'
+                step='0.01'
                 value={state.pitch}
                 onChange={handleChange}
                 className='ttl-range-input'
