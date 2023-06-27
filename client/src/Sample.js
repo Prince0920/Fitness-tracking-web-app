@@ -22,6 +22,9 @@ const Sample = () => {
     audioDevices: [],
   });
 
+  const [characterCount, setCharacterCount] = useState(0);
+  const [byteCount, setByteCount] = useState(0);
+
   const handleChange = event => {
     const { name, value, type } = event.target;
     const newValue = type === 'number' ? parseFloat(value) : value;
@@ -29,10 +32,20 @@ const Sample = () => {
       ...prev,
       [name]: newValue,
     }));
+
+    if (name === 'text') {
+      const trimmedValue = newValue.trim();
+      // Calculate character count
+      setCharacterCount(trimmedValue.length);
+
+      // Calculate byte count (considering UTF-8 encoding)
+      const byteCount = new Blob([trimmedValue]).size;
+      setByteCount(byteCount);
+    }
   };
 
   console.log('state', state);
-  const getAvaliableLanguage = async() => {
+  const getAvaliableLanguage = async () => {
     // const url = SERVER_URL + '/api/get-available-languages';
     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
     // return data;
@@ -144,15 +157,24 @@ const Sample = () => {
           <div className='row'>
             <div className='col-12'>
               <label htmlFor='language'>Input:</label>
-              <input
+              <textarea
                 type='text'
                 name='text'
                 value={state.text}
                 onChange={handleChange}
                 className='ttl-input'
               />
+              <div className='count-info'>
+                <span className='character-count'>
+                  Characters: <span style={{ color: 'red' }}>{characterCount}</span>
+                </span>
+                <span className='byte-count'>
+                  Bytes: <span style={{ color: 'red' }}>{byteCount}</span>
+                </span>
+              </div>
             </div>
           </div>
+
           <div className='row ttl-margin-top'>
             <div className='col-4'>
               <label htmlFor='language'>Language:</label>
