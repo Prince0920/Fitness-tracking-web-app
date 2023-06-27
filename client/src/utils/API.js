@@ -129,9 +129,9 @@ export const disconnectFitbit = async token => {
   }
 };
 
-export const getActivityGoals = async token => {
+export const getActivityGoals = async (token, period = 'daily') => {
   try {
-    const url = SERVER_URL + '/api/fitbit/getActivityGoals';
+    const url = SERVER_URL + `/api/fitbit/getActivityGoals?period=${period}`;
     const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
     return data;
   } catch (error) {

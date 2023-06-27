@@ -1,9 +1,12 @@
-import React from 'react';
-import { Progress, Card, Typography, Row, Col, Divider } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Progress, Card, Typography, Row, Col, Divider, Dropdown, Menu } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { getActivityGoals } from '../../../../utils/API';
+import { toast } from 'react-toastify';
 
 const { Title } = Typography;
 
-const TodayStatisticsCard = () => {
+const ActivityGoalsCard = () => {
   const totalSteps = 10000;
   const currentSteps = 6000;
   const stepProgressPercent = (currentSteps / totalSteps) * 100;
@@ -43,14 +46,63 @@ const TodayStatisticsCard = () => {
     </div>
   );
 
+  const [selectedPeriod, setSelectedPeriod] = useState('daily');
+
+  const handleMenuClick = ({ key }) => {
+    setSelectedPeriod(key);
+    // Handle menu click here
+    console.log('Selected:', key);
+  };
+
+  const menu = (
+    <Menu
+      onClick={handleMenuClick}
+      selectedKeys={[selectedPeriod]}>
+      <Menu.Item key='daily'>Daily</Menu.Item>
+      <Menu.Item key='weekly'>Weekly</Menu.Item>
+    </Menu>
+  );
+
+  // Fetching activity goals.
+  useEffect(() => {
+    const fetch = async () => {
+      const resp = await getActivityGoals(localStorage.getItem('token'), selectedPeriod);
+      if (resp.status === 200) {
+        console.log('getActivityGoals', resp.data.goals);
+      } else {
+        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      }
+    };
+
+    fetch();
+  }, [selectedPeriod]);
+
   return (
     <Card className='card card-primary card-outline'>
       <div className='card-body'>
-        <Title
-          level={4}
-          style={{ color: '#CC5500' }}>
-          Today Statistics
-        </Title>
+        <Row
+          justify='space-between'
+          align='middle'>
+          <Col>
+            <Title
+              level={4}
+              style={{ color: '#CC5500' }}>
+              Activity Goals
+            </Title>
+          </Col>
+          <Col>
+            <Dropdown
+              overlay={menu}
+              placement='bottomRight'>
+              <a
+                href='#!'
+                className='ant-dropdown-link'
+                onClick={e => e.preventDefault()}>
+                {selectedPeriod} <DownOutlined />
+              </a>
+            </Dropdown>
+          </Col>
+        </Row>
         <Divider />
 
         <Row
@@ -113,4 +165,4 @@ const TodayStatisticsCard = () => {
   );
 };
 
-export default TodayStatisticsCard;
+export default ActivityGoalsCard;

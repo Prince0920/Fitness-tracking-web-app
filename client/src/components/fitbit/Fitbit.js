@@ -7,7 +7,7 @@ import Layout from '../common/Layout';
 import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingCard';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
-import TodayStatisticsCard from './cards/TodayStatisticsCard/TodayStatisticsCard';
+import ActivityGoalsCard from './cards/TodayStatisticsCard/ActivityGoalsCard';
 
 export const Fitbit = () => {
   const navigate = useNavigate();
@@ -33,22 +33,6 @@ export const Fitbit = () => {
 
     checkLoginStatus();
   }, [token]);
-
-  // Fetching activity goals.
-  useEffect(() => {
-    const fetch = async () => {
-      const resp = await getActivityGoals(token);
-      if (resp.status === 200) {
-        console.log('getActivityGoals', resp.data.goals);
-      } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
-      }
-    };
-
-    if (isLogin) {
-      fetch();
-    }
-  }, [token, isLogin]);
 
   const handleDisconnect = async () => {
     const resp = await disconnectFitbit(token);
@@ -80,7 +64,7 @@ export const Fitbit = () => {
               </div>
               <div className='row'>
                 <div className='col-md-12'>
-                  <TodayStatisticsCard />
+                  <ActivityGoalsCard />
                 </div>
               </div>
               <div className='row'>
