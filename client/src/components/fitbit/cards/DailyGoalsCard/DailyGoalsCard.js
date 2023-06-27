@@ -1,13 +1,16 @@
 import { Card, Col, Divider, Progress, Row, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getActivityGoals } from '../../../../utils/API';
+import { getDailyActivitySummary } from '../../../../utils/API';
 
 const { Title } = Typography;
 
 const DailyGoalsCard = () => {
-  const totalSteps = 10000;
-  const currentSteps = 6000;
+  const [activites, setActivites] = useState(null);
+  const [goals, setGoals] = useState(null);
+
+  const totalSteps = goals?.steps;
+  const currentSteps = activites?.steps || 6000;
   const stepProgressPercent = (currentSteps / totalSteps) * 100;
 
   const formatSteps = () => (
@@ -19,8 +22,8 @@ const DailyGoalsCard = () => {
     </div>
   );
 
-  const totalCalories = 2000;
-  const burnedCalories = 1500;
+  const totalCalories = goals?.caloriesOut;
+  const burnedCalories = activites?.caloriesOut || 1500;
   const calorieProgressPercent = (burnedCalories / totalCalories) * 100;
 
   const formatCalories = () => (
@@ -32,8 +35,8 @@ const DailyGoalsCard = () => {
     </div>
   );
 
-  const totalDistance = 10;
-  const traveledDistance = 6;
+  const totalDistance = goals?.distance;
+  const traveledDistance = activites?.distance || 6;
   const distanceProgressPercent = (traveledDistance / totalDistance) * 100;
 
   const formatDistance = () => (
@@ -48,9 +51,11 @@ const DailyGoalsCard = () => {
   // Fetching activity goals.
   useEffect(() => {
     const fetch = async () => {
-      const resp = await getActivityGoals(localStorage.getItem('token'), "daily");
+      const resp = await getDailyActivitySummary(localStorage.getItem('token'));
       if (resp.status === 200) {
-        console.log('getActivityGoals', resp.data.goals);
+        console.log('getDailyActivitySummary', resp.data);
+        setActivites(resp.data.activites);
+        setGoals(resp.data.goals);
       } else {
         resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
       }
