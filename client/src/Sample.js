@@ -34,12 +34,12 @@
 //     }));
 
 //     if (name === 'text') {
-//       const trimmedValue = newValue.trim();
+//       let newString = newValue.replace(/\s+/g, ' ').trim();
 //       // Calculate character count
-//       setCharacterCount(trimmedValue.length);
+//       setCharacterCount(newString.length);
 
 //       // Calculate byte count (considering UTF-8 encoding)
-//       const byteCount = new Blob([trimmedValue]).size;
+//       const byteCount = new Blob([newString]).size;
 //       setByteCount(byteCount);
 //     }
 //   };
