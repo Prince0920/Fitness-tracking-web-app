@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Progress, Card, Typography, Row, Col, Divider, Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { getLifetimeStatics } from '../../../../utils/API';
-import { toast } from 'react-toastify';
+import { Card, Col, Divider, Dropdown, Menu, Progress, Row, Typography } from 'antd';
+import React, { useState } from 'react';
 
 const { Title } = Typography;
 
@@ -23,18 +21,19 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
     </Menu>
   );
 
-  useEffect(() => {
-    const fetch = async () => {
-      const resp = await getLifetimeStatics(localStorage.getItem('token'));
-      if (resp.status === 200) {
-        console.log('getLifetimeStatics', resp.data);
-      } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
-      }
-    };
+  // Getting lifetime activity data
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const resp = await getLifetimeStatics(localStorage.getItem('token'));
+  //     if (resp.status === 200) {
+  //       console.log('getLifetimeStatics', resp.data);
+  //     } else {
+  //       resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+  //     }
+  //   };
 
-    fetch();
-  }, []);
+  //   fetch();
+  // }, []);
 
   return (
     <Card className='card card-primary card-outline'>

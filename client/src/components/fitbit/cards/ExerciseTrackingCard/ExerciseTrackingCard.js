@@ -1,6 +1,6 @@
 import { Button, DatePicker } from 'antd';
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { getActivityTimeseriesByDateRange } from '../../../../utils/API';
 import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
@@ -77,14 +77,15 @@ const ExerciseTrackingCard = () => {
     return combinedArray;
   };
 
-  useEffect(() => {
-    const fetch = async () => {
-      const _data = await combineActivityData();
-      setActivityData(_data);
-    };
+  // Getting data
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const _data = await combineActivityData();
+  //     setActivityData(_data);
+  //   };
 
-    fetch();
-  }, []);
+  //   fetch();
+  // }, []);
 
   const handleSubmit = async () => {
     if (startDate && endDate) {
