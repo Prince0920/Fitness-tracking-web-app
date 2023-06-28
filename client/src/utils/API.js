@@ -163,6 +163,17 @@ export const getActivityTimeseriesByDateRange = async (token, activity, startDat
     return error.response;
   }
 };
+
+export const getLifetimeStatics = async token => {
+  try {
+    const url = SERVER_URL + `/api/fitbit/getLifetimeStatics`;
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
 // Fitbit API  Ends--------------------------------------------------------------------
 
 // User api starts --------------------------------------------------------------------
