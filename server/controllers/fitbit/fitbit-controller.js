@@ -140,4 +140,29 @@ module.exports = {
       return res.status(500).json({ message: 'Something went wrong!' });
     }
   },
+
+  async getActivityTimeseriesByDateRange(req, res) {
+    try {
+      const { user, query } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+      const profileId = fitbitData.profileId;
+      const accessToken = fitbitData.access_token;
+
+      const activity = query.activity;
+      const startDate = query.startDate;
+      const endDate = query.endDate;
+
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/tracker/${activity}/date/${startDate}/${endDate}.json`;
+      const { data } = await axios.get(url, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      res.json(data);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
 };

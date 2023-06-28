@@ -11,15 +11,7 @@ import {
 } from 'recharts';
   
 const ExerciseTrackingGraph = ({
-  data = [
-    { date: '2023-06-01', caloriesBurned: 250, stepCount: 190 },
-    { date: '2023-06-02', caloriesBurned: 350, stepCount: 150 },
-    { date: '2023-06-03', caloriesBurned: 400, stepCount: 500 },
-    { date: '2023-06-04', caloriesBurned: 200, stepCount: 190 },
-    { date: '2023-06-05', caloriesBurned: 550, stepCount: 150 },
-    { date: '2023-06-06', caloriesBurned: 50, stepCount: 500 },
-    // Add more data points as needed
-  ],
+  data,
 }) => {
   return (
     <ResponsiveContainer

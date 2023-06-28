@@ -10,6 +10,7 @@ const {
   getActivityGoals,
   getLifetimeStatics,
   getDailyActivitySummary,
+  getActivityTimeseriesByDateRange,
 } = require('../../../controllers/fitbit/fitbit-controller');
 const { authMiddleware, ensureFitibitAuthenticated } = require('../../../utils/auth');
 
@@ -59,4 +60,9 @@ router
 router
   .route('/getDailyActivitySummary')
   .get(authMiddleware, ensureFitibitAuthenticated, getDailyActivitySummary);
+
+// /api/fitbit/get-activity-timeseries-by-date-range
+router
+  .route('/get-activity-timeseries-by-date-range')
+  .get(authMiddleware, ensureFitibitAuthenticated, getActivityTimeseriesByDateRange);
 module.exports = router;
