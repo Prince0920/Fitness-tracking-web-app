@@ -12,7 +12,7 @@ export const Apple = () => {
   async function handleDisconnect() {
     alert('Handle Disconnect functionality');
   }
-  const isLogin = true;
+  const isLogin = false;
 
   return (
     <div className='content-wrapper'>
