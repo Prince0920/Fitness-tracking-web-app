@@ -1,14 +1,18 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../../../reusable/layout/Layout';
-import AppleGreetingHeader from '../../../apple/cards/AppleGreetingHeaderCard';
-import StepCountCard from '../../../apple/cards/StepCountCard';
+import StepCountCard from './cards/StepCountCard';
+import GreetingCard from '../../../reusable/cards/GreetingCard';
 
 export const Apple = () => {
   async function handleConnect() {
     alert('Handle Connect functionality');
   }
-  const isLogin = false;
+
+  async function handleDisconnect() {
+    alert('Handle Disconnect functionality');
+  }
+  const isLogin = true;
 
   return (
     <div className='content-wrapper'>
@@ -22,7 +26,10 @@ export const Apple = () => {
             <>
               <div className='row'>
                 <div className='col-12'>
-                  <AppleGreetingHeader />
+                  <GreetingCard
+                    username={'Prince'}
+                    handleDisconnect={handleDisconnect}
+                  />
                 </div>
               </div>
               <div className='row'>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { getTodayDate } from '../../../../reusable/helper_functions/getCurrentDate';
+import { getTodayDate } from '../helper_functions/getCurrentDate';
 
-const FitbitGreetingHeader = ({ username , handleDisconnect }) => {
+const GreetingCard = ({ username, handleDisconnect }) => {
   const currentDate = getTodayDate();
 
   return (
@@ -45,4 +45,4 @@ const FitbitGreetingHeader = ({ username , handleDisconnect }) => {
   );
 };
 
-export default FitbitGreetingHeader;
+export default GreetingCard;

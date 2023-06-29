@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Admin from './components/routing/Admin';
-import { Apple } from './components/pages/app/apple/Apple';
 import Login from './components/pages/landing/auth/Login';
 import Register from './components/pages/landing/auth/Register';
 import { Fitbit } from './components/pages/app/fitbit/Fitbit';
@@ -14,6 +13,7 @@ import Sample from './Sample';
 import LandingPage from './components/pages/landing/Home/LandingPage';
 import EditUser from './components/pages/app/admin/usersList/EditUser';
 import { UserList } from './components/pages/app/admin/usersList/UserList';
+import { Apple } from './components/pages/app/apple/Apple';
 
 function App() {
   return (
