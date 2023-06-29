@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../../../utils/API';
 import Layout from '../../../reusable/layout/Layout';
-import Loader from '../../../utils/Loader ';
+import Loader from '../../../reusable/loader/Loader ';
 import ExerciseTrackingCard from '../../../fitbit/cards/ExerciseTrackingCard/ExerciseTrackingCard';
 import FitbitGreetingHeader from '../../../fitbit/cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from '../../../fitbit/cards/LifetimeStatisticsCard/LifetimeStatisticsCard';

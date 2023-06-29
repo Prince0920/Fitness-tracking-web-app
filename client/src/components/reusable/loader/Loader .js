@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from 'react-loader-spinner';
-import './Loader.css';
+import './loader.css'
 
 const Loader = () => {
   return (

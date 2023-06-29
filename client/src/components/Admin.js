@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "./reusable/layout/Footer";
 import Header from "./reusable/layout/Header";
 import Menu from "./reusable/layout/Menu";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Admin = () => {
   return (
