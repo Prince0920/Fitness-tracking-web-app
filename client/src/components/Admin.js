@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "./common/Footer";
-import Header from "./common/Header";
-import Menu from "./common/Menu";
+import Footer from "./reusable/layout/Footer";
+import Header from "./reusable/layout/Header";
+import Menu from "./reusable/layout/Menu";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 const Admin = () => {

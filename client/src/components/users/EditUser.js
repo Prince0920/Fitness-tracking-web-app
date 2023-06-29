@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../common/Layout';
+import Layout from '../reusable/layout/Layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUser, updateUser } from '../../utils/API';
 import { toast } from 'react-toastify';

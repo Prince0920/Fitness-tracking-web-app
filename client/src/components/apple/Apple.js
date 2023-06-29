@@ -1,6 +1,6 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from '../common/Layout';
+import Layout from '../reusable/layout/Layout';
 import AppleGreetingHeader from './cards/AppleGreetingHeaderCard';
 import StepCountCard from './cards/StepCountCard';
 

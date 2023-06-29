@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../utils/API';
-import Layout from '../common/Layout';
+import Layout from '../reusable/layout/Layout';
 import Loader from '../utils/Loader ';
 import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingCard';
 import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
