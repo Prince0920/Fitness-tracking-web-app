@@ -8,12 +8,12 @@ import Register from './components/pages/landing/auth/Register';
 import { Fitbit } from './components/pages/app/fitbit/Fitbit';
 import ForgotPassword from './components/pages/landing/auth/ForgotPassword';
 import ResetPassword from './components/pages/landing/auth/ResetPassword';
-import { UserList } from './components/users/UserList';
 import ProfilePage from './components/pages/app/profile/Profile';
-import EditUser from './components/users/EditUser';
 import Dashboard from './components/pages/app/dashboard/Dashboard';
 import Sample from './Sample';
 import LandingPage from './components/pages/landing/Home/LandingPage';
+import EditUser from './components/pages/app/admin/usersList/EditUser';
+import { UserList } from './components/pages/app/admin/usersList/UserList';
 
 function App() {
   return (

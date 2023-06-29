@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { deleteUser, getUsers } from '../../utils/API';
-import Layout from '../reusable/layout/Layout';
+import { deleteUser, getUsers } from '../../../../../utils/API';
+import Layout from '../../../../reusable/layout/Layout';
 
 export const UserList = () => {
   const token = localStorage.getItem('token');
