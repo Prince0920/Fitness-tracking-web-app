@@ -33,14 +33,14 @@ const ExerciseTrackingGraph = ({ data }) => {
           dataKey='caloriesBurned'
           stroke='#8884d8'
           strokeWidth={2}
-          dot={false}
+          dot={{ stroke: '#8884d8', fill: '#8884d8', r: 4 }}
         />
         <Line
           type='monotone'
           dataKey='stepCount'
           stroke='#82ca9d'
           strokeWidth={2}
-          dot={false}
+          dot={{ stroke: '#82ca9d', fill: '#82ca9d', r: 4 }}
         />
       </LineChart>
     </ResponsiveContainer>
