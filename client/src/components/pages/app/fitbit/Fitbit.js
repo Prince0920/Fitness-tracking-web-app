@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../utils/API';
-import Layout from '../reusable/layout/Layout';
-import Loader from '../utils/Loader ';
-import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingCard';
-import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
-import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
-import DailyGoalsCard from './cards/DailyGoalsCard/DailyGoalsCard';
+import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../../../utils/API';
+import Layout from '../../../reusable/layout/Layout';
+import Loader from '../../../utils/Loader ';
+import ExerciseTrackingCard from '../../../fitbit/cards/ExerciseTrackingCard/ExerciseTrackingCard';
+import FitbitGreetingHeader from '../../../fitbit/cards/FitbitGreetingHeaderCard';
+import LifetimeStatisticsCard from '../../../fitbit/cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
+import DailyGoalsCard from '../../../fitbit/cards/DailyGoalsCard/DailyGoalsCard';
 
 export const Fitbit = () => {
   const navigate = useNavigate();

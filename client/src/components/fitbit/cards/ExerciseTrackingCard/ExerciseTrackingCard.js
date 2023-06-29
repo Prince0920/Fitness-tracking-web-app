@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { getActivityTimeseriesByDateRange } from '../../../../utils/API';
 import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
-import GraphTitle from '../../Title/GraphTitle';
+import GraphTitle from '../../../reusable/title/GraphTitle';
 
 const ExerciseTrackingCard = () => {
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'days'));

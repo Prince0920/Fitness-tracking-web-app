@@ -5,7 +5,7 @@ import Admin from './components/Admin';
 import { Apple } from './components/apple/Apple';
 import Login from './components/pages/landing/auth/Login';
 import Register from './components/pages/landing/auth/Register';
-import { Fitbit } from './components/fitbit/Fitbit';
+import { Fitbit } from './components/pages/app/fitbit/Fitbit';
 import ForgotPassword from './components/pages/landing/auth/ForgotPassword';
 import ResetPassword from './components/pages/landing/auth/ResetPassword';
 import { UserList } from './components/users/UserList';

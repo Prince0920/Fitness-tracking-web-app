@@ -1,6 +1,6 @@
 import { Card, Col, Progress, Row, Typography } from 'antd';
 import React from 'react';
-import GraphTitle from '../../Title/GraphTitle';
+import GraphTitle from '../../../reusable/title/GraphTitle';
 
 const { Title } = Typography;
 

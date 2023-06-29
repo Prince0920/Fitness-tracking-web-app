@@ -1,8 +1,8 @@
 import { Card, Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getDailyActivitySummary } from '../../../../utils/API';
-import GraphTitle from '../../Title/GraphTitle';
-import { ProgressGraph } from '../../graphs/ProgressGraph';
+import GraphTitle from '../../../reusable/title/GraphTitle';
+import { ProgressGraph } from '../../../reusable/graphs/ProgressGraph';
 import { toast } from 'react-toastify';
 
 const DailyGoalsCard = () => {
