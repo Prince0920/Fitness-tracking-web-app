@@ -2,7 +2,7 @@ import { Button, DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { getActivityTimeseriesByDateRange } from '../../../../utils/API';
+import { getActivityTimeseriesByDateRange } from '../../../api/API';
 import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
 import GraphTitle from '../../../reusable/title/GraphTitle';

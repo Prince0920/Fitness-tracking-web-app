@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { login } from '../../../../utils/API';
+import { login } from '../../../api/API';
 
 const Login = () => {
   const navigate = useNavigate();

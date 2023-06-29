@@ -1,6 +1,6 @@
 import { Card, Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getDailyActivitySummary } from '../../../../utils/API';
+import { getDailyActivitySummary } from '../../../api/API';
 import GraphTitle from '../../../reusable/title/GraphTitle';
 import { ProgressGraph } from '../../../reusable/graphs/ProgressGraph';
 import { toast } from 'react-toastify';

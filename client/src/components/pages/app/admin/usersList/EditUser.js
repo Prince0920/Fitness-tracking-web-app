@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../../../reusable/layout/Layout';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getUser, updateUser } from '../../../../../utils/API';
+import { getUser, updateUser } from '../../../../api/API';
 import { toast } from 'react-toastify';
 
 const EditUser = () => {

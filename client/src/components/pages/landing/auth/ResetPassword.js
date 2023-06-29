@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { resetPassword } from '../../../../utils/API';
+import { resetPassword } from '../../../api/API';
 
 const ResetPassword = () => {
   const navigate = useNavigate();

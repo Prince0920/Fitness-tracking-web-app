@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTodayDate } from '../../../utils/getCurrentDate';
+import { getTodayDate } from '../../reusable/helper_functions/getCurrentDate';
 
 const AppleGreetingHeader = () => {
   const username = 'Prince Agrawal';

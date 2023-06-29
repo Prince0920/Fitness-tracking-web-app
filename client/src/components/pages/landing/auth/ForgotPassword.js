@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { forgotPassword } from '../../../../utils/API';
+import { forgotPassword } from '../../../api/API';
 
 const ForgotPassword = () => {
   const [forgotFromDetail, setForgotFormDetail] = useState({
