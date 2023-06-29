@@ -9,7 +9,7 @@ import { Fitbit } from './components/fitbit/Fitbit';
 import ForgotPassword from './components/pages/landing/auth/ForgotPassword';
 import ResetPassword from './components/pages/landing/auth/ResetPassword';
 import { UserList } from './components/users/UserList';
-import ProfilePage from './components/admin/profile/Profile';
+import ProfilePage from './components/pages/app/profile/Profile';
 import EditUser from './components/users/EditUser';
 import Dashboard from './components/pages/app/dashboard/Dashboard';
 import Sample from './Sample';
