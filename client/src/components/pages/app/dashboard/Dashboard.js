@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
-import Layout from '../common/Layout';
+import Layout from '../../../common/Layout';
 import { HealthFitnessAnalyticsCard } from './Card/HealthFitnessAnalyticsCard';
 import { DietSuggestionsCard } from './Card/DietSuggestionsCard';
-import { getProfile } from '../../utils/API';
+import { getProfile } from '../../../../utils/API';
 import { toast } from 'react-toastify';
 import { calculateBMI, calculateBMICategory, calculateExpectedAge } from './helperFunction';
 
