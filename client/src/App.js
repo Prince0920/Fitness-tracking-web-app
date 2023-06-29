@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Admin from './components/routing/Admin';
-import { Apple } from './components/apple/Apple';
+import { Apple } from './components/pages/app/apple/Apple';
 import Login from './components/pages/landing/auth/Login';
 import Register from './components/pages/landing/auth/Register';
 import { Fitbit } from './components/pages/app/fitbit/Fitbit';

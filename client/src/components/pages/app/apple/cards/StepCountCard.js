@@ -1,5 +1,5 @@
 import React from 'react';
-import StepCountProgressGraph from '../graphs/StepCountProgressGraph';
+import StepCountProgressGraph from '../../pages/app/apple/graphs/StepCountProgressGraph';
 
 const StepCountCard = () => {
   const totalSteps = 10000;

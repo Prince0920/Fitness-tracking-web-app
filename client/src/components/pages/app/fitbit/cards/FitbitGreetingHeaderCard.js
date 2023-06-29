@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTodayDate } from '../../reusable/helper_functions/getCurrentDate';
+import { getTodayDate } from '../../../../reusable/helper_functions/getCurrentDate';
 
 const FitbitGreetingHeader = ({ username , handleDisconnect }) => {
   const currentDate = getTodayDate();

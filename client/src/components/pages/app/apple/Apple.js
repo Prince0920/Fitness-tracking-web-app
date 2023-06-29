@@ -1,8 +1,8 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import Layout from '../reusable/layout/Layout';
-import AppleGreetingHeader from './cards/AppleGreetingHeaderCard';
-import StepCountCard from './cards/StepCountCard';
+import Layout from '../../../reusable/layout/Layout';
+import AppleGreetingHeader from '../../../apple/cards/AppleGreetingHeaderCard';
+import StepCountCard from '../../../apple/cards/StepCountCard';
 
 export const Apple = () => {
   async function handleConnect() {

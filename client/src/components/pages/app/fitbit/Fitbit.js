@@ -6,7 +6,7 @@ import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../../api/API';
 import Layout from '../../../reusable/layout/Layout';
 import Loader from '../../../reusable/loader/Loader ';
 import ExerciseTrackingCard from '../../../fitbit/cards/ExerciseTrackingCard/ExerciseTrackingCard';
-import FitbitGreetingHeader from '../../../fitbit/cards/FitbitGreetingHeaderCard';
+import FitbitGreetingHeader from './cards/FitbitGreetingHeaderCard';
 import LifetimeStatisticsCard from '../../../fitbit/cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
 import DailyGoalsCard from '../../../fitbit/cards/DailyGoalsCard/DailyGoalsCard';
 
