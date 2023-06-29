@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -9,31 +9,40 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-  
-const ExerciseTrackingGraph = ({
-  data,
-}) => {
+
+const ExerciseTrackingGraph = ({ data }) => {
   return (
     <ResponsiveContainer
       width='100%'
       height={400}>
-      <BarChart
+      <LineChart
         data={data}
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='date' />
+        <XAxis
+          dataKey='date'
+          interval={0}
+          angle={-45}
+          dy={15}
+        />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar
+        <Line
+          type='monotone'
           dataKey='caloriesBurned'
-          fill='#8884d8'
+          stroke='#8884d8'
+          strokeWidth={2}
+          dot={false}
         />
-        <Bar
+        <Line
+          type='monotone'
           dataKey='stepCount'
-          fill='#82ca9d'
+          stroke='#82ca9d'
+          strokeWidth={2}
+          dot={false}
         />
-      </BarChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
