@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { getActivityTimeseriesByDateRange } from '../../../../utils/API';
 import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
+import GraphTitle from '../../Title/GraphTitle';
 
 const ExerciseTrackingCard = () => {
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'days'));
@@ -98,36 +99,30 @@ const ExerciseTrackingCard = () => {
 
   console.log('activityData', activityData);
   return (
-    <div className='card card-primary card-outline'>
-      <div className='card-body'>
-        <h5
-          className='card-title'
-          style={{
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            color: '#CC5500',
-          }}>
-          Exercise Tracking
-        </h5>
-        <div className='date-range-container'>
-          <DatePicker
-            value={startDate}
-            onChange={date => setStartDate(date)}
-          />
-          <DatePicker
-            value={endDate}
-            onChange={date => setEndDate(date)}
-          />
-          <Button
-            type='primary'
-            onClick={handleSubmit}
-            style={{ marginLeft: '1rem' }}>
-            Select Date Range
-          </Button>
+    <>
+      <GraphTitle title={'Exercise Tracking'} />
+      <div className='card card-primary card-outline'>
+        <div className='card-body'>
+          <div className='date-range-container'>
+            <DatePicker
+              value={startDate}
+              onChange={date => setStartDate(date)}
+            />
+            <DatePicker
+              value={endDate}
+              onChange={date => setEndDate(date)}
+            />
+            <Button
+              type='primary'
+              onClick={handleSubmit}
+              style={{ marginLeft: '1rem' }}>
+              Select Date Range
+            </Button>
+          </div>
+          <ExerciseTrackingGraph data={data} />
         </div>
-        <ExerciseTrackingGraph data={data} />
       </div>
-    </div>
+    </>
   );
 };
 

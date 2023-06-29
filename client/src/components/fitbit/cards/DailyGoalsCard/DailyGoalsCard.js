@@ -1,52 +1,13 @@
-import { Card, Col, Divider, Progress, Row, Typography } from 'antd';
+import { Card, Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { getDailyActivitySummary } from '../../../../utils/API';
-
-const { Title } = Typography;
+import GraphTitle from '../../Title/GraphTitle';
+import { ProgressGraph } from '../../graphs/ProgressGraph';
+import { toast } from 'react-toastify';
 
 const DailyGoalsCard = () => {
   const [summary, setSummary] = useState(null);
   const [goals, setGoals] = useState(null);
-
-  const totalSteps = goals?.steps || 10000;
-  const currentSteps = summary?.steps || 6000;
-  const stepProgressPercent = (currentSteps / totalSteps) * 100;
-
-  const formatSteps = () => (
-    <div>
-      <p style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: 0 }}>{currentSteps}</p>
-      <p style={{ fontSize: '1rem', color: 'rgba(0, 0, 0, 0.45)', marginBottom: 0 }}>
-        out of {totalSteps}
-      </p>
-    </div>
-  );
-
-  const totalCalories = goals?.caloriesOut || 2000;
-  const burnedCalories = summary?.caloriesOut || 1500;
-  const calorieProgressPercent = (burnedCalories / totalCalories) * 100;
-
-  const formatCalories = () => (
-    <div>
-      <p style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: 0 }}>{burnedCalories}</p>
-      <p style={{ fontSize: '1rem', color: 'rgba(0, 0, 0, 0.45)', marginBottom: 0 }}>
-        out of {totalCalories}
-      </p>
-    </div>
-  );
-
-  const totalDistance = goals?.distance || 10;
-  const traveledDistance = summary?.distances[0]?.distance || 6;
-  const distanceProgressPercent = (traveledDistance / totalDistance) * 100;
-
-  const formatDistance = () => (
-    <div>
-      <p style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: 0 }}>{traveledDistance}</p>
-      <p style={{ fontSize: '1rem', color: 'rgba(0, 0, 0, 0.45)', marginBottom: 0 }}>
-        out of {totalDistance}
-      </p>
-    </div>
-  );
 
   // Fetching activity goals.
   useEffect(() => {
@@ -64,79 +25,45 @@ const DailyGoalsCard = () => {
     fetch();
   }, []);
 
-  return (
-    <Card className='card card-primary card-outline'>
-      <div className='card-body'>
-        <Row
-          justify='space-between'
-          align='middle'>
-          <Col>
-            <Title
-              level={4}
-              style={{ color: '#CC5500' }}>
-              Activity Status
-            </Title>
-          </Col>
-        </Row>
-        <Divider />
+  console.log('Summary: ', summary);
+  console.log('Goals: ', goals);
 
-        <Row
-          justify='space-between'
-          gutter={[16, 16]}>
-          <Col>
-            <div className='progress-item'>
-              <Title
-                level={5}
-                style={{ fontWeight: 'bold' }}>
-                Step Count
-              </Title>
-              <Progress
-                type='circle'
-                percent={stepProgressPercent}
-                strokeColor='#36A2EB'
-                trailColor='#D3D3D3'
-                strokeLinecap='square'
-                format={formatSteps}
+  return (
+    <>
+      <GraphTitle title={'Activity Status'} />
+      <Card className='card card-primary card-outline'>
+        <div className='card-body'>
+          <Row
+            justify='space-between'
+            align='middle'>
+            <Col>
+              <ProgressGraph
+                title='Step Count'
+                progressPercent={(summary?.steps / goals?.steps) * 100}
+                totalValue={goals?.steps}
+                currentValue={summary?.steps}
               />
-            </div>
-          </Col>
-          <Col>
-            <div className='progress-item'>
-              <Title
-                level={5}
-                style={{ fontWeight: 'bold' }}>
-                Calories Burned
-              </Title>
-              <Progress
-                type='circle'
-                percent={calorieProgressPercent}
-                strokeColor='#FF6384'
-                trailColor='#D3D3D3'
-                strokeLinecap='square'
-                format={formatCalories}
+            </Col>
+            <Col>
+              <ProgressGraph
+                title='Calories Burned'
+                progressPercent={(summary?.caloriesOut / goals?.caloriesOut) * 100}
+                totalValue={goals?.caloriesOut}
+                currentValue={summary?.caloriesOut}
               />
-            </div>
-          </Col>
-          <Col>
-            <div className='progress-item'>
-              <Title
-                level={5}
-                style={{ fontWeight: 'bold' }}>
-                Distance Traveled
-              </Title>
-              <Progress
-                type='circle'
-                percent={distanceProgressPercent}
-                strokeColor='#FFCE56'
-                trailColor='#D3D3D3'
-                strokeLinecap='square'
-                format={formatDistance}
+            </Col>
+            <Col>
+              <ProgressGraph
+                title='Distance Traveled'
+                progressPercent={(summary?.distances[0]?.distance / goals?.distance) * 100}
+                totalValue={goals?.distance}
+                currentValue={summary?.distances[0]?.distance}
               />
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </Card>
+            </Col>
+          </Row>
+        </div>
+      </Card>
+    </>
   );
 };
 
