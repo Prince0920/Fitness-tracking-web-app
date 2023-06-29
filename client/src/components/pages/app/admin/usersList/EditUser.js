@@ -3,6 +3,9 @@ import Layout from '../../../../reusable/layout/Layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUser, updateUser } from '../../../../api/API';
 import { toast } from 'react-toastify';
+import InputEmail from '../../../../reusable/forms/InputEmail';
+import InputPassword from '../../../../reusable/forms/InputPassword';
+import InputText from '../../../../reusable/forms/InputText';
 
 const EditUser = () => {
   let { id } = useParams();
@@ -72,43 +75,28 @@ const EditUser = () => {
                 <div className='card-body'>
                   <div className='row align-items-end'>
                     <div className='form-group col-md-6'>
-                      <label htmlFor='exampleInputEmail1'>Username</label>
-                      <input
-                        type='text'
-                        className='form-control'
-                        name='username'
-                        placeholder='Enter username'
-                        onChange={handleInputChange}
-                        defaultValue={user.username}
-                        value={editedUser.username}
+                      <InputText
+                        label={'Username'}
+                        defaultValue={user?.username || null}
+                        value={editedUser?.username}
+                        handleInputChange={handleInputChange}
+                      />
+                    </div>
+                    <div className='form-group col-md-6'>
+                      <InputEmail
+                        defaultValue={user?.email || null}
+                        value={editedUser?.email}
+                        handleInputChange={handleInputChange}
                       />
                     </div>
 
                     <div className='form-group col-md-6'>
-                      <label htmlFor='exampleInputEmail1'>Email address</label>
-                      <input
-                        type='email'
-                        className='form-control'
-                        placeholder='Enter email'
-                        name='email'
-                        onChange={handleInputChange}
-                        defaultValue={user.email}
-                        value={editedUser.email}
+                      <InputPassword
+                        defaultValue={null}
+                        value={editedUser?.password}
+                        handleInputChange={handleInputChange}
                       />
                     </div>
-
-                    <div className='form-group col-md-6'>
-                      <label htmlFor='exampleInputPassword1'>Password</label>
-                      <input
-                        type='password'
-                        className='form-control'
-                        placeholder='********'
-                        name='password'
-                        onChange={handleInputChange}
-                        value={editedUser.password}
-                      />
-                    </div>
-
                     <div className='form-group col-md-6'>
                       <div className='d-flex justify-content-end'>
                         <button
