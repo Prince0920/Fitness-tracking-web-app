@@ -9,11 +9,11 @@ import { Fitbit } from './components/fitbit/Fitbit';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import { UserList } from './components/users/UserList';
-import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/admin/profile/Profile';
 import EditUser from './components/users/EditUser';
 import Dashboard from './components/Dashboard/Dashboard';
 import Sample from './Sample';
+import LandingPage from './components/pages/landing/Home/LandingPage';
 
 function App() {
   return (
