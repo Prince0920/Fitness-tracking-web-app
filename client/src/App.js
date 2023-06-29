@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Admin from './components/Admin';
+import Admin from './components/routing/Admin';
 import { Apple } from './components/apple/Apple';
 import Login from './components/pages/landing/auth/Login';
 import Register from './components/pages/landing/auth/Register';
