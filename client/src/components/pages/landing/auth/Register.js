@@ -26,7 +26,7 @@ const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (registerFromDetail.password !== registerFromDetail.confirmPassword) {
-      toast('Password and confirm password not match.');
+      toast.warning('Password and confirm password not match.');
     } else {
       const registerBody = {
         username: registerFromDetail.username,
@@ -38,7 +38,7 @@ const Register = () => {
       if (resp.status === 200) {
         navigate('/admin/login');
       } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     }
   };

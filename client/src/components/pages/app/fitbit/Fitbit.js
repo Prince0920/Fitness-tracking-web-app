@@ -30,7 +30,7 @@ const Fitbit = () => {
         setIsLogin(true);
         setUsername(resp.data.displayName);
       } else if (resp.status === 400) {
-        toast(resp.data.message);
+        toast.info(resp.data.message);
       } else {
         setIsLoading(false);
       }
@@ -45,7 +45,7 @@ const Fitbit = () => {
       setIsLogin(false);
       navigate('/admin/fitbit/dashboard');
     } else {
-      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
     }
   };
 

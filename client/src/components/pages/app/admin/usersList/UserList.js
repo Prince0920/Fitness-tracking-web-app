@@ -16,7 +16,7 @@ export const UserList = () => {
       if (resp.status === 200) {
         setUsers(resp.data);
       } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     };
     fetchData();
@@ -29,9 +29,9 @@ export const UserList = () => {
       if (resp.status === 200) {
         // Remove the deleted user from the list
         setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
-        toast('User deleted successfully!');
+        toast.success('User deleted successfully!');
       } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     }
   }

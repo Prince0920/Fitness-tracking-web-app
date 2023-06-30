@@ -26,7 +26,7 @@ const Dashboard = () => {
           age: data.age,
         });
       } else {
-        return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        return resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     };
 

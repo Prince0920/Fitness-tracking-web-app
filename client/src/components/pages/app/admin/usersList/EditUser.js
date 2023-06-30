@@ -24,7 +24,7 @@ const EditUser = () => {
           password: '',
         });
       } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     };
     fetchData();
@@ -54,10 +54,10 @@ const EditUser = () => {
     });
 
     if (resp.status === 200) {
-      toast('User updated successfully!');
+      toast.success('User updated successfully!');
       navigate('/admin/users/userList');
     } else {
-      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
     }
   };
 

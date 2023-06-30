@@ -22,24 +22,10 @@ const ForgotPassword = () => {
     e.preventDefault();
     const resp = await forgotPassword(forgotFromDetail);
     if (resp.status === 200) {
-      toast('Password resent link send to your mail.');
+      toast.success('Password resent link send to your mail.');
     } else {
-      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
     }
-    // axios
-    //   .post(url, forgotFromDetail)
-    //   .then(resp => {
-    //     console.log('forgot password api data: ', resp);
-    //     toast('Password resent link send to your mail.');
-    //   })
-    //   .catch(e => {
-    //     console.log('forgot password api error: ', e);
-    //     if (e.response.status === 400) {
-    //       toast(e.response.data.message);
-    //     } else {
-    //       toast('Server error!');
-    //     }
-    //   });
   };
 
   return (

@@ -28,14 +28,14 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (resetFromDetail.password !== resetFromDetail.confirmPassword) {
-      toast('Password and confirm password not match.');
+      toast.warning('Password and confirm password not match.');
     } else {
       const resp = await resetPassword(token, userId, resetFromDetail.password);
       if (resp.status === 200) {
-        toast('Password resent Successfully.');
+        toast.success('Password resent Successfully.');
         navigate('/admin/login');
       } else {
-        resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     }
   };

@@ -36,7 +36,7 @@ const ExerciseTrackingCard = () => {
       console.log('getActivityTimeseriesByDateRange', resp.data);
       return resp.data[`activities-tracker-${activity}`];
     } else {
-      resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
     }
   };
 
@@ -93,7 +93,7 @@ const ExerciseTrackingCard = () => {
       const _data = await combineActivityData();
       setActivityData(_data);
     } else {
-      toast('Please select both start and end dates.');
+      toast.warning('Please select both start and end dates.');
     }
   };
 

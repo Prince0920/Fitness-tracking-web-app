@@ -12,7 +12,7 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
   //     if (resp.status === 200) {
   //       console.log('getLifetimeStatics', resp.data);
   //     } else {
-  //       resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+  //       resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
   //     }
   //   };
 

@@ -31,9 +31,9 @@ const ProfilePage = () => {
         age: resp?.data?.age,
       });
       setEditMode(false);
-      toast('Profile Updated!');
+      toast.success('Profile Updated!');
     } else {
-      return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+      return resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
     }
 
     // Perform save/update logic here
@@ -60,7 +60,7 @@ const ProfilePage = () => {
           age: data.age,
         });
       } else {
-        return resp.status === 400 ? toast(resp.data.message) : toast('Something Went Wrong!');
+        return resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
       }
     };
 
