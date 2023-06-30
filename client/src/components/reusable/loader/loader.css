@@ -1,3 +1,6 @@
+.blur {
+  filter: none;
+}
 .loader-container {
   display: flex;
   justify-content: center;
@@ -6,13 +9,13 @@
   margin-top: 10%;
 }
 
-.loader {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 4px solid #f3f3f3;
+  border-top: 6px solid orange; /* Set the border color to orange */
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

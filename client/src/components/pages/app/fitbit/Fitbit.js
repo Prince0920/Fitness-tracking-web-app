@@ -33,7 +33,6 @@ const Fitbit = () => {
         toast(resp.data.message);
       } else {
         setIsLoading(false);
-        setIsLoading(false);
       }
     };
 
@@ -51,13 +50,13 @@ const Fitbit = () => {
   };
 
   return (
-    <div className='content-wrapper'>
+    <div className={`content-wrapper ${isLoading ? 'content blur' : 'content'}`}>
       <Layout
         heading='Fitbit Dashboard'
         item='fitbit'
       />
       {isLoading ? (
-        <Loader />
+          <Loader />
       ) : (
         <section className='content'>
           <div className='container-fluid'>
