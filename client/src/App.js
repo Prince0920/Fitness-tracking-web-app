@@ -1,19 +1,19 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Admin from './components/routing/Admin';
-import Login from './components/pages/landing/auth/Login';
-import Register from './components/pages/landing/auth/Register';
-import { Fitbit } from './components/pages/app/fitbit/Fitbit';
-import ForgotPassword from './components/pages/landing/auth/ForgotPassword';
-import ResetPassword from './components/pages/landing/auth/ResetPassword';
-import ProfilePage from './components/pages/app/profile/Profile';
-import Dashboard from './components/pages/app/dashboard/Dashboard';
 import Sample from './Sample';
-import LandingPage from './components/pages/landing/Home/LandingPage';
 import EditUser from './components/pages/app/admin/usersList/EditUser';
 import { UserList } from './components/pages/app/admin/usersList/UserList';
 import { Apple } from './components/pages/app/apple/Apple';
+import Dashboard from './components/pages/app/dashboard/Dashboard';
+import Fitbit from './components/pages/app/fitbit/Fitbit';
+import ProfilePage from './components/pages/app/profile/Profile';
+import LandingPage from './components/pages/landing/Home/LandingPage';
+import ForgotPassword from './components/pages/landing/auth/ForgotPassword';
+import Login from './components/pages/landing/auth/Login';
+import Register from './components/pages/landing/auth/Register';
+import ResetPassword from './components/pages/landing/auth/ResetPassword';
+import Admin from './components/routing/Admin';
 
 function App() {
   return (

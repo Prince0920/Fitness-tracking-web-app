@@ -3,7 +3,7 @@ import React from 'react';
 
 const { Title } = Typography;
 
-export const ProgressGraph = ({ title, progressPercent, totalValue, currentValue }) => {
+const ProgressGraph = ({ title, progressPercent, totalValue, currentValue }) => {
   const formatValue = () => (
     <div>
       <p style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: 0 }}>{currentValue}</p>
@@ -31,3 +31,5 @@ export const ProgressGraph = ({ title, progressPercent, totalValue, currentValue
     </div>
   );
 };
+
+export default ProgressGraph;

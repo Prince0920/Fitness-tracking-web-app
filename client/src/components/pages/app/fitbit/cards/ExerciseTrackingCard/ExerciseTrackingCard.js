@@ -2,10 +2,10 @@ import { Button, DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { getActivityTimeseriesByDateRange } from '../../../api/API';
-import ExerciseTrackingGraph from '../../../pages/app/fitbit/graphs/ExerciseTrackingGraph';
+import { getActivityTimeseriesByDateRange } from '../../../../../api/API';
+import GraphTitle from '../../../../../reusable/title/GraphTitle';
+import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
-import GraphTitle from '../../../reusable/title/GraphTitle';
 
 const ExerciseTrackingCard = () => {
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'days'));

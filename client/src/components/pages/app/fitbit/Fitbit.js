@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../../api/API';
-import DailyGoalsCard from '../../../fitbit/cards/DailyGoalsCard/DailyGoalsCard';
-import ExerciseTrackingCard from '../../../fitbit/cards/ExerciseTrackingCard/ExerciseTrackingCard';
-import LifetimeStatisticsCard from '../../../fitbit/cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
 import GreetingCard from '../../../reusable/cards/GreetingCard';
 import Layout from '../../../reusable/layout/Layout';
 import Loader from '../../../reusable/loader/Loader ';
+import DailyGoalsCard from './cards/DailyGoalsCard/DailyGoalsCard';
+import ExerciseTrackingCard from './cards/ExerciseTrackingCard/ExerciseTrackingCard';
+import LifetimeStatisticsCard from './cards/LifetimeStatisticsCard/LifetimeStatisticsCard';
 
-export const Fitbit = () => {
+const Fitbit = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
@@ -107,3 +107,5 @@ export const Fitbit = () => {
     </div>
   );
 };
+
+export default Fitbit;
