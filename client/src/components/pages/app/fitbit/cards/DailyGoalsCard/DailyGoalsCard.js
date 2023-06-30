@@ -2,7 +2,8 @@ import { Card, Col, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getDailyActivitySummary } from '../../../../../api/API';
-import { default as GraphTitle, default as ProgressGraph } from '../../../../../reusable/graphs/ProgressGraph';
+import ProgressGraph from '../../../../../reusable/graphs/ProgressGraph';
+import GraphTitle from '../../../../../reusable/title/GraphTitle';
 
 const DailyGoalsCard = () => {
   const [summary, setSummary] = useState(null);
