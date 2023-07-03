@@ -199,6 +199,17 @@ export const getUser = async (token, id) => {
     return error.response;
   }
 };
+
+export const createUser = async (token, body) => {
+  try {
+    const url = SERVER_URL + `/api/admin/createUser`;
+    const data = await axios.post(url, body, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
 export const updateUser = async (token, id, body) => {
   try {
     const url = SERVER_URL + `/api/admin/user/${id}`;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../../../../reusable/layout/Layout';
 import { useNavigate } from 'react-router-dom';
-// import { createUser } from '../../../../api/API';
+import { createUser } from '../../../../api/API';
 import { toast } from 'react-toastify';
 import InputEmail from '../../../../reusable/forms/InputEmail';
 import InputPassword from '../../../../reusable/forms/InputPassword';
@@ -25,17 +25,17 @@ const CreateUser = () => {
   };
 
   const handleSave = async () => {
-    // const resp = await createUser(token, {
-    //   username: user.username,
-    //   email: user.email,
-    //   password: user.password,
-    // });
-    // if (resp.status === 200) {
-    //   toast.success('User created successfully!');
-    //   navigate('/admin/users/userList');
-    // } else {
-    //   resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
-    // }
+    const resp = await createUser(token, {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
+    if (resp.status === 200) {
+      toast.success('User created successfully!');
+      navigate('/admin/users/userList');
+    } else {
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+    }
   };
 
   const handleCancel = () => {
