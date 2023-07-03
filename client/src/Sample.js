@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react';
 // import './Sample.css';
-// import Layout from './components/common/Layout';
+// import Layout from './components/reusable/layout/Layout';
 // import { SERVER_URL } from './constant';
 // import axios from 'axios';
 
