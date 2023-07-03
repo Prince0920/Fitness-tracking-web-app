@@ -81,9 +81,23 @@ const Menu = () => {
                 activeClassName='active'>
                 <span
                   style={{
-                    color: location.pathname.includes('/admin/users') ? 'orange' : 'inherit',
+                    color: location.pathname.includes('/admin/users/userList')
+                      ? 'orange'
+                      : 'inherit',
                   }}>
                   User List
+                </span>
+              </NavLink>
+            </AntMenu.Item>
+            <AntMenu.Item key='/admin/users/create'>
+              <NavLink
+                to='/admin/users/create'
+                activeClassName='active'>
+                <span
+                  style={{
+                    color: location.pathname.includes('/admin/users/create') ? 'orange' : 'inherit',
+                  }}>
+                  Create User
                 </span>
               </NavLink>
             </AntMenu.Item>
