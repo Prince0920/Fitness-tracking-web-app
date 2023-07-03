@@ -1,11 +1,19 @@
 .sidebar-dark-primary .nav-sidebar .nav-link.active {
-    background-color: #fd7e14 !important;
-    color: white !important;
-  }
+  background-color: #fd7e14 !important;
+  color: white !important;
+}
 
-  .sidebar-dark-primary .nav-sidebar .nav-treeview .nav-link.active {
-    background-color: transparent !important;
-    color: orange !important;
-  }
+.sidebar-dark-primary .nav-sidebar .nav-treeview .nav-link.active {
+  background-color: transparent !important;
+  color: orange !important;
+}
 
-  
+.ant-menu {
+  /* Add your custom styles for the AntMenu component here */
+  background-color: black;
+  color: white;
+}
+
+li.ant-menu-item.ant-menu-item-only-child {
+  background-color: transparent;
+}

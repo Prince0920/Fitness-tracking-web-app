@@ -1,8 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { Layout, Menu as AntMenu } from 'antd';
+import {
+  DashboardFilled,
+  UserOutlined,
+  AppleOutlined,
+  ArrowRightOutlined,
+  AppleFilled,
+} from '@ant-design/icons';
 import './Menu.css';
 
+const { Sider } = Layout;
+const { SubMenu } = AntMenu;
+
 const Menu = () => {
+  const location = useLocation(); // Get the current location
+
   return (
     <aside
       className='main-sidebar sidebar-dark-primary elevation-4'
@@ -40,95 +53,95 @@ const Menu = () => {
           </div>
         </div>
         {/* Sidebar Menu */}
-        <nav className='mt-2'>
-          <ul
-            className='nav nav-pills nav-sidebar flex-column'
-            data-widget='treeview'
-            role='menu'
-            data-accordion='false'>
-            <li className='nav-item'>
-              <NavLink
-                to='/admin/dashboard'
-                className='nav-link'
-                activeClassName='active'
-                exact={true}>
-                <i className='nav-icon fas fa-tachometer-alt' />
-                <p>Dashboard</p>
-              </NavLink>
-            </li>
+        <AntMenu
+          mode='inline'
+          theme='dark'
+          defaultSelectedKeys={[location.pathname]} // Set the selected key based on the current location
+          className='menu'>
+          <AntMenu.Item
+            key='/admin/dashboard'
+            icon={<DashboardFilled />}
+            style={{
+              backgroundColor: location.pathname.includes('/admin/dashboard')
+                ? 'orange'
+                : 'inherit',
+            }}>
+            <NavLink
+              to='/admin/dashboard'
+              activeClassName='active'
+              exact
+              style={{ color: 'white' }}>
+              Dashboard
+            </NavLink>
+          </AntMenu.Item>
 
-            <li className='nav-item'>
+          <SubMenu
+            key='sub1'
+            icon={<UserOutlined />}
+            title='Users'
+            style={{
+              backgroundColor: location.pathname.includes('/admin/users') ? 'orange' : 'inherit',
+            }}>
+            <AntMenu.Item key='/admin/users/userList'>
               <NavLink
                 to='/admin/users/userList'
-                className='nav-link'
                 activeClassName='active'>
-                <i className='nav-icon fas fa-users' />
-                <p>
-                  Users
-                  <i className='right fas fa-angle-left' />
-                </p>
+                <span
+                  style={{
+                    color: location.pathname.includes('/admin/users') ? 'orange' : 'inherit',
+                  }}>
+                  User List
+                </span>
               </NavLink>
-              <ul className='nav nav-treeview'>
-                <li className='nav-item'>
-                  <NavLink
-                    to='/admin/users/userList'
-                    className='nav-link'
-                    activeClassName='active'>
-                    <i className='far fa-circle nav-icon' />
-                    <p>User List</p>
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
+            </AntMenu.Item>
+          </SubMenu>
 
-            <li className='nav-item'>
+          <SubMenu
+            key='sub2'
+            icon={<AppleFilled />}
+            title='Apple Watch'
+            style={{
+              backgroundColor: location.pathname.includes('/admin/apple') ? 'orange' : 'inherit',
+            }}>
+            <AntMenu.Item key='/admin/apple/dashboard'>
               <NavLink
                 to='/admin/apple/dashboard'
-                className='nav-link'
                 activeClassName='active'>
-                <i className='nav-icon fas fa-tachometer-alt' />
-                <p>
-                  Apple Watch
-                  <i className='right fas fa-angle-left' />
-                </p>
+                <span
+                  style={{
+                    color: location.pathname.includes('/admin/apple/dashboard')
+                      ? 'orange'
+                      : 'inherit',
+                  }}>
+                  Dashboard
+                </span>
               </NavLink>
-              <ul className='nav nav-treeview'>
-                <li className='nav-item'>
-                  <NavLink
-                    to='/admin/apple/dashboard'
-                    className='nav-link'
-                    activeClassName='active'>
-                    <i className='far fa-circle nav-icon' />
-                    <p>Dashboard</p>
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className='nav-item'>
+            </AntMenu.Item>
+          </SubMenu>
+
+          <SubMenu
+            key='sub3'
+            icon={<AppleFilled />}
+            title={'FitBit Watch'}
+            style={{
+              backgroundColor: location.pathname.includes('/admin/fitbit') ? 'orange' : 'inherit',
+            }}>
+            <AntMenu.Item key='/admin/fitbit/dashboard'>
               <NavLink
                 to='/admin/fitbit/dashboard'
-                className='nav-link'
                 activeClassName='active'>
-                <i className='nav-icon fas fa-tachometer-alt' />
-                <p>
-                  FitBit Watch
-                  <i className='right fas fa-angle-left' />
-                </p>
+                <span
+                  style={{
+                    color: location.pathname.includes('/admin/fitbit/dashboard')
+                      ? 'orange'
+                      : 'inherit',
+                  }}>
+                  Dashboard
+                </span>
               </NavLink>
-              <ul className='nav nav-treeview'>
-                <li className='nav-item'>
-                  <NavLink
-                    to='/admin/fitbit/dashboard'
-                    className='nav-link'
-                    activeClassName='active'>
-                    <i className='far fa-circle nav-icon' />
-                    <p>Dashboard</p>
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+            </AntMenu.Item>
+          </SubMenu>
+        </AntMenu>
       </div>
     </aside>
   );
