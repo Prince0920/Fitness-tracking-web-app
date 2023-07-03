@@ -5,7 +5,7 @@ import './Header.css';
 export default class Header extends Component {
   render() {
     return (
-      <nav className='main-header navbar navbar-expand navbar-light navbar-orange'>
+      <nav className='main-header navbar navbar-expand navbar-light navbar-orange sticky-top'>
         {/* Left navbar links */}
         <ul className='navbar-nav'>
           <li className='nav-item'>
