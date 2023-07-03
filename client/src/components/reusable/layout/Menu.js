@@ -1,16 +1,9 @@
+import { AppleFilled, DashboardFilled, UserOutlined } from '@ant-design/icons';
+import { Menu as AntMenu } from 'antd';
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Layout, Menu as AntMenu } from 'antd';
-import {
-  DashboardFilled,
-  UserOutlined,
-  AppleOutlined,
-  ArrowRightOutlined,
-  AppleFilled,
-} from '@ant-design/icons';
 import './Menu.css';
 
-const { Sider } = Layout;
 const { SubMenu } = AntMenu;
 
 const Menu = () => {
