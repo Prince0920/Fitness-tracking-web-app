@@ -14,6 +14,7 @@ import Login from './components/pages/landing/auth/Login';
 import Register from './components/pages/landing/auth/Register';
 import ResetPassword from './components/pages/landing/auth/ResetPassword';
 import Admin from './components/routing/Admin';
+import CreateUser from './components/pages/app/admin/usersList/CreateUser';
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
           <Route
             path='users/userList'
             element={<UserList />}
+          />
+          <Route
+            path='users/create'
+            element={<CreateUser />}
           />
           <Route
             path='users/edit/:id'
