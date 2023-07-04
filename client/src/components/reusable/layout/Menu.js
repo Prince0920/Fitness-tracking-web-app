@@ -128,7 +128,7 @@ const Menu = () => {
 
           <SubMenu
             key='sub3'
-            icon={<AppleFilled />}
+            icon={<i className='nav-icon fas fa-clock' />}
             title={'FitBit Watch'}
             style={{
               backgroundColor: location.pathname.includes('/admin/fitbit') ? 'orange' : 'inherit',
