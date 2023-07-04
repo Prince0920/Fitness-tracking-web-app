@@ -18,10 +18,10 @@ li.ant-menu-item.ant-menu-item-only-child {
   background-color: transparent;
 }
 
-li.ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-selected {
+/* li.ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-selected {
   border-radius: 0px;
-  background-color: orange;
-}
+  background-color: #fd7e14;
+} */
 
 
 /* For removing blinking on click */
