@@ -29,14 +29,14 @@ const ExerciseTrackingGraph = ({ data }) => {
         <Tooltip />
         <Legend />
         <Line
-          type='monotone'
+          type='linear'
           dataKey='caloriesBurned'
           stroke='#8884d8'
           strokeWidth={2}
           dot={{ stroke: '#8884d8', fill: '#8884d8', r: 4 }}
         />
         <Line
-          type='monotone'
+          type='linear'
           dataKey='stepCount'
           stroke='#82ca9d'
           strokeWidth={2}

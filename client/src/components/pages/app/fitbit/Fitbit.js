@@ -83,12 +83,7 @@ const Fitbit = () => {
 
                 <div className='row'>
                   <div className='col-12'>
-                    <LifetimeStatisticsCard
-                      caloriesBurned={170000}
-                      totalSteps={95000}
-                      distanceTraveled={5000}
-                      activeScore={13000}
-                    />
+                    <LifetimeStatisticsCard />
                   </div>
                 </div>
               </>

@@ -6,19 +6,37 @@ import ProgressGraph from '../../../../../reusable/graphs/ProgressGraph';
 import GraphTitle from '../../../../../reusable/title/GraphTitle';
 
 const DailyGoalsCard = () => {
-  const [summary, setSummary] = useState(null);
-  const [goals, setGoals] = useState(null);
+  const [summary, setSummary] = useState();
+  const [goals, setGoals] = useState();
 
   // Fetching activity goals.
   useEffect(() => {
     const fetch = async () => {
-      const resp = await getDailyActivitySummary(localStorage.getItem('token'));
-      if (resp.status === 200) {
+      try {
+        const resp = await getDailyActivitySummary(localStorage.getItem('token'));
         console.log('getDailyActivitySummary', resp.data);
         setSummary(resp.data.summary);
         setGoals(resp.data.goals);
-      } else {
-        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+      } catch (error) {
+        error.status === 400
+          ? toast.info(error.data.message)
+          : console.log('getDailyActivitySummary error', error);
+
+        // If error setting default values
+        setSummary({
+          steps: 6000,
+          distances: [
+            {
+              distance: 8.05,
+            },
+          ],
+          caloriesOut: 9000,
+        });
+        setGoals({
+          steps: 10000,
+          distance: 10,
+          caloriesOut: 15000,
+        });
       }
     };
 
