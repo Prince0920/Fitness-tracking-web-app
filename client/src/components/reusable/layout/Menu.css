@@ -23,3 +23,19 @@ li.ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-selected {
   background-color: orange;
 }
 
+
+/* For removing blinking on click */
+:where(.css-dev-only-do-not-override-1wazalj).ant-menu-dark:not(.ant-menu-horizontal)
+  .ant-menu-submenu-title:active,
+:where(.css-dev-only-do-not-override-1wazalj).ant-menu-dark
+  > .ant-menu:not(.ant-menu-horizontal)
+  .ant-menu-submenu-title:active {
+  background-color: transparent;
+}
+:where(.css-dev-only-do-not-override-1wazalj).ant-menu-dark:not(.ant-menu-horizontal)
+  .ant-menu-item:not(.ant-menu-item-selected):active,
+:where(.css-dev-only-do-not-override-1wazalj).ant-menu-dark
+  > .ant-menu:not(.ant-menu-horizontal)
+  .ant-menu-item:not(.ant-menu-item-selected):active {
+  background-color: transparent;
+}
