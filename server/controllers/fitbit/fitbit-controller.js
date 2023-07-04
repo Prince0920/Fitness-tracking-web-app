@@ -73,6 +73,27 @@ module.exports = {
 
   async getActivityGoals(req, res) {
     try {
+      const { user, query } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+      const profileId = fitbitData.profileId;
+      const accessToken = fitbitData.access_token;
+
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/goals/${query.period}.json`;
+      const { data } = await axios.get(url, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      res.json(data);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
+
+  async getLifetimeStatics(req, res) {
+    try {
       const { user } = req;
       const fitbitData = await Fitbit.findOne({ userId: user._id });
       if (!fitbitData) {
@@ -81,7 +102,60 @@ module.exports = {
       const profileId = fitbitData.profileId;
       const accessToken = fitbitData.access_token;
 
-      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/goals/weekly.json`;
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities.json`;
+      const { data } = await axios.get(url, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      res.json(data);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
+
+  async getDailyActivitySummary(req, res) {
+    try {
+      const { user } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+      const profileId = fitbitData.profileId;
+      const accessToken = fitbitData.access_token;
+
+      // Getting today date.
+      let date = new Date();
+      date.toISOString().split('T')[0];
+      const offset = date.getTimezoneOffset();
+      date = new Date(date.getTime() - offset * 60 * 1000);
+      const todayDate = date.toISOString().split('T')[0];
+
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/date/${todayDate}.json`;
+      const { data } = await axios.get(url, {
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      res.json(data);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
+
+  async getActivityTimeseriesByDateRange(req, res) {
+    try {
+      const { user, query } = req;
+      const fitbitData = await Fitbit.findOne({ userId: user._id });
+      if (!fitbitData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+      const profileId = fitbitData.profileId;
+      const accessToken = fitbitData.access_token;
+
+      const activity = query.activity;
+      const startDate = query.startDate;
+      const endDate = query.endDate;
+
+      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/tracker/${activity}/date/${startDate}/${endDate}.json`;
       const { data } = await axios.get(url, {
         headers: { authorization: `Bearer ${accessToken}` },
       });

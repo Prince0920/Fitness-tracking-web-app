@@ -33,6 +33,35 @@ module.exports = {
     }
   },
 
+  // Create User
+  async createUser(req, res) {
+    try {
+      const { body } = req;
+      const { username, email, password } = body;
+
+      // Check if user with the same email already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ message: 'User with this email already exists!' });
+      }
+
+      // Create the new user
+      const newUser = new User({
+        username,
+        email,
+        password: password,
+      });
+
+      // Save the new user to the database
+      const savedUser = await newUser.save();
+
+      res.json(savedUser);
+    } catch (error) {
+      console.log('Error in createUser', error);
+      res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
+
   // update a single user by id
   async updateUser(req, res) {
     try {

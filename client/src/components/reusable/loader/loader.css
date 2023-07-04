@@ -1,0 +1,28 @@
+.blur {
+  filter: none;
+}
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 10%;
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 4px solid #f3f3f3;
+  border-top: 6px solid orange; /* Set the border color to orange */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -8,6 +8,9 @@ const {
   isLogin,
   disconnect,
   getActivityGoals,
+  getLifetimeStatics,
+  getDailyActivitySummary,
+  getActivityTimeseriesByDateRange,
 } = require('../../../controllers/fitbit/fitbit-controller');
 const { authMiddleware, ensureFitibitAuthenticated } = require('../../../utils/auth');
 
@@ -48,4 +51,18 @@ router.route('/disconnect').delete(authMiddleware, disconnect);
 // /api/fitbit/getActivityGoals
 router.route('/getActivityGoals').get(authMiddleware, ensureFitibitAuthenticated, getActivityGoals);
 
+// /api/fitbit/getLifetimeStatics
+router
+  .route('/getLifetimeStatics')
+  .get(authMiddleware, ensureFitibitAuthenticated, getLifetimeStatics);
+
+// /api/fitbit/getDailyActivitySummary
+router
+  .route('/getDailyActivitySummary')
+  .get(authMiddleware, ensureFitibitAuthenticated, getDailyActivitySummary);
+
+// /api/fitbit/get-activity-timeseries-by-date-range
+router
+  .route('/get-activity-timeseries-by-date-range')
+  .get(authMiddleware, ensureFitibitAuthenticated, getActivityTimeseriesByDateRange);
 module.exports = router;
