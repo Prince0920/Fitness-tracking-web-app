@@ -1,6 +1,6 @@
 import { Button, DatePicker } from 'antd';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getActivityTimeseriesByDateRange } from '../../../../../api/API';
 import GraphTitle from '../../../../../reusable/title/GraphTitle';
@@ -10,15 +10,15 @@ import './ExerciseTrackingCard.css';
 const ExerciseTrackingCard = () => {
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'days'));
   const [endDate, setEndDate] = useState(dayjs());
-  const data = [
-    { date: '2023-06-01', caloriesBurned: 250, stepCount: 190 },
-    { date: '2023-06-02', caloriesBurned: 350, stepCount: 150 },
-    { date: '2023-06-03', caloriesBurned: 400, stepCount: 500 },
-    { date: '2023-06-04', caloriesBurned: 200, stepCount: 190 },
-    { date: '2023-06-05', caloriesBurned: 550, stepCount: 150 },
-    { date: '2023-06-06', caloriesBurned: 50, stepCount: 500 },
-    // Add more data points as needed
-  ];
+  // const data = [
+  //   { date: '2023-06-01', caloriesBurned: 250, stepCount: 190 },
+  //   { date: '2023-06-02', caloriesBurned: 350, stepCount: 150 },
+  //   { date: '2023-06-03', caloriesBurned: 400, stepCount: 500 },
+  //   { date: '2023-06-04', caloriesBurned: 200, stepCount: 190 },
+  //   { date: '2023-06-05', caloriesBurned: 550, stepCount: 150 },
+  //   { date: '2023-06-06', caloriesBurned: 50, stepCount: 500 },
+  //   // Add more data points as needed
+  // ];
   const [activityData, setActivityData] = useState([]);
 
   const formatDate = date => {
@@ -56,7 +56,7 @@ const ExerciseTrackingCard = () => {
         if (!dataMap.has(dateTime)) {
           dataMap.set(dateTime, { date: dateTime });
         }
-        dataMap.get(dateTime).stepCount = value;
+        dataMap.get(dateTime).stepCount = Number(value);
       });
     }
 
@@ -66,7 +66,7 @@ const ExerciseTrackingCard = () => {
         if (!dataMap.has(dateTime)) {
           dataMap.set(dateTime, { date: dateTime });
         }
-        dataMap.get(dateTime).caloriesBurned = value;
+        dataMap.get(dateTime).caloriesBurned = Number(value);
       });
     }
 
@@ -79,14 +79,14 @@ const ExerciseTrackingCard = () => {
   };
 
   // Getting data
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const _data = await combineActivityData();
-  //     setActivityData(_data);
-  //   };
+  useEffect(() => {
+    const fetch = async () => {
+      const _data = await combineActivityData();
+      setActivityData(_data);
+    };
 
-  //   fetch();
-  // }, []);
+    fetch();
+  }, []);
 
   const handleSubmit = async () => {
     if (startDate && endDate) {
@@ -119,7 +119,7 @@ const ExerciseTrackingCard = () => {
               Select Date Range
             </Button>
           </div>
-          <ExerciseTrackingGraph data={data} />
+          <ExerciseTrackingGraph data={activityData} />
         </div>
       </div>
     </>
