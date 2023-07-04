@@ -5,11 +5,12 @@ const {
   getAvailableVoiceTypes,
   getAvailableVoiceName,
   saveAilableVoiceCustomeName,
+  getAvailableAudioDevice,
 } = require('../../../controllers/tts/tts-controller');
 
 /* Google text to spech route start */
 // /api/tts/tts
-router.post('/tts', speachText);
+router.post('/generate', speachText);
 // /api/tts/get-available-languages
 router.get('/get-available-languages', getAvailableLanguages);
 // /api/tts/get-available-voice-types
@@ -21,7 +22,7 @@ router.post('/save-available-voice-custome-name', saveAilableVoiceCustomeName);
 // /api/tts/save-audio-device-drofile
 router.post('/save-audio-device-drofile', saveAilableVoiceCustomeName);
 // /api/tts/get-available-audio-device
-router.get('/get-available-audio-device', saveAilableVoiceCustomeName);
+router.get('/get-available-audio-device', getAvailableAudioDevice);
 /* Google text to spech route end */
 
 module.exports = router;

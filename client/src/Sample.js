@@ -46,7 +46,7 @@
 
 //   console.log('state', state);
 //   const getAvaliableLanguage = async () => {
-//     // const url = SERVER_URL + '/api/get-available-languages';
+//     // const url = SERVER_URL + '/api/tts/get-available-languages';
 //     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     // return data;
 //     return {
@@ -59,8 +59,9 @@
 //     };
 //   };
 
-//   const getAvaliableVoiceType = () => {
-//     const url = `/api/get-available-voice-types?language=${state?.selectedLanguage}`;
+//   const getAvaliableVoiceType = async () => {
+//     // const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
+//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     return {
 //       voiceTypes: [
 //         {
@@ -71,8 +72,9 @@
 //     };
 //   };
 
-//   const getAvaliableVoiceName = () => {
-//     const url = `/api/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
+//   const getAvaliableVoiceName = async () => {
+//     // const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
+//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     return {
 //       voiceNames: [
 //         {
@@ -83,8 +85,9 @@
 //     };
 //   };
 
-//   const getActivityAudioDevice = () => {
-//     const url = `/api/get-available-audio-device`;
+//   const getActivityAudioDevice = async () => {
+//     // const url =  SERVER_URL +`/api/tts/get-available-audio-device`;
+//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     return {
 //       audioDevices: [
 //         {
@@ -135,7 +138,7 @@
 //     if (state.selectedVoiceType) fetch();
 //   }, [state.selectedVoiceType]);
 
-//   const handleTextToSpeech = () => {
+//   const handleTextToSpeech = async () => {
 //     // Perform text-to-speech action with the selected values
 //     console.log('Text to Speech:', state.text);
 //     console.log('Selected Language:', state.selectedLanguage);
@@ -144,6 +147,18 @@
 //     console.log('Selected Audio Device Profile:', state.selectedAudioDeviceProfile);
 //     console.log('Speed:', state.speed);
 //     console.log('Pitch:', state.pitch);
+
+//     // Generate the MP3 file
+//     // const response = await axios.post(SERVER_URL + '/api/tts/generate', {
+//     //   text: state.text,
+//     //   language: state.selectedLanguage,
+//     //   voiceType: state.selectedVoiceType,
+//     //   voiceName: state.selectedVoiceName,
+//     //   audioDeviceProfile: state.selectedAudioDeviceProfile,
+//     //   speed: state.speed,
+//     //   pitch: state.pitch,
+//     // });
+//     // console.log('response', response);
 //   };
 
 //   return (
