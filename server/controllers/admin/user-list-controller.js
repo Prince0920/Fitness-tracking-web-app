@@ -37,7 +37,6 @@ module.exports = {
   async createUser(req, res) {
     try {
       const { body } = req;
-      console.log("body", body)
       const { username, email, password } = body;
 
       // Check if user with the same email already exists
@@ -46,15 +45,11 @@ module.exports = {
         return res.status(400).json({ message: 'User with this email already exists!' });
       }
 
-      // Hash the password
-      const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
-
       // Create the new user
       const newUser = new User({
         username,
         email,
-        password: hashedPassword,
+        password: password,
       });
 
       // Save the new user to the database
