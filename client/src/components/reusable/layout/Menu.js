@@ -58,6 +58,7 @@ const Menu = () => {
               backgroundColor: location.pathname.includes('/admin/dashboard')
                 ? 'orange'
                 : 'inherit',
+              borderRadius: '0px',
             }}>
             <NavLink
               to='/admin/dashboard'
@@ -71,10 +72,7 @@ const Menu = () => {
           <SubMenu
             key='sub1'
             icon={<UserOutlined />}
-            title='Users'
-            style={{
-              backgroundColor: location.pathname.includes('/admin/users') ? 'orange' : 'inherit',
-            }}>
+            title='Users'>
             <AntMenu.Item key='/admin/users/userList'>
               <NavLink
                 to='/admin/users/userList'
@@ -106,10 +104,7 @@ const Menu = () => {
           <SubMenu
             key='sub2'
             icon={<AppleFilled />}
-            title='Apple Watch'
-            style={{
-              backgroundColor: location.pathname.includes('/admin/apple') ? 'orange' : 'inherit',
-            }}>
+            title='Apple Watch'>
             <AntMenu.Item key='/admin/apple/dashboard'>
               <NavLink
                 to='/admin/apple/dashboard'
@@ -129,10 +124,7 @@ const Menu = () => {
           <SubMenu
             key='sub3'
             icon={<i className='nav-icon fas fa-clock' />}
-            title={'FitBit Watch'}
-            style={{
-              backgroundColor: location.pathname.includes('/admin/fitbit') ? 'orange' : 'inherit',
-            }}>
+            title={'FitBit Watch'}>
             <AntMenu.Item key='/admin/fitbit/dashboard'>
               <NavLink
                 to='/admin/fitbit/dashboard'
