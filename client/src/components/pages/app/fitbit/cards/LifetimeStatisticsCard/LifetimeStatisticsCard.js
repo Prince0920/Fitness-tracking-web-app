@@ -1,23 +1,37 @@
 import { Card, Col, Progress, Row, Typography } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GraphTitle from '../../../../../reusable/title/GraphTitle';
+import { getLifetimeStatics } from '../../../../../api/API';
+import { toast } from 'react-toastify';
 
 const { Title } = Typography;
 
-const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, activeScore }) => {
-  // Getting lifetime activity data
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const resp = await getLifetimeStatics(localStorage.getItem('token'));
-  //     if (resp.status === 200) {
-  //       console.log('getLifetimeStatics', resp.data);
-  //     } else {
-  //       resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
-  //     }
-  //   };
+const LifetimeStatisticsCard = () => {
+  // const caloriesBurned = 170000,
+  //   totalSteps = 95000,
+  //   distanceTraveled = 5000,
+  //   activeScore = 13000;
 
-  //   fetch();
-  // }, []);
+  const [total, setTotal] = useState({});
+
+  const caloriesBurned = total?.caloriesOut;
+  const totalSteps = total?.steps;
+  const distanceTraveled = total?.distance;
+  const activeScore = total?.activeScore;
+  // Getting lifetime activity data
+  useEffect(() => {
+    const fetch = async () => {
+      const resp = await getLifetimeStatics(localStorage.getItem('token'));
+      if (resp.status === 200) {
+        console.log('getLifetimeStatics', resp.data.lifetime.total);
+        setTotal(resp.data.lifetime.total);
+      } else {
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+      }
+    };
+
+    fetch();
+  }, []);
 
   return (
     <>
@@ -40,7 +54,7 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
                   </Title>
                   <Progress
                     type='circle'
-                    percent={caloriesBurned}
+                    percent={100}
                     strokeColor='#FF6384'
                     trailColor='#D3D3D3'
                     strokeLinecap='square'
@@ -60,7 +74,7 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
                   </Title>
                   <Progress
                     type='circle'
-                    percent={totalSteps}
+                    percent={100}
                     strokeColor='#36A2EB'
                     trailColor='#D3D3D3'
                     strokeLinecap='square'
@@ -80,7 +94,7 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
                   </Title>
                   <Progress
                     type='circle'
-                    percent={distanceTraveled}
+                    percent={100}
                     strokeColor='#FFCE56'
                     trailColor='#D3D3D3'
                     strokeLinecap='square'
@@ -100,7 +114,7 @@ const LifetimeStatisticsCard = ({ caloriesBurned, totalSteps, distanceTraveled, 
                   </Title>
                   <Progress
                     type='circle'
-                    percent={activeScore}
+                    percent={100}
                     strokeColor='#00C851'
                     trailColor='#D3D3D3'
                     strokeLinecap='square'
