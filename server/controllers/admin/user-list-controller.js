@@ -37,6 +37,7 @@ module.exports = {
   async createUser(req, res) {
     try {
       const { body } = req;
+      console.log("body", body)
       const { username, email, password } = body;
 
       // Check if user with the same email already exists
