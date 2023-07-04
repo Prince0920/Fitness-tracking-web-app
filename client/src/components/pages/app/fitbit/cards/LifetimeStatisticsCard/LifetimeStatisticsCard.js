@@ -1,17 +1,12 @@
 import { Card, Col, Progress, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
-import GraphTitle from '../../../../../reusable/title/GraphTitle';
-import { getLifetimeStatics } from '../../../../../api/API';
 import { toast } from 'react-toastify';
+import { getLifetimeStatics } from '../../../../../api/API';
+import GraphTitle from '../../../../../reusable/title/GraphTitle';
 
 const { Title } = Typography;
 
 const LifetimeStatisticsCard = () => {
-  // const caloriesBurned = 170000,
-  //   totalSteps = 95000,
-  //   distanceTraveled = 5000,
-  //   activeScore = 13000;
-
   const [total, setTotal] = useState({});
 
   const caloriesBurned = total?.caloriesOut;
@@ -21,12 +16,22 @@ const LifetimeStatisticsCard = () => {
   // Getting lifetime activity data
   useEffect(() => {
     const fetch = async () => {
-      const resp = await getLifetimeStatics(localStorage.getItem('token'));
-      if (resp.status === 200) {
+      try {
+        const resp = await getLifetimeStatics(localStorage.getItem('token'));
         console.log('getLifetimeStatics', resp.data.lifetime.total);
         setTotal(resp.data.lifetime.total);
-      } else {
-        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+      } catch (error) {
+        error.status === 400
+          ? toast.info(error.data.message)
+          : console.log('getLifetimeStatics error', error);
+
+        // On error set default value
+        setTotal({
+          caloriesOut: 170000,
+          steps: 95000,
+          distance: 5000,
+          activeScore: 13000,
+        });
       }
     };
 

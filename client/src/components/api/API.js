@@ -1,5 +1,5 @@
-import { SERVER_URL } from '../../constant';
 import axios from 'axios';
+import { SERVER_URL } from '../../constant';
 
 // Auth API Starts ---------------------------------------------
 
@@ -147,7 +147,7 @@ export const getDailyActivitySummary = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response;
+    throw error.response;
   }
 };
 
@@ -160,7 +160,7 @@ export const getActivityTimeseriesByDateRange = async (token, activity, startDat
     return data;
   } catch (error) {
     console.log(error);
-    return error.response;
+    throw error.response;
   }
 };
 
@@ -171,7 +171,7 @@ export const getLifetimeStatics = async token => {
     return data;
   } catch (error) {
     console.log(error);
-    return error.response;
+    throw error.response;
   }
 };
 // Fitbit API  Ends--------------------------------------------------------------------
