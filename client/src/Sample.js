@@ -25,6 +25,10 @@
 //   const [characterCount, setCharacterCount] = useState(0);
 //   const [byteCount, setByteCount] = useState(0);
 
+//   const textTrimming = text => {
+//     return text.replace(/\s+/g, ' ').trim();
+//   };
+
 //   const handleChange = event => {
 //     const { name, value, type } = event.target;
 //     const newValue = type === 'number' ? parseFloat(value) : value;
@@ -34,12 +38,12 @@
 //     }));
 
 //     if (name === 'text') {
-//       let newString = newValue.replace(/\s+/g, ' ').trim();
+//       let trimText = textTrimming(newValue);
 //       // Calculate character count
-//       setCharacterCount(newString.length);
+//       setCharacterCount(trimText.length);
 
 //       // Calculate byte count (considering UTF-8 encoding)
-//       const byteCount = new Blob([newString]).size;
+//       const byteCount = new Blob([trimText]).size;
 //       setByteCount(byteCount);
 //     }
 //   };
@@ -47,7 +51,7 @@
 //   console.log('state', state);
 //   const getAvaliableLanguage = async () => {
 //     // const url = SERVER_URL + '/api/tts/get-available-languages';
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     // return data;
 //     return {
 //       languages: [
@@ -61,7 +65,8 @@
 
 //   const getAvaliableVoiceType = async () => {
 //     // const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     //  return data
 //     return {
 //       voiceTypes: [
 //         {
@@ -74,7 +79,8 @@
 
 //   const getAvaliableVoiceName = async () => {
 //     // const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     //  return data
 //     return {
 //       voiceNames: [
 //         {
@@ -86,17 +92,19 @@
 //   };
 
 //   const getActivityAudioDevice = async () => {
-//     // const url =  SERVER_URL +`/api/tts/get-available-audio-device`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     return {
-//       audioDevices: [
-//         {
-//           name: 'Default',
-//           code: 'default',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL + `/api/tts/get-available-audio-device`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   audioDevices: [
+//     //     {
+//     //       name: 'Default',
+//     //       code: 'default',
+//     //     },
+//     //   ],
+//     // };
 //   };
+
 //   console.log('dropDownState', dropDownState);
 //   useEffect(() => {
 //     const fetch = async () => {
@@ -149,16 +157,16 @@
 //     console.log('Pitch:', state.pitch);
 
 //     // Generate the MP3 file
-//     // const response = await axios.post(SERVER_URL + '/api/tts/generate', {
-//     //   text: state.text,
-//     //   language: state.selectedLanguage,
-//     //   voiceType: state.selectedVoiceType,
-//     //   voiceName: state.selectedVoiceName,
-//     //   audioDeviceProfile: state.selectedAudioDeviceProfile,
-//     //   speed: state.speed,
-//     //   pitch: state.pitch,
-//     // });
-//     // console.log('response', response);
+//     const response = await axios.post(SERVER_URL + '/api/tts/generate', {
+//       inputText: textTrimming(state.text),
+//       selectedLanguage: state.selectedLanguage,
+//       voiceType: state.selectedVoiceType,
+//       voiceName: state.selectedVoiceName,
+//       audioDevice: state.selectedAudioDeviceProfile,
+//       speed: state.speed,
+//       pitch: state.pitch,
+//     });
+//     console.log('response', response);
 //   };
 
 //   return (
