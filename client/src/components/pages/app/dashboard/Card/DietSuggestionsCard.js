@@ -6,7 +6,7 @@ export const DietSuggestionsCard = ({ category }) => {
       case 'Underweight':
         return (
           <div>
-            <div class='tips-container'>
+            <div className='tips-container'>
               <h2>Quick Health Tips for Underweight Individuals:</h2>
               <p>1. Increase calorie intake by consuming nutrient-dense foods.</p>
               <p>
@@ -22,7 +22,7 @@ export const DietSuggestionsCard = ({ category }) => {
                 8. Consult with a healthcare professional or dietitian for personalized guidance.
               </p>
             </div>
-            <div class='food-limit-container'>
+            <div className='food-limit-container'>
               <h2>Food items to limit for underweight individuals:</h2>
               <ul>
                 <li>Whole Eggs</li>

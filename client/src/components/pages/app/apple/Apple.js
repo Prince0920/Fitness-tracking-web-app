@@ -41,7 +41,7 @@ export const Apple = () => {
           ) : (
             <button
               type='button'
-              class='btn btn-block btn-primary'
+              className='btn btn-block btn-primary'
               onClick={handleConnect}>
               Connect to Apple
             </button>
