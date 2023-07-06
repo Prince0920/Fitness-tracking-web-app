@@ -50,45 +50,45 @@
 
 //   console.log('state', state);
 //   const getAvaliableLanguage = async () => {
-//     // const url = SERVER_URL + '/api/tts/get-available-languages';
-//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     // return data;
-//     return {
-//       languages: [
-//         {
-//           code: 'es-US',
-//           name: 'Spanish (US)',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL + '/api/tts/get-available-languages';
+//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   languages: [
+//     //     {
+//     //       code: 'es-US',
+//     //       name: 'Spanish (US)',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getAvaliableVoiceType = async () => {
-//     // const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
-//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     //  return data
-//     return {
-//       voiceTypes: [
-//         {
-//           code: 'Standard',
-//           name: 'Standard',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
+//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//      return data
+//     // return {
+//     //   voiceTypes: [
+//     //     {
+//     //       code: 'Standard',
+//     //       name: 'Standard',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getAvaliableVoiceName = async () => {
-//     // const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
-//     // const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     //  return data
-//     return {
-//       voiceNames: [
-//         {
-//           code: 'ja-JP-Standard-A',
-//           name: 'A-FEMALE',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
+//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//      return data
+//     // return {
+//     //   voiceNames: [
+//     //     {
+//     //       code: 'ja-JP-Standard-A',
+//     //       name: 'A-FEMALE',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getActivityAudioDevice = async () => {
@@ -298,8 +298,8 @@
 //                 type='range'
 //                 id='pitch'
 //                 name='pitch'
-//                 min='0.5'
-//                 max='2'
+//                 min='-20'
+//                 max='20'
 //                 step='0.01'
 //                 value={state.pitch}
 //                 onChange={handleChange}
