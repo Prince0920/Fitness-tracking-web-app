@@ -3,6 +3,7 @@
 // import Layout from './components/reusable/layout/Layout';
 // import { SERVER_URL } from './constant';
 // import axios from 'axios';
+// import { toast } from 'react-toastify';
 
 // const Sample = () => {
 //   const [state, setState] = useState({
@@ -51,7 +52,7 @@
 //   console.log('state', state);
 //   const getAvaliableLanguage = async () => {
 //     const url = SERVER_URL + '/api/tts/get-available-languages';
-//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
 //     return data;
 //     // return {
 //     //   languages: [
@@ -64,9 +65,10 @@
 //   };
 
 //   const getAvaliableVoiceType = async () => {
-//     const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
-//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//      return data
+//     const url =
+//       SERVER_URL + `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
 //     // return {
 //     //   voiceTypes: [
 //     //     {
@@ -78,9 +80,11 @@
 //   };
 
 //   const getAvaliableVoiceName = async () => {
-//     const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
-//     const {data} = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//      return data
+//     const url =
+//       SERVER_URL +
+//       `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
 //     // return {
 //     //   voiceNames: [
 //     //     {
@@ -146,27 +150,44 @@
 //     if (state.selectedVoiceType) fetch();
 //   }, [state.selectedVoiceType]);
 
-//   const handleTextToSpeech = async () => {
-//     // Perform text-to-speech action with the selected values
-//     console.log('Text to Speech:', state.text);
-//     console.log('Selected Language:', state.selectedLanguage);
-//     console.log('Selected Voice Type:', state.selectedVoiceType);
-//     console.log('Selected Voice Name:', state.selectedVoiceName);
-//     console.log('Selected Audio Device Profile:', state.selectedAudioDeviceProfile);
-//     console.log('Speed:', state.speed);
-//     console.log('Pitch:', state.pitch);
+//   // Check if all required fields are selected
+//   const isConvertDisabled =
+//     !state.selectedLanguage ||
+//     !state.selectedVoiceType ||
+//     !state.selectedVoiceName ||
+//     !state.selectedAudioDeviceProfile ||
+//     !state.text;
 
-//     // Generate the MP3 file
-//     const response = await axios.post(SERVER_URL + '/api/tts/generate', {
-//       inputText: textTrimming(state.text),
-//       selectedLanguage: state.selectedLanguage,
-//       voiceType: state.selectedVoiceType,
-//       voiceName: state.selectedVoiceName,
-//       audioDevice: state.selectedAudioDeviceProfile,
-//       speed: state.speed,
-//       pitch: state.pitch,
-//     });
-//     console.log('response', response);
+//   const handleTextToSpeech = async () => {
+//     try {
+//       if (isConvertDisabled) {
+//         toast.warning('Please select all the fields!!');
+//       } else {
+//         // Perform text-to-speech action with the selected values
+//         console.log('Text to Speech:', state.text);
+//         console.log('Selected Language:', state.selectedLanguage);
+//         console.log('Selected Voice Type:', state.selectedVoiceType);
+//         console.log('Selected Voice Name:', state.selectedVoiceName);
+//         console.log('Selected Audio Device Profile:', state.selectedAudioDeviceProfile);
+//         console.log('Speed:', state.speed);
+//         console.log('Pitch:', state.pitch);
+
+//         // Generate the MP3 file
+//         const response = await axios.post(SERVER_URL + '/api/tts/generate', {
+//           inputText: textTrimming(state.text),
+//           selectedLanguage: state.selectedLanguage,
+//           voiceType: state.selectedVoiceType,
+//           voiceName: state.selectedVoiceName,
+//           audioDevice: state.selectedAudioDeviceProfile,
+//           speed: state.speed,
+//           pitch: state.pitch,
+//         });
+//         toast.success('Audio successfully converted!!');
+//         console.log('response', response);
+//       }
+//     } catch (error) {
+//       toast.error('Something Went wrong!!');
+//     }
 //   };
 
 //   return (

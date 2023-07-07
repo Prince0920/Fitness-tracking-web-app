@@ -17,6 +17,7 @@ const keyFilePath = 'controllers/tts/tts-keys.json';
 module.exports = {
   speachText: async (req, res, next) => {
     try {
+      console.log("Starting of speech to text API_____________________________")
       const { audioDevice, inputText, pitch, selectedLanguage, speed, voiceName, voiceType } =
         req.body;
 
@@ -98,7 +99,7 @@ module.exports = {
           console.log('Volume set to 50');
         }
       });
-
+      console.log("Ending of speech to text API_____________________________")
       // Respond with the generated file name
       res.json({ fileName });
     } catch (error) {
