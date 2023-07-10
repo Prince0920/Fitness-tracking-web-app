@@ -8,7 +8,10 @@ const passport = require('passport');
 require('dotenv').config();
 
 const initializeFitbit = require('./utils/fitbit-passport');
+const initializeStrava = require('./utils/strava-passport');
+
 initializeFitbit(passport);
+initializeStrava(passport);
 const PORT = process.env.PORT || 3001;
 const app = express();
 
