@@ -1,0 +1,54 @@
+.small-box.health-fitness-card {
+  background-color: #e0e0e0;
+}
+
+.health-data-heading {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dashboard-info-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.dashboard-info {
+  background-color: #f7f7f7;
+  padding: 10px;
+  text-align: center;
+}
+
+.dashboard-info h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.dashboard-info p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-box-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  background-color: #f7f7f7;
+  text-align: right;
+  color: #000;
+  text-decoration: none;
+}
+
+.bmi-text {
+  font-size: 12px;
+  font-style: italic;
+}

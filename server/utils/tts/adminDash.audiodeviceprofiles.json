@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b1"
+  },
+  "name": "Default",
+  "code": "default",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b2"
+  },
+  "name": "Smart watch or wearable",
+  "code": "wearable-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b3"
+  },
+  "name": "Smartphone",
+  "code": "handset-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b4"
+  },
+  "name": "Headphones or earbuds",
+  "code": "headphone-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b5"
+  },
+  "name": "Small home speaker",
+  "code": "small-bluetooth-speaker-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b6"
+  },
+  "name": "Smart home speaker",
+  "code": "medium-bluetooth-speaker-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b7"
+  },
+  "name": "Home entertainment system or smart TV",
+  "code": "large-home-entertainment-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b8"
+  },
+  "name": "Car speaker",
+  "code": "large-automotive-class-device",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "648c3a67e4e0b1d732b014b9"
+  },
+  "name": "Interactive Voice Response (IVR) system",
+  "code": "telephony-class-application",
+  "__v": 0
+}]
