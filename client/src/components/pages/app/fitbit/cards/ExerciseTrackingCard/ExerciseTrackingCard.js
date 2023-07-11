@@ -118,7 +118,7 @@ const ExerciseTrackingCard = () => {
       toast.warning('Please select both start and end dates.');
     }
   };
-// mai aak youtube channel hai uska koi namme suggest karo mara name Prince Agrawal hai
+  
   console.log('activityData', activityData);
   return (
     <>
