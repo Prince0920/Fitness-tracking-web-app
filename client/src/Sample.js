@@ -3,6 +3,7 @@
 // import Layout from './components/reusable/layout/Layout';
 // import { SERVER_URL } from './constant';
 // import axios from 'axios';
+// import { toast } from 'react-toastify';
 
 // const Sample = () => {
 //   const [state, setState] = useState({
@@ -25,6 +26,10 @@
 //   const [characterCount, setCharacterCount] = useState(0);
 //   const [byteCount, setByteCount] = useState(0);
 
+//   const textTrimming = text => {
+//     return text.replace(/\s+/g, ' ').trim();
+//   };
+
 //   const handleChange = event => {
 //     const { name, value, type } = event.target;
 //     const newValue = type === 'number' ? parseFloat(value) : value;
@@ -34,69 +39,76 @@
 //     }));
 
 //     if (name === 'text') {
-//       let newString = newValue.replace(/\s+/g, ' ').trim();
+//       let trimText = textTrimming(newValue);
 //       // Calculate character count
-//       setCharacterCount(newString.length);
+//       setCharacterCount(trimText.length);
 
 //       // Calculate byte count (considering UTF-8 encoding)
-//       const byteCount = new Blob([newString]).size;
+//       const byteCount = new Blob([trimText]).size;
 //       setByteCount(byteCount);
 //     }
 //   };
 
 //   console.log('state', state);
 //   const getAvaliableLanguage = async () => {
-//     // const url = SERVER_URL + '/api/tts/get-available-languages';
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     // return data;
-//     return {
-//       languages: [
-//         {
-//           code: 'es-US',
-//           name: 'Spanish (US)',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL + '/api/tts/get-available-languages';
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   languages: [
+//     //     {
+//     //       code: 'es-US',
+//     //       name: 'Spanish (US)',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getAvaliableVoiceType = async () => {
-//     // const url = SERVER_URL+ `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     return {
-//       voiceTypes: [
-//         {
-//           code: 'Standard',
-//           name: 'Standard',
-//         },
-//       ],
-//     };
+//     const url =
+//       SERVER_URL + `/api/tts/get-available-voice-types?language=${state?.selectedLanguage}`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   voiceTypes: [
+//     //     {
+//     //       code: 'Standard',
+//     //       name: 'Standard',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getAvaliableVoiceName = async () => {
-//     // const url = SERVER_URL+ `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     return {
-//       voiceNames: [
-//         {
-//           code: 'ja-JP-Standard-A',
-//           name: 'A-FEMALE',
-//         },
-//       ],
-//     };
+//     const url =
+//       SERVER_URL +
+//       `/api/tts/get-available-voice-name?language=${state.selectedLanguage}&voiceType=${state.selectedVoiceType}`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   voiceNames: [
+//     //     {
+//     //       code: 'ja-JP-Standard-A',
+//     //       name: 'A-FEMALE',
+//     //     },
+//     //   ],
+//     // };
 //   };
 
 //   const getActivityAudioDevice = async () => {
-//     // const url =  SERVER_URL +`/api/tts/get-available-audio-device`;
-//     // const data = await axios.get(url, { headers: { Authorization: `Bearer ` } });
-//     return {
-//       audioDevices: [
-//         {
-//           name: 'Default',
-//           code: 'default',
-//         },
-//       ],
-//     };
+//     const url = SERVER_URL + `/api/tts/get-available-audio-device`;
+//     const { data } = await axios.get(url, { headers: { Authorization: `Bearer ` } });
+//     return data;
+//     // return {
+//     //   audioDevices: [
+//     //     {
+//     //       name: 'Default',
+//     //       code: 'default',
+//     //     },
+//     //   ],
+//     // };
 //   };
+
 //   console.log('dropDownState', dropDownState);
 //   useEffect(() => {
 //     const fetch = async () => {
@@ -138,27 +150,44 @@
 //     if (state.selectedVoiceType) fetch();
 //   }, [state.selectedVoiceType]);
 
-//   const handleTextToSpeech = async () => {
-//     // Perform text-to-speech action with the selected values
-//     console.log('Text to Speech:', state.text);
-//     console.log('Selected Language:', state.selectedLanguage);
-//     console.log('Selected Voice Type:', state.selectedVoiceType);
-//     console.log('Selected Voice Name:', state.selectedVoiceName);
-//     console.log('Selected Audio Device Profile:', state.selectedAudioDeviceProfile);
-//     console.log('Speed:', state.speed);
-//     console.log('Pitch:', state.pitch);
+//   // Check if all required fields are selected
+//   const isConvertDisabled =
+//     !state.selectedLanguage ||
+//     !state.selectedVoiceType ||
+//     !state.selectedVoiceName ||
+//     !state.selectedAudioDeviceProfile ||
+//     !state.text;
 
-//     // Generate the MP3 file
-//     // const response = await axios.post(SERVER_URL + '/api/tts/generate', {
-//     //   text: state.text,
-//     //   language: state.selectedLanguage,
-//     //   voiceType: state.selectedVoiceType,
-//     //   voiceName: state.selectedVoiceName,
-//     //   audioDeviceProfile: state.selectedAudioDeviceProfile,
-//     //   speed: state.speed,
-//     //   pitch: state.pitch,
-//     // });
-//     // console.log('response', response);
+//   const handleTextToSpeech = async () => {
+//     try {
+//       if (isConvertDisabled) {
+//         toast.warning('Please select all the fields!!');
+//       } else {
+//         // Perform text-to-speech action with the selected values
+//         console.log('Text to Speech:', state.text);
+//         console.log('Selected Language:', state.selectedLanguage);
+//         console.log('Selected Voice Type:', state.selectedVoiceType);
+//         console.log('Selected Voice Name:', state.selectedVoiceName);
+//         console.log('Selected Audio Device Profile:', state.selectedAudioDeviceProfile);
+//         console.log('Speed:', state.speed);
+//         console.log('Pitch:', state.pitch);
+
+//         // Generate the MP3 file
+//         const response = await axios.post(SERVER_URL + '/api/tts/generate', {
+//           inputText: textTrimming(state.text),
+//           selectedLanguage: state.selectedLanguage,
+//           voiceType: state.selectedVoiceType,
+//           voiceName: state.selectedVoiceName,
+//           audioDevice: state.selectedAudioDeviceProfile,
+//           speed: state.speed,
+//           pitch: state.pitch,
+//         });
+//         toast.success('Audio successfully converted!!');
+//         console.log('response', response);
+//       }
+//     } catch (error) {
+//       toast.error('Something Went wrong!!');
+//     }
 //   };
 
 //   return (
@@ -290,8 +319,8 @@
 //                 type='range'
 //                 id='pitch'
 //                 name='pitch'
-//                 min='0.5'
-//                 max='2'
+//                 min='-20'
+//                 max='20'
 //                 step='0.01'
 //                 value={state.pitch}
 //                 onChange={handleChange}

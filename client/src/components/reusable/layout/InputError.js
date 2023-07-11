@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react';
 const InputError = ({ message }) => {
   return (
-    <div id="cname" class="emsg" style={{ color: "#c12020" }}>
+    <div
+      id='cname'
+      className='emsg'
+      style={{ color: '#c12020' }}>
       {message}
     </div>
   );

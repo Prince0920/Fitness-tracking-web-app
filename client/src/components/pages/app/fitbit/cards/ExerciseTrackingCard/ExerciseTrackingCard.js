@@ -6,11 +6,13 @@ import { getActivityTimeseriesByDateRange } from '../../../../../api/API';
 import GraphTitle from '../../../../../reusable/title/GraphTitle';
 import ExerciseTrackingGraph from '../../graphs/ExerciseTrackingGraph';
 import './ExerciseTrackingCard.css';
+import Loader from '../../../../../reusable/loader/Loader ';
 
 const ExerciseTrackingCard = () => {
   const [startDate, setStartDate] = useState(dayjs().subtract(7, 'days'));
   const [endDate, setEndDate] = useState(dayjs());
   const [activityData, setActivityData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const formatDate = date => {
     return dayjs(date).format('YYYY-MM-DD');
@@ -36,6 +38,7 @@ const ExerciseTrackingCard = () => {
   };
 
   const combineActivityData = async () => {
+    setIsLoading(true);
     try {
       const stepsData = await fetchActivityData(
         'steps',
@@ -47,6 +50,7 @@ const ExerciseTrackingCard = () => {
         formatDate(startDate),
         formatDate(endDate)
       );
+      setIsLoading(false);
       const combinedArray = [];
       const dataMap = new Map();
       // Check if stepsData is defined and not empty
@@ -89,6 +93,7 @@ const ExerciseTrackingCard = () => {
         setActivityData(_data);
       } catch (error) {
         console.log('error combineActivityData', error);
+        setIsLoading(true);
         // Setting default value if error comes
         setActivityData([
           { date: '2023-06-01', caloriesBurned: 250, stepCount: 190 },
@@ -113,30 +118,36 @@ const ExerciseTrackingCard = () => {
       toast.warning('Please select both start and end dates.');
     }
   };
-
+  
   console.log('activityData', activityData);
   return (
     <>
       <GraphTitle title={'Exercise Tracking'} />
       <div className='card card-primary card-outline'>
         <div className='card-body'>
-          <div className='date-range-container'>
-            <DatePicker
-              value={startDate}
-              onChange={date => setStartDate(date)}
-            />
-            <DatePicker
-              value={endDate}
-              onChange={date => setEndDate(date)}
-            />
-            <Button
-              type='primary'
-              onClick={handleSubmit}
-              style={{ marginLeft: '1rem' }}>
-              Select Date Range
-            </Button>
-          </div>
-          <ExerciseTrackingGraph data={activityData} />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <div className='date-range-container'>
+                <DatePicker
+                  value={startDate}
+                  onChange={date => setStartDate(date)}
+                />
+                <DatePicker
+                  value={endDate}
+                  onChange={date => setEndDate(date)}
+                />
+                <Button
+                  type='primary'
+                  onClick={handleSubmit}
+                  style={{ marginLeft: '1rem' }}>
+                  Select Date Range
+                </Button>
+              </div>
+              <ExerciseTrackingGraph data={activityData} />
+            </>
+          )}
         </div>
       </div>
     </>

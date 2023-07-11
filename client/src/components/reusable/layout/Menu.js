@@ -39,8 +39,7 @@ const Menu = () => {
           <div className='info'>
             <NavLink
               to='/admin/dashboard'
-              className='d-block'
-              activeClassName='active'>
+              className='d-block'>
               Dotsquare
             </NavLink>
           </div>
@@ -62,7 +61,6 @@ const Menu = () => {
             }}>
             <NavLink
               to='/admin/dashboard'
-              activeClassName='active'
               exact
               style={{ color: 'white' }}>
               Dashboard
@@ -78,9 +76,7 @@ const Menu = () => {
               borderRadius: '0Px',
             }}>
             <AntMenu.Item key='/admin/users/userList'>
-              <NavLink
-                to='/admin/users/userList'
-                activeClassName='active'>
+              <NavLink to='/admin/users/userList'>
                 <span
                   style={{
                     color: location.pathname.includes('/admin/users/userList')
@@ -92,9 +88,7 @@ const Menu = () => {
               </NavLink>
             </AntMenu.Item>
             <AntMenu.Item key='/admin/users/create'>
-              <NavLink
-                to='/admin/users/create'
-                activeClassName='active'>
+              <NavLink to='/admin/users/create'>
                 <span
                   style={{
                     color: location.pathname.includes('/admin/users/create') ? 'orange' : 'inherit',
@@ -114,9 +108,7 @@ const Menu = () => {
               borderRadius: '0Px',
             }}>
             <AntMenu.Item key='/admin/apple/dashboard'>
-              <NavLink
-                to='/admin/apple/dashboard'
-                activeClassName='active'>
+              <NavLink to='/admin/apple/dashboard'>
                 <span
                   style={{
                     color: location.pathname.includes('/admin/apple/dashboard')
@@ -138,9 +130,7 @@ const Menu = () => {
               borderRadius: '0Px',
             }}>
             <AntMenu.Item key='/admin/fitbit/dashboard'>
-              <NavLink
-                to='/admin/fitbit/dashboard'
-                activeClassName='active'>
+              <NavLink to='/admin/fitbit/dashboard'>
                 <span
                   style={{
                     color: location.pathname.includes('/admin/fitbit/dashboard')

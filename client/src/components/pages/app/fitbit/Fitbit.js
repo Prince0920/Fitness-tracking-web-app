@@ -56,7 +56,7 @@ const Fitbit = () => {
         item='fitbit'
       />
       {isLoading ? (
-          <Loader />
+        <Loader />
       ) : (
         <section className='content'>
           <div className='container-fluid'>
@@ -90,7 +90,7 @@ const Fitbit = () => {
             ) : (
               <button
                 type='button'
-                class='btn btn-block btn-primary'
+                className='btn btn-block btn-primary'
                 onClick={handleConnect}>
                 Connect to Fitbit
               </button>

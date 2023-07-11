@@ -15,6 +15,7 @@ import Register from './components/pages/landing/auth/Register';
 import ResetPassword from './components/pages/landing/auth/ResetPassword';
 import Admin from './components/routing/Admin';
 import CreateUser from './components/pages/app/admin/usersList/CreateUser';
+import ContactUs from './components/pages/app/contactUs/ContactUs';
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
           <Route
             path='profile'
             element={<ProfilePage />}
+          />
+          <Route
+            path='contactUs'
+            element={<ContactUs />}
           />
           <Route
             path='apple/dashboard'

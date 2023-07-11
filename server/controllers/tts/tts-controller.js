@@ -12,11 +12,12 @@ const loudness = require('loudness');
 const languageCodeMapping = require('../../utils/tts/languageCodeMapping.js');
 
 // Path to your JSON key file
-const keyFilePath = 'myKey.json';
+const keyFilePath = 'controllers/tts/tts-keys.json';
 
 module.exports = {
   speachText: async (req, res, next) => {
     try {
+      console.log("Starting of speech to text API_____________________________")
       const { audioDevice, inputText, pitch, selectedLanguage, speed, voiceName, voiceType } =
         req.body;
 
@@ -65,7 +66,7 @@ module.exports = {
       console.log(`Audio content written to file: ${filePath}`);
 
       // Save data to MongoDB
-      const charactersCount = inputText.length > 50 ? 50 : inputText.length;
+      const charactersCount = inputText.length;
       const byteCount = Buffer.byteLength(inputText, 'utf8'); // Calculate byte count
       const createdDateTime = new Date();
 
@@ -98,7 +99,7 @@ module.exports = {
           console.log('Volume set to 50');
         }
       });
-
+      console.log("Ending of speech to text API_____________________________")
       // Respond with the generated file name
       res.json({ fileName });
     } catch (error) {
