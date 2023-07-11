@@ -176,6 +176,22 @@ export const getLifetimeStatics = async token => {
 };
 // Fitbit API  Ends--------------------------------------------------------------------
 
+
+// Strava API  Starts--------------------------------------------------------------------
+export const stravaAuth = async token => {
+  try {
+    window.open(
+      `${SERVER_URL}/api/strava/auth/strava?token=${localStorage.getItem('token')}`,
+      '_self'
+    );
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+// Strava api ends----------------------------------------------------------------------
 // User api starts --------------------------------------------------------------------
 
 export const getUsers = async token => {
