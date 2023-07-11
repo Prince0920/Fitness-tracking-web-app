@@ -142,6 +142,28 @@ const Menu = () => {
               </NavLink>
             </AntMenu.Item>
           </SubMenu>
+
+          <SubMenu
+            key='sub4'
+            icon={<i className='nav-icon fas fa-clock' />}
+            title={'Strava Watch'}
+            style={{
+              backgroundColor: location.pathname.includes('/admin/strava') ? '#fd7e14' : 'inherit',
+              borderRadius: '0Px',
+            }}>
+            <AntMenu.Item key='/admin/strava/dashboard'>
+              <NavLink to='/admin/strava/dashboard'>
+                <span
+                  style={{
+                    color: location.pathname.includes('/admin/strava/dashboard')
+                      ? 'orange'
+                      : 'inherit',
+                  }}>
+                  Dashboard
+                </span>
+              </NavLink>
+            </AntMenu.Item>
+          </SubMenu>
         </AntMenu>
       </div>
     </aside>

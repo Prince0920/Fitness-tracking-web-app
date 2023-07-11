@@ -16,6 +16,7 @@ import ResetPassword from './components/pages/landing/auth/ResetPassword';
 import Admin from './components/routing/Admin';
 import CreateUser from './components/pages/app/admin/usersList/CreateUser';
 import ContactUs from './components/pages/app/contactUs/ContactUs';
+import Strava from './components/pages/app/strava/Strava'
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
           <Route
             path='fitbit/dashboard'
             element={<Fitbit />}
+          />
+          <Route
+            path='strava/dashboard'
+            element={<Strava />}
           />
           <Route
             path='users/userList'
