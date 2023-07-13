@@ -26,7 +26,7 @@ app.use(passport.session());
 app.use(routes);
 
 db.once('open', () => {
-  app.listen(PORT, () => {
+  app.listen(PORT, '192.168.6.76',() => {
     console.log(`API server running on port ${PORT}!`);
   });
 });
