@@ -1,4 +1,5 @@
 const StravaStrategy = require('passport-strava').Strategy;
+const Strava = require('../models/Strava');
 
 const STRAVA_CLIENT_ID = '110392';
 const STRAVA_CLIENT_SECRET = '4f3e46caa57a320f005fa952daedb0d9cf9b48f9';
@@ -12,9 +13,25 @@ function initializeStrava(passport) {
         clientID: STRAVA_CLIENT_ID,
         clientSecret: STRAVA_CLIENT_SECRET,
         callbackURL: 'http://localhost:3001/api/strava/auth/strava/callback',
+        passReqToCallback: true,
       },
-      function (accessToken, refreshToken, profile, cb) {
-        console.log('profile', accessToken);
+      async (req, accessToken, refreshToken, profile, done) => {
+        // TODO: save accessToken here for later use
+console.log("req.query.state")
+        // const bodyData = {
+        //   profileId: profile.id,
+        //   userId: req.query.state,
+        //   access_token: accessToken,
+        //   refresh_token: refreshToken,
+        //   profile: profile,
+        // };
+        // const strava_data = await Strava.findOneAndUpdate({ profileId: profile.id }, bodyData, {
+        //   new: true,
+        //   upsert: true,
+        // });
+        // done(null, strava_data);
+        done(null, profile);
+
       }
     )
   );

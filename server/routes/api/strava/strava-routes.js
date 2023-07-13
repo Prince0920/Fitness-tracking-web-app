@@ -5,8 +5,10 @@ const { authMiddleware } = require('../../../utils/auth');
 const { authSuccess, authFailed } = require('../../../controllers/strava/strava-controller');
 
 // /api/strava/auth/strava
-router.route('/auth/strava').get((req, res, next) => {
-  passport.authenticate('strava')(req, res, next);
+router.route('/auth/strava').get(authMiddleware, (req, res, next) => {
+  passport.authenticate('strava', {
+    state: req.user._id,
+  })(req, res, next);
 });
 
 // /api/strava/auth/strava/callback
