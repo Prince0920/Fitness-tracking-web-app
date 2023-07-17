@@ -29,8 +29,7 @@
     "passport-fitbit-oauth2": "^1.0.2",
     "passport-strava": "^0.2.0",
     "path": "^0.12.7",
-    "util": "^0.12.5",
-    "validator": "^13.9.0"
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
