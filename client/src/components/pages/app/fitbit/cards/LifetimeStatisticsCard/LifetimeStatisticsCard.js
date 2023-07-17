@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { getLifetimeStatics } from '../../../../../api/API';
 import GraphTitle from '../../../../../reusable/title/GraphTitle';
 import Loader from '../../../../../reusable/loader/Loader ';
+import InputDropdown from '../../../../../reusable/forms/InputDropdown';
 
 const { Title } = Typography;
 
@@ -50,70 +51,75 @@ const LifetimeStatisticsCard = () => {
             {isLoading ? (
               <Loader />
             ) : (
-              <Row
-                gutter={[16, 16]}
-                justify='space-between'>
-                <Col
-                  xs={24}
-                  sm={12}
-                  md={6}>
-                  <div className='progress-item'>
-                    <Title
-                      level={5}
-                      style={{ fontWeight: 'bold' }}>
-                      Calories Burned
-                    </Title>
-                    <Progress
-                      type='circle'
-                      percent={100}
-                      strokeColor='#FF6384'
-                      trailColor='#D3D3D3'
-                      strokeLinecap='square'
-                      format={() => `${caloriesBurned}\nkcal`}
-                    />
-                  </div>
-                </Col>
-                <Col
-                  xs={24}
-                  sm={12}
-                  md={6}>
-                  <div className='progress-item'>
-                    <Title
-                      level={5}
-                      style={{ fontWeight: 'bold' }}>
-                      Total Steps
-                    </Title>
-                    <Progress
-                      type='circle'
-                      percent={100}
-                      strokeColor='#36A2EB'
-                      trailColor='#D3D3D3'
-                      strokeLinecap='square'
-                      format={() => `${totalSteps}\nsteps`}
-                    />
-                  </div>
-                </Col>
-                <Col
-                  xs={24}
-                  sm={12}
-                  md={6}>
-                  <div className='progress-item'>
-                    <Title
-                      level={5}
-                      style={{ fontWeight: 'bold' }}>
-                      Distance Traveled
-                    </Title>
-                    <Progress
-                      type='circle'
-                      percent={100}
-                      strokeColor='#FFCE56'
-                      trailColor='#D3D3D3'
-                      strokeLinecap='square'
-                      format={() => `${distanceTraveled}\nkm`}
-                    />
-                  </div>
-                </Col>
-                <Col
+              <>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
+                  <InputDropdown options={['Last Week', 'Last Quarter', 'Last Year']} />
+                </div>
+                <Row
+                  gutter={[16, 16]}
+                  justify='space-between'>
+                  <Col
+                    xs={24}
+                    sm={12}
+                    md={6}>
+                    <div className='progress-item'>
+                      <Title
+                        level={5}
+                        style={{ fontWeight: 'bold' }}>
+                        Total Steps
+                      </Title>
+                      <Progress
+                        type='circle'
+                        percent={100}
+                        strokeColor='#36A2EB'
+                        trailColor='#D3D3D3'
+                        strokeLinecap='square'
+                        format={() => `${totalSteps}\nsteps`}
+                      />
+                    </div>
+                  </Col>
+                  <Col
+                    xs={24}
+                    sm={12}
+                    md={6}>
+                    <div className='progress-item'>
+                      <Title
+                        level={5}
+                        style={{ fontWeight: 'bold' }}>
+                        Calories Burned
+                      </Title>
+                      <Progress
+                        type='circle'
+                        percent={100}
+                        strokeColor='#FF6384'
+                        trailColor='#D3D3D3'
+                        strokeLinecap='square'
+                        format={() => `${caloriesBurned}\nkcal`}
+                      />
+                    </div>
+                  </Col>
+
+                  <Col
+                    xs={24}
+                    sm={12}
+                    md={6}>
+                    <div className='progress-item'>
+                      <Title
+                        level={5}
+                        style={{ fontWeight: 'bold' }}>
+                        Distance Traveled
+                      </Title>
+                      <Progress
+                        type='circle'
+                        percent={100}
+                        strokeColor='#FFCE56'
+                        trailColor='#D3D3D3'
+                        strokeLinecap='square'
+                        format={() => `${distanceTraveled}\nkm`}
+                      />
+                    </div>
+                  </Col>
+                  {/* <Col
                   xs={24}
                   sm={12}
                   md={6}>
@@ -132,8 +138,9 @@ const LifetimeStatisticsCard = () => {
                       format={() => `${activeScore}`}
                     />
                   </div>
-                </Col>
-              </Row>
+                </Col> */}
+                </Row>
+              </>
             )}
           </div>
         </div>
