@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const passport = require('passport');
-const { authMiddleware } = require('../../../utils/auth');
-const { authSuccess, authFailed } = require('../../../controllers/strava/strava-controller');
+const { authMiddleware } = require('../../../../utils/auth');
+const { authSuccess, authFailed } = require('../../../../controllers/strava/user/strava-user-controller');
 
 // /api/strava/auth/strava
 router.route('/auth/strava').get(authMiddleware, (req, res, next) => {
