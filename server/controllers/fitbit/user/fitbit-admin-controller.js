@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
 const passport = require('passport');
-const Fitbit = require('../../models/Fitbit');
+const Fitbit = require('../../../models/Fitbit');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 
 module.exports = {

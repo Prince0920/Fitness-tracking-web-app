@@ -11,8 +11,8 @@ const {
   getLifetimeStatics,
   getDailyActivitySummary,
   getActivityTimeseriesByDateRange,
-} = require('../../../controllers/fitbit/fitbit-controller');
-const { authMiddleware, ensureFitibitAuthenticated } = require('../../../utils/auth');
+} = require('../../../../controllers/fitbit/user/fitbit-admin-controller');
+const { authMiddleware, ensureFitibitAuthenticated } = require('../../../../utils/auth');
 
 // /api/fitbit/testing
 router.route('/testing').get(sampleFitbit);

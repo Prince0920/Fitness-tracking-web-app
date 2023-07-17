@@ -17,7 +17,7 @@ function initializeStrava(passport) {
       },
       async (req, accessToken, refreshToken, profile, done) => {
         // TODO: save accessToken here for later use
-console.log("req.query.state")
+        console.log('req.query.state');
         // const bodyData = {
         //   profileId: profile.id,
         //   userId: req.query.state,
@@ -31,7 +31,6 @@ console.log("req.query.state")
         // });
         // done(null, strava_data);
         done(null, profile);
-
       }
     )
   );
