@@ -1,12 +1,11 @@
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Menu } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 
-const InputDropdown = ({ options }) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
-
+const InputDropdown = ({ options, value, onChange }) => {
+ 
   const handleMenuClick = ({ key }) => {
-    setSelectedOption(key);
+    onChange(key);
     // Handle menu click here
     console.log('Selected:', key);
   };
@@ -14,7 +13,7 @@ const InputDropdown = ({ options }) => {
   const menu = (
     <Menu
       onClick={handleMenuClick}
-      selectedKeys={[selectedOption]}>
+      selectedKeys={[value]}>
       {options.map(option => (
         <Menu.Item key={option}>{option}</Menu.Item>
       ))}
@@ -29,7 +28,7 @@ const InputDropdown = ({ options }) => {
         href='#!'
         className='ant-dropdown-link'
         onClick={e => e.preventDefault()}>
-        {selectedOption} <DownOutlined />
+        {value} <DownOutlined />
       </a>
     </Dropdown>
   );
