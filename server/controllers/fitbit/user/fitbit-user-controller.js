@@ -3,6 +3,12 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const passport = require('passport');
 const Fitbit = require('../../../models/Fitbit');
+const {
+  todayActivityData,
+  activityDataByDateRange,
+  lifeTimeStaticsData,
+  activityGoalForPeriod,
+} = require('../helper/helper');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 
 module.exports = {
@@ -81,10 +87,7 @@ module.exports = {
       const profileId = fitbitData.profileId;
       const accessToken = fitbitData.access_token;
 
-      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/goals/${query.period}.json`;
-      const { data } = await axios.get(url, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const data = await activityGoalForPeriod(profileId, accessToken, query.period);
       res.json(data);
     } catch (error) {
       console.error('Error in disconnect:', error);
@@ -102,10 +105,7 @@ module.exports = {
       const profileId = fitbitData.profileId;
       const accessToken = fitbitData.access_token;
 
-      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities.json`;
-      const { data } = await axios.get(url, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const data = await lifeTimeStaticsData(profileId, accessToken);
       res.json(data);
     } catch (error) {
       console.error('Error in disconnect:', error);
@@ -123,17 +123,7 @@ module.exports = {
       const profileId = fitbitData.profileId;
       const accessToken = fitbitData.access_token;
 
-      // Getting today date.
-      let date = new Date();
-      date.toISOString().split('T')[0];
-      const offset = date.getTimezoneOffset();
-      date = new Date(date.getTime() - offset * 60 * 1000);
-      const todayDate = date.toISOString().split('T')[0];
-
-      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/date/${todayDate}.json`;
-      const { data } = await axios.get(url, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const data = await todayActivityData(profileId, accessToken);
       res.json(data);
     } catch (error) {
       console.error('Error in disconnect:', error);
@@ -155,10 +145,13 @@ module.exports = {
       const startDate = query.startDate;
       const endDate = query.endDate;
 
-      const url = `${process.env.FITBIT_API_BASE_URL}/1/user/${profileId}/activities/tracker/${activity}/date/${startDate}/${endDate}.json`;
-      const { data } = await axios.get(url, {
-        headers: { authorization: `Bearer ${accessToken}` },
-      });
+      const data = await activityDataByDateRange(
+        profileId,
+        accessToken,
+        activity,
+        startDate,
+        endDate
+      );
       res.json(data);
     } catch (error) {
       console.error('Error in disconnect:', error);
