@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
-const { todayActivityData, activityDataByDateRange, lifeTimeStaticsData } = require('../helper/helper');
+const { todayActivityData, activityDataByDateRange, lifeTimeStaticsData, activityGoalForPeriod } = require('../helper/helper');
 
 module.exports = {
   // Admin apple login
@@ -20,8 +20,9 @@ module.exports = {
       const todayData = await todayActivityData(profileId, accessToken);
       const activityDataByDate = await activityDataByDateRange(profileId, accessToken, 'steps', '2023-07-13', '2023-07-20');
       const lifetimeData = await lifeTimeStaticsData(profileId, accessToken);
-      console.log("data: ", lifetimeData)
-      res.json({message: 'Success'})
+      const activityGoal = await activityGoalForPeriod(profileId, accessToken, 'daily');
+      console.log("data::::::::::::::::: ", activityGoal)
+      res.json({message: activityGoal})
     } catch (error) {
       res.status(500).json({ message: 'Something went wrong!' });
     }
