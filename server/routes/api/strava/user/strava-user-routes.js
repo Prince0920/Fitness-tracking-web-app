@@ -2,7 +2,10 @@ const router = require('express').Router();
 
 const passport = require('passport');
 const { authMiddleware } = require('../../../../utils/auth');
-const { authSuccess, authFailed } = require('../../../../controllers/strava/user/strava-user-controller');
+const {
+  authSuccess,
+  authFailed,
+} = require('../../../../controllers/strava/user/strava-user-controller');
 
 // /api/strava/auth/strava
 router.route('/auth/strava').get(authMiddleware, (req, res, next) => {
@@ -15,7 +18,10 @@ router.route('/auth/strava').get(authMiddleware, (req, res, next) => {
 router
   .route('/auth/strava/callback')
   .get(
-    passport.authenticate('strava', { failureRedirect: '/api/strava/auth/strava/failure' }),
+    passport.authenticate('strava', {
+      failureRedirect: '/api/strava/auth/strava/failure',
+      session: false,
+    }),
     function (req, res) {
       // Successful authentication, redirect home.
       res.redirect('/api/strava/auth/strava/success');
