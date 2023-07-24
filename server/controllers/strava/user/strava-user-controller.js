@@ -34,22 +34,22 @@ module.exports = {
     }
   },
   // Checking if user already login
-  // async isLogin(req, res) {
-  //   try {
-  //     const { user } = req;
-  //     const stravaData = await Strava.findOne({ userId: user._id });
-  //     if (!stravaData) {
-  //       return res.status(409).json({ message: 'Cannot find a user with this id!' });
-  //     }
+  async isLogin(req, res) {
+    try {
+      const { user } = req;
+      const stravaData = await Strava.findOne({ userId: user._id });
+      if (!stravaData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
 
-  //     return res.json({
-  //       profileId: stravaData.profileId,
-  //       provider: 'fitbit',
-  //       displayName: fitbitData.profile.displayName,
-  //     });
-  //   } catch (error) {
-  //     console.error('Error in isLogin:', error);
-  //     return res.status(500).json({ message: 'Something went wrong!' });
-  //   }
-  // },
+      return res.json({
+        profileId: stravaData.profileId,
+        provider: 'fitbit',
+        displayName: stravaData.profile.displayName,
+      });
+    } catch (error) {
+      console.error('Error in isLogin:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
 };

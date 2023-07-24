@@ -5,6 +5,7 @@ const { authMiddleware } = require('../../../../utils/auth');
 const {
   authSuccess,
   authFailed,
+  isLogin,
 } = require('../../../../controllers/strava/user/strava-user-controller');
 
 // /api/strava/auth/strava
@@ -33,5 +34,8 @@ router.route('/auth/strava/success').get(authSuccess);
 
 // /api/fitbit/auth/fitbit/failure
 router.route('/auth/strava/failure').get(authFailed);
+
+// /api/fitbit/isLogin
+router.route('/isLogin').get(authMiddleware, isLogin);
 
 module.exports = router;
