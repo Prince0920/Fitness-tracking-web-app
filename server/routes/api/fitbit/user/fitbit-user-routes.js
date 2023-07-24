@@ -29,7 +29,7 @@ router.route('/auth/fitbit').get(authMiddleware, (req, res, next) => {
 router
   .route('/auth/fitbit/callback')
   .get(
-    passport.authenticate('fitbit', { failureRedirect: '/api/fitbit/auth/fitbit/failure' }),
+    passport.authenticate('fitbit', { failureRedirect: '/api/fitbit/auth/fitbit/failure', session: false }),
     function (req, res) {
       // Successful authentication, redirect home.
       res.redirect('/api/fitbit/auth/fitbit/success');
