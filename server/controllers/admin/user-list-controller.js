@@ -5,11 +5,27 @@ module.exports = {
   // get a user list
   async getUsers(req, res) {
     try {
-      const userList = await User.find();
+      const totalRecord = await User.count();
+      const page = req.query?.page || 1;
+      const pageSize = req.query?.pageSize || 10;
+
+      const userList = await User.find()
+        .skip((page - 1) * pageSize)
+        .limit(pageSize);
       if (!userList) {
         return res.status(400).json({ message: 'Cannot find a user list!' });
       }
-      res.json(userList);
+      
+      const response = {
+        data: userList,
+        meta: {
+          totalRecord: totalRecord,
+          page: page,
+          pageSize: pageSize,
+        },
+      };
+      
+      res.json(response);
     } catch (error) {
       console.log('Error in getUsers', error);
       res.status(500).json({ message: 'Something went wrong!' });

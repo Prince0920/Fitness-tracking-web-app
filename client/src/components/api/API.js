@@ -194,9 +194,9 @@ export const stravaAuth = async token => {
 // Strava api ends----------------------------------------------------------------------
 // User api starts --------------------------------------------------------------------
 
-export const getUsers = async token => {
+export const getUsers = async (token, page, pageSize) => {
   try {
-    const url = SERVER_URL + '/api/admin/users';
+    const url = SERVER_URL + `/api/admin/users?page=${page}&pageSize=${pageSize}`;
     const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
     return data;
   } catch (error) {
