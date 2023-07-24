@@ -18,7 +18,6 @@ function initializeFitbit(passport) {
         // TODO: save accessToken here for later use
 
         const bodyData = {
-          profileId: profile.id,
           userId: req.query.state,
           access_token: accessToken,
           refresh_token: refreshToken,
