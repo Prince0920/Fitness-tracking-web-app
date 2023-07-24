@@ -17,20 +17,18 @@ function initializeStrava(passport) {
       },
       async (req, accessToken, refreshToken, profile, done) => {
         // TODO: save accessToken here for later use
-        console.log('req.query.state');
-        // const bodyData = {
-        //   profileId: profile.id,
-        //   userId: req.query.state,
-        //   access_token: accessToken,
-        //   refresh_token: refreshToken,
-        //   profile: profile,
-        // };
-        // const strava_data = await Strava.findOneAndUpdate({ profileId: profile.id }, bodyData, {
-        //   new: true,
-        //   upsert: true,
-        // });
-        // done(null, strava_data);
-        done(null, profile);
+
+        const bodyData = {
+          userId: req.query.state,
+          access_token: accessToken,
+          refresh_token: refreshToken,
+          profile: profile,
+        };
+        const strava_data = await Strava.findOneAndUpdate({ profileId: profile.id }, bodyData, {
+          new: true,
+          upsert: true,
+        });
+        done(null, strava_data);
       }
     )
   );
