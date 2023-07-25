@@ -65,7 +65,7 @@ const LifetimeStatisticsCard = () => {
       console.log("dataaaaa", data)
       if (data && data?.length > 0) {
         data.map(item => {
-          sum += Number(item.value);
+          return sum += Number(item.value);
         });
       }
 

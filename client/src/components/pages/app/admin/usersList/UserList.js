@@ -13,7 +13,7 @@ export const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize] = useState(5);
   const [totalRecords, setTotalRecords] = useState(0);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const UserList = () => {
       }
     };
     fetchData();
-  }, [token, page]);
+  }, [token, page, pageSize]);
 
   async function handleDelete(id) {
     const confirmDelete = window.confirm('Are you sure you want to delete this user?');
@@ -77,7 +77,7 @@ export const UserList = () => {
                             users.map((user, index) => {
                               return (
                                 <tr key={index}>
-                                  <td>{(pageSize*(page-1)) + index + 1}</td>
+                                  <td>{pageSize * (page - 1) + index + 1}</td>
                                   <td>{user.username}</td>
                                   <td>{user.email}</td>
                                   <td>********</td>
