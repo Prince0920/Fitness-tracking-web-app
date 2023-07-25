@@ -25,7 +25,7 @@ export default class Header extends Component {
           </li>
           <li className='nav-item d-none d-sm-inline-block'>
             <Link
-              to='/admin/dashboard'
+              to='/admin/aboutUs'
               className='nav-link'>
               AboutUs
             </Link>

@@ -17,6 +17,7 @@ import Admin from './components/routing/Admin';
 import CreateUser from './components/pages/app/admin/usersList/CreateUser';
 import ContactUs from './components/pages/app/contactUs/ContactUs';
 import Strava from './components/pages/app/strava/Strava'
+import AboutUs from './components/pages/app/about/AboutUs';
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
           <Route
             path='contactUs'
             element={<ContactUs />}
+          />
+          <Route
+            path='aboutUs'
+            element={<AboutUs />}
           />
           <Route
             path='apple/dashboard'
