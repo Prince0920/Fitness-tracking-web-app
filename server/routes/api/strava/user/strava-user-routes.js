@@ -13,6 +13,7 @@ const {
 router.route('/auth/strava').get(authMiddleware, (req, res, next) => {
   passport.authenticate('strava', {
     state: req.user._id,
+    scope: 'activity:write,read'
   })(req, res, next);
 });
 
