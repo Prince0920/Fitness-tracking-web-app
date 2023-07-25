@@ -143,7 +143,7 @@ const Menu = () => {
             </AntMenu.Item>
           </SubMenu>
 
-          <SubMenu
+          {/* <SubMenu
             key='sub4'
             icon={<i className='nav-icon fas fa-clock' />}
             title={'Strava Watch'}
@@ -163,7 +163,7 @@ const Menu = () => {
                 </span>
               </NavLink>
             </AntMenu.Item>
-          </SubMenu>
+          </SubMenu> */}
         </AntMenu>
       </div>
     </aside>
