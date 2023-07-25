@@ -31,7 +31,7 @@ const AboutUs = () => {
                   </p>
                   <p>
                     If you have any questions, suggestions, or feedback, feel free to{' '}
-                    <a href='#contact'>contact us</a>. We'd love to hear from you!
+                    <a href='/admin/contactUs'>contact us</a>. We'd love to hear from you!
                   </p>
                   <p>
                     Thank you for visiting our website. We hope you find the information here
