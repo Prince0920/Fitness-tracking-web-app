@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import Layout from '../../../reusable/layout/Layout';
-import GreetingCard from '../../../reusable/cards/GreetingCard';
-import Loader from '../../../reusable/loader/Loader ';
-import { stravaAuth } from '../../../api/API';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { isStravaLogin, stravaAuth } from '../../../api/API';
+import GreetingCard from '../../../reusable/cards/GreetingCard';
+import Layout from '../../../reusable/layout/Layout';
+import Loader from '../../../reusable/loader/Loader ';
 
 const Strava = () => {
   const navigate = useNavigate();
@@ -13,26 +14,43 @@ const Strava = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState('');
 
-  const handleDisconnect = async() => {
-    alert("handleDisconnect");
+  const handleDisconnect = async () => {
+    alert('handleDisconnect');
   };
 
-  const handleConnect = async() => {
+  const handleConnect = async () => {
     await stravaAuth(token);
   };
-  
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const resp = await isStravaLogin(token);
+      if (resp.status === 200) {
+        setIsLoading(false);
+        setIsLogin(true);
+        setUsername(resp.data.displayName);
+      } else if (resp.status === 400) {
+        toast.info(resp.data.message);
+      } else {
+        setIsLoading(false);
+      }
+    };
+
+    checkLoginStatus();
+  }, [token]);
+
   return (
     <div className={`content-wrapper`}>
       <Layout
         heading='Strava Dashboard'
         item='strava'
       />
-      <section className='content'>
-        <div className='container-fluid'>
-          {isLogin ? (
-            isLoading ? (
-              <Loader />
-            ) : (
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <section className='content'>
+          <div className='container-fluid'>
+            {isLogin ? (
               <>
                 <div className='row'>
                   <div className='col-12'>
@@ -43,17 +61,17 @@ const Strava = () => {
                   </div>
                 </div>
               </>
-            )
-          ) : (
-            <button
-              type='button'
-              className='btn btn-block btn-primary'
-              onClick={handleConnect}>
-              Connect to Strava
-            </button>
-          )}
-        </div>
-      </section>
+            ) : (
+              <button
+                type='button'
+                className='btn btn-block btn-primary'
+                onClick={handleConnect}>
+                Connect to Strava
+              </button>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

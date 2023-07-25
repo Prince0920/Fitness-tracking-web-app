@@ -1,7 +1,4 @@
-// const { Cardio, User } = require("../models");
-const mongoose = require('mongoose');
-const axios = require('axios');
-const passport = require('passport');
+const Strava = require('../../../models/Strava');
 
 module.exports = {
   // Testing fitbit routing
@@ -44,7 +41,7 @@ module.exports = {
 
       return res.json({
         profileId: stravaData.profileId,
-        provider: 'fitbit',
+        provider: 'strava',
         displayName: stravaData.profile.displayName,
       });
     } catch (error) {

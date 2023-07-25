@@ -191,6 +191,17 @@ export const stravaAuth = async token => {
   }
 };
 
+export const isStravaLogin = async token => {
+  try {
+    const url = SERVER_URL + '/api/strava/isLogin';
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
 // Strava api ends----------------------------------------------------------------------
 // User api starts --------------------------------------------------------------------
 
