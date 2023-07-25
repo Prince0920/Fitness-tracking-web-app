@@ -6,6 +6,7 @@ const {
   authSuccess,
   authFailed,
   isLogin,
+  disconnect,
 } = require('../../../../controllers/strava/user/strava-user-controller');
 
 // /api/strava/auth/strava
@@ -35,5 +36,8 @@ router.route('/auth/strava/failure').get(authFailed);
 
 // /api/strava/isLogin
 router.route('/isLogin').get(authMiddleware, isLogin);
+
+// /api/strava/disconnect
+router.route('/disconnect').delete(authMiddleware, disconnect);
 
 module.exports = router;

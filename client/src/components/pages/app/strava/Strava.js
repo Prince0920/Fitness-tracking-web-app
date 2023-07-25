@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { isStravaLogin, stravaAuth } from '../../../api/API';
+import { disconnectStrava, isStravaLogin, stravaAuth } from '../../../api/API';
 import GreetingCard from '../../../reusable/cards/GreetingCard';
 import Layout from '../../../reusable/layout/Layout';
 import Loader from '../../../reusable/loader/Loader ';
@@ -15,7 +15,13 @@ const Strava = () => {
   const [username, setUsername] = useState('');
 
   const handleDisconnect = async () => {
-    alert('handleDisconnect');
+    const resp = await disconnectStrava(token);
+    if (resp.status === 200) {
+      setIsLogin(false);
+      navigate('/admin/strava/dashboard');
+    } else {
+      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+    }
   };
 
   const handleConnect = async () => {

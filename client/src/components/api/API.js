@@ -176,7 +176,6 @@ export const getLifetimeStatics = async token => {
 };
 // Fitbit API  Ends--------------------------------------------------------------------
 
-
 // Strava API  Starts--------------------------------------------------------------------
 export const stravaAuth = async token => {
   try {
@@ -202,7 +201,19 @@ export const isStravaLogin = async token => {
   }
 };
 
+export const disconnectStrava = async token => {
+  try {
+    const url = SERVER_URL + '/api/strava/disconnect';
+    const data = await axios.delete(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+};
+
 // Strava api ends----------------------------------------------------------------------
+
 // User api starts --------------------------------------------------------------------
 
 export const getUsers = async (token, page, pageSize) => {

@@ -49,4 +49,19 @@ module.exports = {
       return res.status(500).json({ message: 'Something went wrong!' });
     }
   },
+
+  async disconnect(req, res) {
+    try {
+      const { user } = req;
+      const stravaData = await Strava.deleteOne({ userId: user._id });
+      if (!stravaData) {
+        return res.status(409).json({ message: 'Cannot find a user with this id!' });
+      }
+
+      return res.json(stravaData);
+    } catch (error) {
+      console.error('Error in disconnect:', error);
+      return res.status(500).json({ message: 'Something went wrong!' });
+    }
+  },
 };
