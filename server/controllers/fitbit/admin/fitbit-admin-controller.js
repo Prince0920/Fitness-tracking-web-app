@@ -26,6 +26,12 @@ module.exports = {
       const source = req.body.source;
       const currentDate = new Date();
       const timestamp = currentDate.toISOString();
+      var currenDateWithoutTime =
+        currentDate.getFullYear() +
+        '/' +
+        (currentDate.getMonth() + 1) +
+        '/' +
+        currentDate.getDate();
 
       // Today Data starts----------------------------------------------------
       const todayData = await todayActivityData(profileId, accessToken);
@@ -136,8 +142,10 @@ module.exports = {
       // Steps sync Start-------------------------------------------------------------------
       const stepFilter = {
         userId: userId,
+        deviceProfileId: fitbitData.profileId,
         source: source,
         data_type: 'steps',
+        date: currenDateWithoutTime
       };
       const stepUpdate = {
         timestamp: timestamp,
@@ -159,6 +167,8 @@ module.exports = {
       const calorieFilter = {
         userId: userId,
         source: source,
+        deviceProfileId: fitbitData.profileId,
+        date: currenDateWithoutTime,
         data_type: 'calories',
       };
       const calorieUpdate = {
@@ -181,6 +191,8 @@ module.exports = {
       const distanceFilter = {
         userId: userId,
         source: source,
+        deviceProfileId: fitbitData.profileId,
+        date: currenDateWithoutTime,
         data_type: 'distance',
       };
       const distanceUpdate = {

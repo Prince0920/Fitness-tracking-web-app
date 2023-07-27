@@ -14,7 +14,6 @@ const { Schema, model } = require('mongoose');
 //   }
 // }
 
-
 const FitnessDataSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
@@ -22,6 +21,10 @@ const FitnessDataSchema = new Schema({
     required: true,
   },
 
+  deviceProfileId: {
+    type: Schema.Types.String,
+    required: true,
+  },
   // fitibit, apple ...
   source: {
     type: String,
@@ -30,8 +33,11 @@ const FitnessDataSchema = new Schema({
 
   timestamp: {
     type: String,
-    required: true
+    required: true,
   },
+
+  // Storing date without time stamp
+  date: {},
 
   // steps, calories ...
   data_type: {
