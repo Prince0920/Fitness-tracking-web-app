@@ -4,9 +4,9 @@ const { signToken } = require('../utils/auth');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const sendEmail = require('../utils/sendEmail');
+const { CLIENT_URL } = require('../config/CONSTANT');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
-const clientURL = process.env.CLIENT_URL;
 
 module.exports = {
   // get a single user by id or username
@@ -96,7 +96,7 @@ module.exports = {
         createdAt: Date.now(),
       }).save();
 
-      const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${user._id}`;
+      const link = `${CLIENT_URL}/passwordReset?token=${resetToken}&id=${user._id}`;
       sendEmail(
         user.email,
         'Password Reset Request',

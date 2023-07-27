@@ -1,3 +1,4 @@
+const { CLIENT_URL } = require('../../../config/CONSTANT');
 const Strava = require('../../../models/Strava');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
   // Strava authentication success
   async authSuccess(req, res) {
     try {
-      res.redirect(`${process.env.CLIENT_URL}/admin/strava/dashboard`);
+      res.redirect(`${CLIENT_URL}/admin/strava/dashboard`);
     } catch (error) {
       console.error('Error in authSuccess:', error);
       return res.status(500).json('Something went wrong!');

@@ -10,6 +10,7 @@ const {
   activityGoalForPeriod,
 } = require('../helper/helper');
 const FitnessData = require('../../../models/FitnessData');
+const { CLIENT_URL } = require('../../../config/CONSTANT');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 
 module.exports = {
@@ -26,7 +27,7 @@ module.exports = {
   // Fitbit authentication success
   async authSuccess(req, res) {
     try {
-      res.redirect(`${process.env.CLIENT_URL}/admin/fitbit/dashboard`);
+      res.redirect(`${CLIENT_URL}/admin/fitbit/dashboard`);
     } catch (error) {
       console.error('Error in authSuccess:', error);
       return res.status(500).json('Something went wrong!');

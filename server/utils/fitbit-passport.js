@@ -1,3 +1,4 @@
+const { SERVER_URL } = require('../config/CONSTANT');
 const Fitbit = require('../models/Fitbit');
 
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
@@ -11,7 +12,7 @@ function initializeFitbit(passport) {
         clientID: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         scope: ['activity', 'heartrate', 'location', 'profile'],
-        callbackURL: `${process.env.SERVER_URL}/api/fitbit/auth/fitbit/callback`,
+        callbackURL: `${SERVER_URL}/api/fitbit/auth/fitbit/callback`,
         passReqToCallback: true,
       },
       async (req, accessToken, refreshToken, profile, done) => {

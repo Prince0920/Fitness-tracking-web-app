@@ -1,4 +1,5 @@
 const StravaStrategy = require('passport-strava').Strategy;
+const { SERVER_URL } = require('../config/CONSTANT');
 const Strava = require('../models/Strava');
 
 const STRAVA_CLIENT_ID = process.env.STRAVA_CLIENT_ID;
@@ -10,7 +11,7 @@ function initializeStrava(passport) {
       {
         clientID: STRAVA_CLIENT_ID,
         clientSecret: STRAVA_CLIENT_SECRET,
-        callbackURL: `${process.env.SERVER_URL}/api/strava/auth/strava/callback`,
+        callbackURL: `${SERVER_URL}/api/strava/auth/strava/callback`,
         passReqToCallback: true,
       },
       async (req, accessToken, refreshToken, profile, done) => {
