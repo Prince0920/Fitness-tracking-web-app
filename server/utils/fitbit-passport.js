@@ -11,7 +11,7 @@ function initializeFitbit(passport) {
         clientID: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         scope: ['activity', 'heartrate', 'location', 'profile'],
-        callbackURL: 'http://localhost:3001/api/fitbit/auth/fitbit/callback',
+        callbackURL: `${process.env.SERVER_URL}/api/fitbit/auth/fitbit/callback`,
         passReqToCallback: true,
       },
       async (req, accessToken, refreshToken, profile, done) => {

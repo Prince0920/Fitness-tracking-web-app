@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const sendEmail = require('../utils/sendEmail');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
-const clientURL = 'localhost:3132';
+const clientURL = process.env.CLIENT_URL;
 
 module.exports = {
   // get a single user by id or username

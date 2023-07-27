@@ -14,7 +14,7 @@ module.exports = {
   // Strava authentication success
   async authSuccess(req, res) {
     try {
-      res.redirect(`http://localhost:3132/admin/strava/dashboard`);
+      res.redirect(`${process.env.CLIENT_URL}/admin/strava/dashboard`);
     } catch (error) {
       console.error('Error in authSuccess:', error);
       return res.status(500).json('Something went wrong!');

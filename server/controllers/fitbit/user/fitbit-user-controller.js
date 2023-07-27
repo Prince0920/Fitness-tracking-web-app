@@ -26,7 +26,7 @@ module.exports = {
   // Fitbit authentication success
   async authSuccess(req, res) {
     try {
-      res.redirect(`http://localhost:3132/admin/fitbit/dashboard`);
+      res.redirect(`${process.env.CLIENT_URL}/admin/fitbit/dashboard`);
     } catch (error) {
       console.error('Error in authSuccess:', error);
       return res.status(500).json('Something went wrong!');
