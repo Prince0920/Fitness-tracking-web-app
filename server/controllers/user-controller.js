@@ -88,7 +88,7 @@ module.exports = {
       let token = await Token.findOne({ userId: user._id });
       if (token) await token.deleteOne();
       let resetToken = crypto.randomBytes(32).toString('hex');
-      const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+      const hash = await bcrypt.hash(resetToken, Number(process.env.BCRYPT_SALT));
 
       await new Token({
         userId: user._id,
@@ -96,7 +96,7 @@ module.exports = {
         createdAt: Date.now(),
       }).save();
 
-      const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+      const link = `${process.env.CLIENT_URL}/passwordReset?token=${resetToken}&id=${user._id}`;
       sendEmail(
         user.email,
         'Password Reset Request',
