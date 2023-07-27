@@ -9,6 +9,7 @@ const {
   lifeTimeStaticsData,
   activityGoalForPeriod,
 } = require('../helper/helper');
+const FitnessData = require('../../../models/FitnessData');
 const FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
 
 module.exports = {
@@ -70,6 +71,8 @@ module.exports = {
         return res.status(409).json({ message: 'Cannot find a user with this id!' });
       }
 
+      // deleting the fitness data that is stored in a db.
+      await FitnessData.deleteMany({ userId: user._id, source: 'fitbit' });
       return res.json(fitbitData);
     } catch (error) {
       console.error('Error in disconnect:', error);
