@@ -38,7 +38,8 @@ export const UserList = () => {
       const resp = await deleteUser(token, id);
       if (resp.status === 200) {
         // Remove the deleted user from the list
-        setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
+        const resp = await getUsers(token, page, pageSize);
+        setUsers(resp.data.data);
         toast.success('User deleted successfully!');
       } else {
         resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
