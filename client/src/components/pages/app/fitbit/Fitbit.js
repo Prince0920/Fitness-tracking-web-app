@@ -40,12 +40,17 @@ const Fitbit = () => {
   }, [token]);
 
   const handleDisconnect = async () => {
-    const resp = await disconnectFitbit(token);
-    if (resp.status === 200) {
-      setIsLogin(false);
-      navigate('/admin/fitbit/dashboard');
-    } else {
-      resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+    const confirmDisconnect = window.confirm(
+      'Are you sure you want to disconnect from Fitbit it will remove your all history?'
+    );
+    if (confirmDisconnect) {
+      const resp = await disconnectFitbit(token);
+      if (resp.status === 200) {
+        setIsLogin(false);
+        navigate('/admin/fitbit/dashboard');
+      } else {
+        resp.status === 400 ? toast.info(resp.data.message) : toast.error('Something Went Wrong!');
+      }
     }
   };
 

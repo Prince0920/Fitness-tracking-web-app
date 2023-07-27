@@ -37,7 +37,10 @@ const FitnessDataSchema = new Schema({
   },
 
   // Storing date without time stamp
-  date: {},
+  date: {
+    type: String,
+    required: true,
+  },
 
   // steps, calories ...
   data_type: {
