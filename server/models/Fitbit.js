@@ -20,6 +20,10 @@ const FitbitSchema = new Schema({
   profile: {
     type: Object,
   },
+  isSync: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Fitbit = model('Fitbit', FitbitSchema);

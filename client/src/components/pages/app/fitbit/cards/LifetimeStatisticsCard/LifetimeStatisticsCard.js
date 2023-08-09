@@ -48,7 +48,6 @@ const LifetimeStatisticsCard = () => {
   //   fetch();
   // }, []);
 
-
   const fetchActivityData = async (activity, formattedStartDate, formattedEndDate) => {
     try {
       const resp = await getActivityTimeseriesByDateRange(
@@ -62,10 +61,9 @@ const LifetimeStatisticsCard = () => {
       // adding the data
       let sum = 0;
       const data = resp.data[`activities-tracker-${activity}`];
-      console.log("dataaaaa", data)
       if (data && data?.length > 0) {
         data.map(item => {
-          return sum += Number(item.value);
+          return (sum += Number(item.value));
         });
       }
 
@@ -79,16 +77,15 @@ const LifetimeStatisticsCard = () => {
     }
   };
 
-  console.log("total", total)
   useEffect(() => {
     setIsLoading(true);
     const { startdate, enddate } = getDateRangeByPeriod(selectedDropdownOption);
-    console.log("startdate, enddate", startdate, enddate)
+    console.log('startdate, enddate', startdate, enddate);
     const fetch = async () => {
       const stepData = await fetchActivityData('steps', startdate, enddate);
       const calorieData = await fetchActivityData('calories', startdate, enddate);
       const distanceData = await fetchActivityData('distance', startdate, enddate);
-      console.log("stepData, calorieData , distanceData", stepData, calorieData , distanceData)
+      console.log('stepData, calorieData , distanceData', stepData, calorieData, distanceData);
       setTotal({
         caloriesOut: calorieData,
         steps: stepData,

@@ -17,13 +17,17 @@ const Fitbit = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState('');
+  const [isSync, setIsSync] = useState(false);
 
   async function handleConnect() {
     await fitbitAuth(token);
   }
 
   async function handleSyncData() {
+    setIsLoading(true);
     const resp = await syncFitbitData(token, 'fitbit');
+    setIsLoading(false);
+    setIsSync(true);
     console.log('resp::::::::::::::::::::::::::', resp);
   }
 
@@ -33,6 +37,7 @@ const Fitbit = () => {
       if (resp.status === 200) {
         setIsLoading(false);
         setIsLogin(true);
+        setIsSync(resp.data.isSync);
         setUsername(resp.data.displayName);
       } else if (resp.status === 400) {
         toast.info(resp.data.message);
@@ -44,6 +49,7 @@ const Fitbit = () => {
     checkLoginStatus();
   }, [token]);
 
+  console.log('IsSync: ', isSync);
   const handleDisconnect = async () => {
     const confirmDisconnect = window.confirm(
       'Are you sure you want to disconnect from Fitbit it will remove your all history?'
@@ -81,22 +87,37 @@ const Fitbit = () => {
                     />
                   </div>
                 </div>
-                <div className='row'>
-                  <div className='col-md-12'>
-                    <DailyGoalsCard />
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-12'>
-                    <ExerciseTrackingCard />
-                  </div>
-                </div>
+                {isSync ? (
+                  <>
+                    <div className='row'>
+                      <div className='col-12'>
+                        <LifetimeStatisticsCard />
+                      </div>
+                    </div>
 
-                <div className='row'>
-                  <div className='col-12'>
-                    <LifetimeStatisticsCard />
+                    <div className='row'>
+                      <div className='col-12'>
+                        <ExerciseTrackingCard />
+                      </div>
+                    </div>
+                    {/* <div className='row'>
+                      <div className='col-md-12'>
+                        <DailyGoalsCard />
+                      </div>
+                    </div> */}
+                  </>
+                ) : (
+                  <div
+                    className='col-12'
+                    style={{ textAlign: 'center', marginTop: '20px' }}>
+                    <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#FF4500' }}>
+                      Sync Required:
+                    </p>
+                    <p style={{ fontSize: '1.2rem', color: '#333' }}>
+                      Please sync your data to view your dashboard.
+                    </p>
                   </div>
-                </div>
+                )}
               </>
             ) : (
               <button

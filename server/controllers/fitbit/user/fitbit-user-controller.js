@@ -57,6 +57,7 @@ module.exports = {
         profileId: fitbitData.profileId,
         provider: 'fitbit',
         displayName: fitbitData.profile.displayName,
+        isSync: fitbitData.isSync
       });
     } catch (error) {
       console.error('Error in isLogin:', error);

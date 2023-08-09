@@ -324,7 +324,7 @@ module.exports = {
           upsert: true, // Make this update into an upsert
         });
       }
-
+      await Fitbit.findOneAndUpdate({ userId: userId }, { isSync: true });
       console.log('fitbit step data synk end.', req.query);
       res.json({ message: 'Success' });
     } catch (error) {
