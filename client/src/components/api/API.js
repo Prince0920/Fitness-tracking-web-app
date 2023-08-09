@@ -176,6 +176,20 @@ export const getLifetimeStatics = async token => {
 };
 // Fitbit API  Ends--------------------------------------------------------------------
 
+// Fitbit Admin API  Ends--------------------------------------------------------------------
+
+export const syncFitbitData = async (token, source) => {
+  try {
+    const url = SERVER_URL + `/api/fitbit/admin/sync-data?source=${source}`;
+    const data = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error.response;
+  }
+};
+// Fitbit Admin API  Ends--------------------------------------------------------------------
+
 // Strava API  Starts--------------------------------------------------------------------
 export const stravaAuth = async token => {
   try {

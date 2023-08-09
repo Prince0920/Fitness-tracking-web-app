@@ -1,7 +1,7 @@
 import React from 'react';
 import { getTodayDate } from '../helper_functions/getCurrentDate';
 
-const GreetingCard = ({ username, handleDisconnect }) => {
+const GreetingCard = ({ username, handleDisconnect, handleSyncData }) => {
   const currentDate = getTodayDate();
 
   return (
@@ -33,6 +33,12 @@ const GreetingCard = ({ username, handleDisconnect }) => {
                 style={{ marginRight: '10px' }}
                 onClick={handleDisconnect}>
                 Disconnect
+              </button>
+              <button
+                className='btn btn-success'
+                style={{ marginRight: '10px' }}
+                onClick={handleSyncData}>
+                Sync Now
               </button>
               {/* <p className='card-text greeting-text' style={{ fontSize: '2rem', fontWeight: 'bold', color: '#000000', textAlign: 'center' }}>
                 <span style={{ color: '#000000' }}>Fitbit</span>

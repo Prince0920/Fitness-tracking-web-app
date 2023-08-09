@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { disconnectFitbit, fitbitAuth, isFitbitLogin } from '../../../api/API';
+import { disconnectFitbit, fitbitAuth, isFitbitLogin, syncFitbitData } from '../../../api/API';
 import GreetingCard from '../../../reusable/cards/GreetingCard';
 import Layout from '../../../reusable/layout/Layout';
 import Loader from '../../../reusable/loader/Loader ';
@@ -20,6 +20,11 @@ const Fitbit = () => {
 
   async function handleConnect() {
     await fitbitAuth(token);
+  }
+
+  async function handleSyncData() {
+    const resp = await syncFitbitData(token, 'fitbit');
+    console.log('resp::::::::::::::::::::::::::', resp);
   }
 
   useEffect(() => {
@@ -72,6 +77,7 @@ const Fitbit = () => {
                     <GreetingCard
                       username={username}
                       handleDisconnect={handleDisconnect}
+                      handleSyncData={handleSyncData}
                     />
                   </div>
                 </div>
