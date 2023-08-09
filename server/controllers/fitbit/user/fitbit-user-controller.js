@@ -135,6 +135,36 @@ module.exports = {
     }
   },
 
+  // Getting data directly using Fitbit API.
+  // async getActivityTimeseriesByDateRange(req, res) {
+  //   try {
+  //     const { user, query } = req;
+  //     const fitbitData = await Fitbit.findOne({ userId: user._id });
+  //     if (!fitbitData) {
+  //       return res.status(409).json({ message: 'Cannot find a user with this id!' });
+  //     }
+  //     const profileId = fitbitData.profileId;
+  //     const accessToken = fitbitData.access_token;
+
+  //     const activity = query.activity;
+  //     const startDate = query.startDate;
+  //     const endDate = query.endDate;
+
+  //     const data = await activityDataByDateRange(
+  //       profileId,
+  //       accessToken,
+  //       activity,
+  //       startDate,
+  //       endDate
+  //     );
+  //     res.json(data);
+  //   } catch (error) {
+  //     console.error('Error in disconnect:', error);
+  //     return res.status(500).json({ message: 'Something went wrong!' });
+  //   }
+  // },
+
+  // Getting data directly from db.
   async getActivityTimeseriesByDateRange(req, res) {
     try {
       const { user, query } = req;
@@ -148,7 +178,6 @@ module.exports = {
       const activity = query.activity;
       const startDate = query.startDate;
       const endDate = query.endDate;
-
       const data = await activityDataByDateRange(
         profileId,
         accessToken,
@@ -156,7 +185,25 @@ module.exports = {
         startDate,
         endDate
       );
-      res.json(data);
+      const _data = await FitnessData.find({
+        deviceProfileId: profileId,
+        data_type: activity,
+        date: { $gte: startDate, $lt: endDate },
+      });
+
+      // For making respose compartible with above data
+      const _response = _data.map(data => {
+        return {
+          value: data.data_value,
+          dateTime: data.date,
+        };
+      });
+      let key = 'activities-tracker-' + activity;
+      let _resp = {
+        [key]: _response,
+      };
+
+      res.json(_resp);
     } catch (error) {
       console.error('Error in disconnect:', error);
       return res.status(500).json({ message: 'Something went wrong!' });
