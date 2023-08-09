@@ -16,7 +16,7 @@ const LoginModal = ({ isModalVisible, handleModalCancel, handleModalSubmit }) =>
 
   return (
     <Modal
-      title='Sign Up'
+      title='Log In'
       visible={isModalVisible}
       onCancel={handleModalCancel}
       footer={[
@@ -29,7 +29,7 @@ const LoginModal = ({ isModalVisible, handleModalCancel, handleModalSubmit }) =>
           key='submit'
           type='primary'
           onClick={onFinish}>
-          Sign Up
+          Log In
         </Button>,
       ]}>
       <Form

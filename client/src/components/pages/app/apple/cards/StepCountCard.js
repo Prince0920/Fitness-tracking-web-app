@@ -1,8 +1,7 @@
 import React from 'react';
 import StepCountProgressGraph from '../graphs/StepCountProgressGraph'
 
-const StepCountCard = () => {
-  const totalSteps = 10000;
+const StepCountCard = ({totalSteps, currentSteps}) => {
 
   return (
     <div className='card card-primary card-outline'>
@@ -18,7 +17,7 @@ const StepCountCard = () => {
         </h5>
         <StepCountProgressGraph
           targetSteps={totalSteps}
-          currentSteps={6000}
+          currentSteps={currentSteps}
         />
         <p
           className='card-text total-steps'

@@ -6,11 +6,8 @@ import Layout from '../../../reusable/layout/Layout';
 import StepCountCard from './cards/StepCountCard';
 
 export const Apple = () => {
-  async function handleDisconnect() {
-    alert('Handle Disconnect functionality');
-  }
-
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleModelVisibility = () => {
     setIsModalVisible(true);
@@ -20,33 +17,57 @@ export const Apple = () => {
     setIsModalVisible(false);
   };
 
-  const handleModalSubmit = (values) => {
-    console.log('Signup values:', values);
+  const handleModalSubmit = values => {
+    console.log('Login Values values:', values);
+
+    // Setting login to true hard coded.
+    setIsLogin(true);
+
     setIsModalVisible(false);
   };
 
-  const isLogin = false;
+  async function handleDisconnect() {
+    const confirmDisconnect = window.confirm(
+      'Are you sure you want to disconnect from apple watch it will remove your all history?'
+    );
+    if (confirmDisconnect) {
+      // setting login to false hardcoded.
+      setIsLogin(false);
+    }
+  }
 
   return (
     <div className='content-wrapper'>
-      <Layout heading='Apple Dashboard' item='apple' />
+      <Layout
+        heading='Apple Dashboard'
+        item='apple'
+      />
       <section className='content'>
         <div className='container-fluid'>
           {isLogin ? (
             <>
               <div className='row'>
                 <div className='col-12'>
-                  <GreetingCard username={'Prince'} handleDisconnect={handleDisconnect} />
+                  <GreetingCard
+                    username={'Prince'}
+                    handleDisconnect={handleDisconnect}
+                  />
                 </div>
               </div>
               <div className='row'>
                 <div className='col-md-6'>
-                  <StepCountCard />
+                  <StepCountCard
+                    totalSteps={10000}
+                    currentSteps={6000}
+                  />
                 </div>
               </div>
             </>
           ) : (
-            <button type='button' className='btn btn-block btn-primary' onClick={handleModelVisibility}>
+            <button
+              type='button'
+              className='btn btn-block btn-primary'
+              onClick={handleModelVisibility}>
               Connect to Apple
             </button>
           )}
