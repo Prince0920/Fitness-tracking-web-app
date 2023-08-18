@@ -2,9 +2,9 @@ const router = require('express').Router();
 
 const passport = require('passport');
 const { syncData } = require('../../../../controllers/fitbit/admin/fitbit-admin-controller');
-const { authMiddleware } = require('../../../../utils/auth');
+const { authMiddleware, ensureFitibitAuthenticated } = require('../../../../utils/auth');
 
 // /api/fitbit/admin/sync-data
-router.route('/sync-data').get(authMiddleware, syncData);
+router.route('/sync-data').get(authMiddleware, ensureFitibitAuthenticated, syncData);
 
 module.exports = router;
